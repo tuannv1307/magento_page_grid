@@ -1,0 +1,54 @@
+.root {
+    margin-left: 6.9rem;
+    padding-top: 60px;
+}
+
+
+.headerPagePro {
+    margin-top: 50px;
+    margin-bottom: 1.2rem;
+    padding: 1.5rem 3rem;
+}
+
+
+.headerPagePro > h1 {
+    margin: 0;
+    color: #41362f;
+    font-size: 28px;
+    margin-bottom: 0;
+    word-break: break-all;
+    font-weight: 400;
+}
+
+.pageContent {
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.btnActionPage {
+    margin-bottom: 3rem;
+
+    background: #f8f8f8;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+    padding: 1.5rem;
+}
+
+.addBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnPrimary {
+    background-color: #eb5202;
+    border-color: #eb5202;
+    color: #fff;
+    text-shadow: 1px 1px 0 rgb(0 0 0 / 25%);
+    font-size: 16px;
+    letter-spacing: .025em;
+    padding: 11px 16px;
+    border: none;
+    outline: none;
+    border-right: 1px solid #333;
+}

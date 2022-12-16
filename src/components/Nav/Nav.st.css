@@ -1,0 +1,66 @@
+.root {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #373330 !important;
+    z-index: 6000;
+    left: 0;
+
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.logoImg {
+    display: block;
+    height: 7.5rem;
+    padding: 1.7rem 1.7rem;
+    position: relative;
+    text-align: center;
+    z-index: 700;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+}
+
+.menu > li {
+    list-style: none;
+
+}
+
+.menu > li > a {
+    text-decoration: none;
+    color: #fff;
+    font-size: inherit;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    padding: 15px 10px;
+    transition: 0.5s all;
+}
+
+.menu > li > a:hover {
+    background-color: rgba(170, 166, 160, 0.3);
+}
+
+.menu > li > a > span {
+    font-size: initial;
+}
+
+.dashboard {}
+
+.icon {}
+
+/* .menu > li > a::before {
+    content: '\e604';
+    font-size: 1.8rem;
+    padding-top: 0.4rem;
+} */
