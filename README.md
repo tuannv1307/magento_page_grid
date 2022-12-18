@@ -19,3 +19,5 @@ The following scripts are available:
 `npm run lint` - Verify best practices and find common issues. Uses [eslint](https://github.com/eslint/eslint).
 
 `npm test` - Execute `typecheck` and `lint` scripts.
+
+https://github.com/tuanlearningIT/trello-app
