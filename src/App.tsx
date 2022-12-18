@@ -7,8 +7,8 @@ import store from "./store/store";
 import { st, classes } from "./App.st.css";
 import "./globals.st.css";
 import { getData } from "./store/magentoPageGridReducer";
-import { dataSet } from "./constants";
-import PaginatePage from "./components/PaginatePage/PaginatePage";
+// import { dataSet } from "./constants";
+
 import Nav from "./components/Nav/Nav";
 import Products from "./components/Products/Products";
 import Header from "./components/Header/Header";

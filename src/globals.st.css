@@ -17,7 +17,7 @@
     margin: 0;
     padding: 0;
     color: #4d4d4d;
-    background: linear-gradient(to right, #3a7fd5, #6ebce2);
+    /* background: linear-gradient(to right, #3a7fd5, #6ebce2); */
 }
 
 :global(html) {

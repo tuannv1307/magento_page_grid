@@ -52,3 +52,71 @@
     outline: none;
     border-right: 1px solid #333;
 }
+
+
+.actionPage {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.actionPageTop,
+.actionPageBottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputSearch {
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    border-radius: 1px;
+    box-shadow: none;
+    color: #303030;
+    font-size: 14px;
+    font-weight: 400;
+    height: auto;
+    line-height: 1.36;
+    padding: 0.6rem 1rem 0.6rem;
+    transition: border-color .1s linear;
+    vertical-align: baseline;
+    width: auto;
+    padding-right: 20rem;
+    width: 100%;
+}
+
+.btnFilter {
+    border: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+
+    font-weight: 600;
+    line-height: 1.36;
+    padding: 0.6rem 1em 0.6rem;
+    text-align: center;
+    vertical-align: baseline;
+    font-size: 13px;
+    background-color: #e3e3e3;
+    padding: 7px 21px 6px 17px;
+    color: #514943;
+    border-color: #adadad;
+}
+
+.btnColumns {
+    padding-right: 3.3rem;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #41362f;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -.025em;
+    padding: 12px 33px 17px 15px;
+    position: relative;
+    vertical-align: baseline;
+    z-index: 2;
+}

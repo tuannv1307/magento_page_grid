@@ -8,9 +8,9 @@ export default function RoutePage() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="products" element={<Products />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="/products" element={<Products />} />
         </Route>
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
