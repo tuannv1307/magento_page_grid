@@ -1,0 +1,125 @@
+.root {
+    position: relative;
+}
+
+.selectMenu {
+    font-size: 14px;
+    display: inline-block;
+    padding: 6px 10px 6px 15px;
+    position: relative;
+    text-align: left;
+    width: auto;
+    z-index: 1;
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    border-radius: 1px;
+    box-shadow: none;
+    color: #303030;
+    font-weight: 400;
+    height: auto;
+    line-height: 1.36;
+    /* padding: 0.6rem 1rem 0.6rem; */
+    transition: border-color .1s linear;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.selectValue {
+    display: inline-block;
+}
+
+.valueSelect {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border: 0;
+    display: inline;
+    margin: 0;
+    width: 5rem;
+    outline: none;
+    font-size: 14px;
+}
+
+
+.seclectMenuToggle {
+    padding-right: 32px;
+    background: transparent;
+    border-width: 0;
+    bottom: 0;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    background: #e3e3e3;
+
+    border-left: 1px solid #adadad;
+}
+
+.seclectMenuItems {
+    background: #fff;
+    border: 1px solid #007bdb;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+
+    /* float: left; */
+    /* left: -1px; */
+    /* margin-top: 3px;
+    max-width: 20rem; */
+    width: calc(100%);
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+
+.seclectMenuItems > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.seclectMenuItems > ul > li {
+    list-style: none;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: #41362f;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    min-width: 100%;
+    padding: 15px;
+    text-align: left;
+    transition: background .2s linear;
+    width: 5rem;
+}
+
+.seclectMenuItems > ul > li:first-child {
+    background: #e3e3e3;
+}
+
+.seclectMenuItems > ul > li:hover {
+    background: #e3e3e3;
+    cursor: pointer;
+}
+
+
+
+.seclectMenuItems > ul > li:last-child:hover {
+
+    text-decoration: underline;
+}
+
+
+.seclectMenuItems > ul > li > button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-weight: 400;
+
+}
+
+.btnCustoms {
+    color: #007bdb;
+    text-decoration: none;
+}

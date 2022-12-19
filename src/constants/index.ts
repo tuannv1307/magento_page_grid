@@ -8,6 +8,7 @@ export const initialData = {
       start_date: "2011/04/25",
       office: "Edinburgh",
       extn: "5421",
+      status: "enable",
       selected: false,
     },
     {
@@ -18,6 +19,7 @@ export const initialData = {
       start_date: "2011/07/25",
       office: "Tokyo",
       extn: "8422",
+      status: "enable",
       selected: false,
     },
     {
@@ -28,6 +30,7 @@ export const initialData = {
       start_date: "2009/01/12",
       office: "San Francisco",
       extn: "1562",
+      status: "enable",
       selected: false,
     },
     {
@@ -38,6 +41,7 @@ export const initialData = {
       start_date: "2012/03/29",
       office: "Edinburgh",
       extn: "6224",
+      status: "enable",
       selected: false,
     },
     {
@@ -48,6 +52,7 @@ export const initialData = {
       start_date: "2008/11/28",
       office: "Tokyo",
       extn: "5407",
+      status: "enable",
       selected: false,
     },
     {
@@ -58,6 +63,7 @@ export const initialData = {
       start_date: "2012/12/02",
       office: "New York",
       extn: "4804",
+      status: "enable",
       selected: false,
     },
     {
@@ -68,6 +74,7 @@ export const initialData = {
       start_date: "2012/08/06",
       office: "San Francisco",
       extn: "9608",
+      status: "enable",
       selected: false,
     },
     {
@@ -78,6 +85,7 @@ export const initialData = {
       start_date: "2010/10/14",
       office: "Tokyo",
       extn: "6200",
+      status: "enable",
       selected: false,
     },
     {
@@ -88,6 +96,7 @@ export const initialData = {
       start_date: "2009/09/15",
       office: "San Francisco",
       extn: "2360",
+      status: "enable",
       selected: false,
     },
     {
@@ -98,6 +107,7 @@ export const initialData = {
       start_date: "2008/12/13",
       office: "Edinburgh",
       extn: "1667",
+      status: "enable",
       selected: false,
     },
     {
@@ -108,6 +118,7 @@ export const initialData = {
       start_date: "2008/12/19",
       office: "London",
       extn: "3814",
+      status: "enable",
       selected: false,
     },
     {
@@ -118,6 +129,7 @@ export const initialData = {
       start_date: "2013/03/03",
       office: "Edinburgh",
       extn: "9497",
+      status: "enable",
       selected: false,
     },
     {
@@ -128,6 +140,7 @@ export const initialData = {
       start_date: "2008/10/16",
       office: "San Francisco",
       extn: "6741",
+      status: "enable",
       selected: false,
     },
     {
@@ -138,6 +151,7 @@ export const initialData = {
       start_date: "2012/12/18",
       office: "London",
       extn: "3597",
+      status: "enable",
       selected: false,
     },
     {
@@ -148,6 +162,7 @@ export const initialData = {
       start_date: "2010/03/17",
       office: "London",
       extn: "1965",
+      status: "enable",
       selected: false,
     },
     {
@@ -158,6 +173,7 @@ export const initialData = {
       start_date: "2012/11/27",
       office: "London",
       extn: "1581",
+      status: "enable",
       selected: false,
     },
     {
@@ -168,6 +184,7 @@ export const initialData = {
       start_date: "2010/06/09",
       office: "New York",
       extn: "3059",
+      status: "enable",
       selected: false,
     },
     {
@@ -178,6 +195,7 @@ export const initialData = {
       start_date: "2009/04/10",
       office: "New York",
       extn: "1721",
+      status: "enable",
       selected: false,
     },
     {
@@ -188,6 +206,7 @@ export const initialData = {
       start_date: "2012/10/13",
       office: "London",
       extn: "2558",
+      status: "enable",
       selected: false,
     },
     {
@@ -198,6 +217,7 @@ export const initialData = {
       start_date: "2012/09/26",
       office: "Edinburgh",
       extn: "2290",
+      status: "enable",
       selected: false,
     },
     {
@@ -208,6 +228,7 @@ export const initialData = {
       start_date: "2011/09/03",
       office: "New York",
       extn: "1937",
+      status: "enable",
       selected: false,
     },
     {
@@ -218,6 +239,7 @@ export const initialData = {
       start_date: "2009/06/25",
       office: "New York",
       extn: "6154",
+      status: "enable",
       selected: false,
     },
     {
@@ -228,6 +250,7 @@ export const initialData = {
       start_date: "2011/12/12",
       office: "New York",
       extn: "8330",
+      status: "enable",
       selected: false,
     },
     {
@@ -238,6 +261,7 @@ export const initialData = {
       start_date: "2010/09/20",
       office: "Sydney",
       extn: "3023",
+      status: "enable",
       selected: false,
     },
     {
@@ -248,6 +272,7 @@ export const initialData = {
       start_date: "2009/10/09",
       office: "London",
       extn: "5797",
+      status: "enable",
       selected: false,
     },
     {
@@ -258,6 +283,7 @@ export const initialData = {
       start_date: "2010/12/22",
       office: "Edinburgh",
       extn: "8822",
+      status: "enable",
       selected: false,
     },
     {
@@ -268,6 +294,7 @@ export const initialData = {
       start_date: "2010/11/14",
       office: "Singapore",
       extn: "9239",
+      status: "enable",
       selected: false,
     },
     {
@@ -278,6 +305,7 @@ export const initialData = {
       start_date: "2011/06/07",
       office: "San Francisco",
       extn: "1314",
+      status: "enable",
       selected: false,
     },
     {
@@ -288,6 +316,7 @@ export const initialData = {
       start_date: "2010/03/11",
       office: "San Francisco",
       extn: "2947",
+      status: "enable",
       selected: false,
     },
     {
@@ -298,6 +327,7 @@ export const initialData = {
       start_date: "2011/08/14",
       office: "Tokyo",
       extn: "8899",
+      status: "enable",
       selected: false,
     },
     {
@@ -308,6 +338,7 @@ export const initialData = {
       start_date: "2011/06/02",
       office: "Sydney",
       extn: "2769",
+      status: "enable",
       selected: false,
     },
     {
@@ -318,6 +349,7 @@ export const initialData = {
       start_date: "2009/10/22",
       office: "London",
       extn: "6832",
+      status: "enable",
       selected: false,
     },
     {
@@ -328,6 +360,7 @@ export const initialData = {
       start_date: "2011/05/07",
       office: "London",
       extn: "3606",
+      status: "enable",
       selected: false,
     },
     {
@@ -338,6 +371,7 @@ export const initialData = {
       start_date: "2008/10/26",
       office: "San Francisco",
       extn: "2860",
+      status: "enable",
       selected: false,
     },
     {
@@ -348,6 +382,7 @@ export const initialData = {
       start_date: "2011/03/09",
       office: "Edinburgh",
       extn: "8240",
+      status: "enable",
       selected: false,
     },
     {
@@ -358,6 +393,7 @@ export const initialData = {
       start_date: "2009/12/09",
       office: "San Francisco",
       extn: "5384",
+      status: "enable",
       selected: false,
     },
     {
@@ -368,6 +404,7 @@ export const initialData = {
       start_date: "2008/12/16",
       office: "San Francisco",
       extn: "7031",
+      status: "enable",
       selected: false,
     },
     {
@@ -378,6 +415,7 @@ export const initialData = {
       start_date: "2010/02/12",
       office: "San Francisco",
       extn: "6318",
+      status: "enable",
       selected: false,
     },
     {
@@ -388,6 +426,7 @@ export const initialData = {
       start_date: "2009/02/14",
       office: "San Francisco",
       extn: "9422",
+      status: "enable",
       selected: false,
     },
     {
@@ -398,6 +437,7 @@ export const initialData = {
       start_date: "2008/12/11",
       office: "London",
       extn: "7580",
+      status: "enable",
       selected: false,
     },
     {
@@ -408,6 +448,7 @@ export const initialData = {
       start_date: "2008/09/26",
       office: "New York",
       extn: "1042",
+      status: "enable",
       selected: false,
     },
     {
@@ -418,6 +459,7 @@ export const initialData = {
       start_date: "2011/02/03",
       office: "Singapore",
       extn: "2120",
+      status: "enable",
       selected: false,
     },
     {
@@ -428,6 +470,7 @@ export const initialData = {
       start_date: "2011/05/03",
       office: "London",
       extn: "6222",
+      status: "enable",
       selected: false,
     },
     {
@@ -438,6 +481,7 @@ export const initialData = {
       start_date: "2009/08/19",
       office: "Tokyo",
       extn: "9383",
+      status: "enable",
       selected: false,
     },
     {
@@ -448,6 +492,7 @@ export const initialData = {
       start_date: "2013/08/11",
       office: "New York",
       extn: "8327",
+      status: "enable",
       selected: false,
     },
     {
@@ -458,6 +503,7 @@ export const initialData = {
       start_date: "2009/07/07",
       office: "San Francisco",
       extn: "2927",
+      status: "enable",
       selected: false,
     },
     {
@@ -468,6 +514,7 @@ export const initialData = {
       start_date: "2012/04/09",
       office: "Singapore",
       extn: "8352",
+      status: "enable",
       selected: false,
     },
     {
@@ -478,6 +525,7 @@ export const initialData = {
       start_date: "2010/01/04",
       office: "New York",
       extn: "7439",
+      status: "enable",
       selected: false,
     },
     {
@@ -488,6 +536,7 @@ export const initialData = {
       start_date: "2012/06/01",
       office: "San Francisco",
       extn: "4389",
+      status: "enable",
       selected: false,
     },
     {
@@ -498,6 +547,7 @@ export const initialData = {
       start_date: "2013/02/01",
       office: "Edinburgh",
       extn: "3431",
+      status: "enable",
       selected: false,
     },
     {
@@ -508,6 +558,7 @@ export const initialData = {
       start_date: "2011/12/06",
       office: "New York",
       extn: "3990",
+      status: "enable",
       selected: false,
     },
     {
@@ -518,6 +569,7 @@ export const initialData = {
       start_date: "2011/03/21",
       office: "London",
       extn: "1016",
+      status: "enable",
       selected: false,
     },
     {
@@ -528,6 +580,7 @@ export const initialData = {
       start_date: "2009/02/27",
       office: "London",
       extn: "6733",
+      status: "enable",
       selected: false,
     },
     {
@@ -538,6 +591,7 @@ export const initialData = {
       start_date: "2010/07/14",
       office: "San Francisco",
       extn: "8196",
+      status: "enable",
       selected: false,
     },
     {
@@ -548,6 +602,7 @@ export const initialData = {
       start_date: "2008/11/13",
       office: "Edinburgh",
       extn: "6373",
+      status: "enable",
       selected: false,
     },
     {
@@ -558,6 +613,7 @@ export const initialData = {
       start_date: "2011/06/27",
       office: "Singapore",
       extn: "5384",
+      status: "enable",
       selected: false,
     },
     {
@@ -568,6 +624,7 @@ export const initialData = {
       start_date: "2011/01/25",
       office: "New York",
       extn: "4226",
+      status: "enable",
       selected: false,
     },
   ],
@@ -575,43 +632,43 @@ export const initialData = {
     "column-1": {
       id: "column-1",
       title: "id",
-      taskIds: ["task-1", "task-2", "task-3", "task-4"],
+      tasks: [],
     },
     "column-2": {
       id: "column-2",
       title: "name",
-      taskIds: [],
+      tasks: [],
     },
     "column-3": {
       id: "column-3",
       title: "position",
-      taskIds: [],
+      tasks: [],
     },
     "column-4": {
       id: "column-4",
       title: "office",
-      taskIds: [],
+      tasks: [],
     },
     "column-5": {
       id: "column-5",
       title: "salary",
-      taskIds: [],
+      tasks: [],
     },
     "column-6": {
       id: "column-6",
       title: "start date",
-      taskIds: [],
+      tasks: [],
     },
     "column-7": {
       id: "column-7",
       title: "extn",
 
-      taskIds: [],
+      tasks: [],
     },
     "column-8": {
-      id: "column-7",
+      id: "column-8",
       title: "status",
-      taskIds: [],
+      tasks: [],
     },
   },
   columnOrder: [
@@ -625,3 +682,72 @@ export const initialData = {
     "column-8",
   ],
 };
+
+export const titleColumns = [
+  {
+    id: "tt0",
+    title: "id",
+    name: "id",
+    statusDisplay: true,
+  },
+  {
+    id: "tt1",
+    title: "name",
+    name: "name",
+    statusDisplay: true,
+  },
+  {
+    id: "tt2",
+    title: "position",
+    name: "position",
+    statusDisplay: true,
+  },
+  {
+    id: "tt3",
+    title: "office",
+    name: "office",
+    statusDisplay: true,
+  },
+  {
+    id: "tt4",
+    title: "Age",
+    name: "age",
+    statusDisplay: true,
+  },
+  {
+    id: "tt5",
+    title: "salary",
+    name: "Salary",
+    statusDisplay: true,
+  },
+  {
+    id: "tt6",
+    title: "start date",
+    name: "start date",
+    statusDisplay: true,
+  },
+  {
+    id: "tt7",
+    title: "extn",
+    name: "extn",
+    statusDisplay: true,
+  },
+  {
+    id: "tt8",
+    title: "status",
+    name: "status",
+    statusDisplay: true,
+  },
+  {
+    id: "tt9",
+    title: "option",
+    name: "option",
+    statusDisplay: true,
+  },
+  {
+    id: "tt10",
+    title: "Action",
+    name: "action",
+    statusDisplay: true,
+  },
+];

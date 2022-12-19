@@ -65,3 +65,20 @@
 :global(span) {
     display: inline-block !important;
 }
+
+:global(button) {
+    background: #e3e3e3;
+    border-color: #adadad;
+    /* color: #514943; */
+    border: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.36;
+    padding: 6px 14px;
+    text-align: center;
+    vertical-align: baseline;
+    cursor: pointer;
+}
