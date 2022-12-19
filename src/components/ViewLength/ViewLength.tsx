@@ -80,22 +80,30 @@ const ViewLength = () => {
       {isShow && (
         <div className={st(classes.seclectMenuItems)}>
           <ul>
-            <li value={20} onClick={handleClick}>
-              <button>20</button>
+            <li>
+              <button value={20} onClick={handleClick}>
+                20
+              </button>
             </li>
-            <li value={30} onClick={handleClick}>
-              <button>30</button>
+            <li>
+              <button value={30} onClick={handleClick}>
+                30
+              </button>
             </li>
-            <li value={50} onClick={handleClick}>
+            <li>
               <button value={50} onClick={handleClick}>
                 50
               </button>
             </li>
-            <li value={100} onClick={handleClick}>
-              <button>100</button>
+            <li>
+              <button value={100} onClick={handleClick}>
+                100
+              </button>
             </li>
-            <li value={200} onClick={handleClick}>
-              <button>200</button>
+            <li>
+              <button value={200} onClick={handleClick}>
+                200
+              </button>
             </li>
             <li>
               <button className={st(classes.btnCustoms)}>Customs</button>

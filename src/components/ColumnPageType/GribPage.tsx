@@ -23,9 +23,14 @@ export type ColumnPageTypeProps = {
   index?: any;
   typeColumn: string;
 };
+
+const columnDataLenght = (arr: [], sizeData: number) => {
+  return _.slice(arr, 0, sizeData);
+};
 const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let data = useSelector((state: any) => state.magentopage);
   let tasks = data?.data?.tasks;
+  let sizeData = data?.valueChange;
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided, snapshot) => (
@@ -37,7 +42,7 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           <p className={st(classes.titleColumn)} {...provided.dragHandleProps}>
             {column.title}
           </p>
-          {_.map(tasks, (task, index) => (
+          {_.map(columnDataLenght(tasks, sizeData), (task: any, index) => (
             <div className={st(classes.itemColumn)} key={index}>
               <>{typeColumn === "id" && task.id}</>
               <>{typeColumn === "name" && task.name}</>
