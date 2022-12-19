@@ -105,10 +105,10 @@
 
 
 
-.seclectMenuItems > ul > li:last-child:hover {
+/* .seclectMenuItems > ul > li:last-child {
 
-    text-decoration: underline;
-}
+   display: flex;
+} */
 
 
 .seclectMenuItems > ul > li > button {
@@ -125,4 +125,36 @@
     color: #007bdb;
     text-decoration: none;
 
+}
+.btnCustoms:hover {
+  
+    text-decoration: underline;
+
+}
+
+.inputCustoms {
+    width: 54px;
+    padding: 6px 10px;
+    outline: none;
+}
+
+.inputCustoms:focus {
+    border: 1px solid;
+       border-color: #007bdb;
+    box-shadow: none;
+    outline: 0;
+}
+.selectItemEdit {
+display: flex;
+padding: 4px;
+}
+
+.btnCustomsEdit{
+     background-color: transparent;
+    border: none;
+    padding: 0;
+    font-weight: 400;
+    /* width: 100%; */
+    text-align: left;
+    padding: 6px 10px !important;
 }

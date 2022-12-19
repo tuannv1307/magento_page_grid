@@ -12,8 +12,9 @@ const ViewLength = () => {
   console.log("🚀 ~ file: ViewLength.tsx:9 ~ ViewLength ~ data", data);
   let valueChange = data?.valueChange;
   const [isShow, setIsShow] = useState(false);
+  const [isShowCustoms, setIsShowCustoms] = useState(false);
   const [inputValue, setInputValue] = useState(valueChange);
-
+  const [inputValueEdit, setInputValueEdit] = useState("");
   let columns = data.data.columns;
   let columnOrder = data.data.columnOrder;
   let tasks = data.data.tasks;
@@ -22,12 +23,13 @@ const ViewLength = () => {
   const handleShow = () => {
     setTimeout(() => {
       setIsShow(!isShow);
+      setIsShowCustoms(false);
     }, 200);
   };
   const handleBlur = () => {
-    // setTimeout(() => {
-    //   setIsShow(false);
-    // }, 200);
+    setTimeout(() => {
+      setIsShow(false);
+    }, 200);
   };
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,18 +37,29 @@ const ViewLength = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    e.preventDefault();
     if (e.key === "Enter") {
       dispatch(changeViewLengthData(_.toNumber(inputValue)));
     }
   };
 
   const handleClick = (e: any) => {
-    setInputValue(e.target.value);
+    // setInputValue(e.target.value);
     dispatch(changeViewLengthData(_.toNumber(e.target.value)));
     setTimeout(() => {
       setIsShow(!isShow);
     }, 200);
+  };
+
+  const handleCustoms = () => {
+    setIsShowCustoms(true);
+  };
+  const handleChangeValueEdit = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValueEdit(e.target.value);
+  };
+  const handleClickEdit = () => {
+    dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
+    setIsShow(false);
+    setInputValueEdit("");
   };
   return (
     <div className={st(classes.root)}>
@@ -58,12 +71,13 @@ const ViewLength = () => {
             className={st(classes.valueSelect)}
             onChange={handleChangeValue}
             onKeyDown={handleKeyDown}
+            autoFocus
           />
         </div>
         <button
           className={st(classes.seclectMenuToggle)}
           onClick={handleShow}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         >
           {isShow ? (
             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -106,7 +120,30 @@ const ViewLength = () => {
               </button>
             </li>
             <li>
-              <button className={st(classes.btnCustoms)}>Customs</button>
+              {isShowCustoms ? (
+                <div className={st(classes.selectItemEdit)}>
+                  <input
+                    type="text"
+                    className={st(classes.inputCustoms)}
+                    onChange={handleChangeValueEdit}
+                    value={inputValueEdit}
+                    autoFocus
+                  />
+                  <button
+                    className={st(classes.btnCustomsEdit)}
+                    onClick={handleClickEdit}
+                  >
+                    sdaw
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className={st(classes.btnCustoms)}
+                  onClick={handleCustoms}
+                >
+                  Customs
+                </button>
+              )}
             </li>
           </ul>
         </div>
