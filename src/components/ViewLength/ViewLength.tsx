@@ -9,11 +9,12 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 const ViewLength = () => {
   let data = useSelector((state: any) => state.magentopage);
-  console.log("🚀 ~ file: ViewLength.tsx:9 ~ ViewLength ~ data", data);
+
   let valueChange = data?.valueChange;
   const [isShow, setIsShow] = useState(false);
   const [isShowCustoms, setIsShowCustoms] = useState(false);
   const [inputValue, setInputValue] = useState(valueChange);
+
   const [inputValueEdit, setInputValueEdit] = useState("");
   let columns = data.data.columns;
   let columnOrder = data.data.columnOrder;
@@ -38,12 +39,17 @@ const ViewLength = () => {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      dispatch(changeViewLengthData(_.toNumber(inputValue)));
+      if (!inputValue) {
+        setInputValue(20);
+        dispatch(changeViewLengthData(20));
+      } else {
+        dispatch(changeViewLengthData(_.toNumber(inputValue)));
+      }
     }
   };
 
   const handleClick = (e: any) => {
-    // setInputValue(e.target.value);
+    setInputValue(e.target.value);
     dispatch(changeViewLengthData(_.toNumber(e.target.value)));
     setTimeout(() => {
       setIsShow(!isShow);
@@ -57,10 +63,31 @@ const ViewLength = () => {
     setInputValueEdit(e.target.value);
   };
   const handleClickEdit = () => {
-    dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
-    setIsShow(false);
-    setInputValueEdit("");
+    if (!inputValueEdit) {
+      dispatch(changeViewLengthData(20));
+      setInputValueEdit("");
+      setIsShow(false);
+    } else {
+      dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
+      setIsShow(false);
+      setInputValueEdit("");
+    }
   };
+
+  const handleKeyDowEdit = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      if (!inputValueEdit) {
+        dispatch(changeViewLengthData(20));
+        setInputValueEdit("");
+        setIsShow(false);
+      } else {
+        dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
+        setIsShow(false);
+        setInputValueEdit("");
+      }
+    }
+  };
+
   return (
     <div className={st(classes.root)}>
       <div className={st(classes.selectMenu)}>
@@ -71,7 +98,6 @@ const ViewLength = () => {
             className={st(classes.valueSelect)}
             onChange={handleChangeValue}
             onKeyDown={handleKeyDown}
-            autoFocus
           />
         </div>
         <button
@@ -80,12 +106,26 @@ const ViewLength = () => {
           // onBlur={handleBlur}
         >
           {isShow ? (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M12,6.93933983 L20.0303301,14.9696699 C20.3232233,15.2625631 20.3232233,15.7374369 20.0303301,16.0303301 C19.7640635,16.2965966 19.3473998,16.3208027 19.0537883,16.1029482 L18.9696699,16.0303301 L12,9.061 L5.03033009,16.0303301 C4.76406352,16.2965966 4.34739984,16.3208027 4.05378835,16.1029482 L3.96966991,16.0303301 C3.70340335,15.7640635 3.6791973,15.3473998 3.89705176,15.0537883 L3.96966991,14.9696699 L12,6.93933983 Z"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              fill="currentColor"
+              className="bi bi-caret-up-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M3.96966991,7.96966991 C4.23593648,7.70340335 4.65260016,7.6791973 4.94621165,7.89705176 L5.03033009,7.96966991 L12,14.939 L18.9696699,7.96966991 C19.2359365,7.70340335 19.6526002,7.6791973 19.9462117,7.89705176 L20.0303301,7.96966991 C20.2965966,8.23593648 20.3208027,8.65260016 20.1029482,8.94621165 L20.0303301,9.03033009 L12,17.0606602 L3.96966991,9.03033009 C3.6767767,8.73743687 3.6767767,8.26256313 3.96966991,7.96966991 Z"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              fill="currentColor"
+              className="bi bi-caret-down-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg>
           )}
         </button>
@@ -126,6 +166,7 @@ const ViewLength = () => {
                     type="text"
                     className={st(classes.inputCustoms)}
                     onChange={handleChangeValueEdit}
+                    onKeyDown={handleKeyDowEdit}
                     value={inputValueEdit}
                     autoFocus
                   />
@@ -133,7 +174,14 @@ const ViewLength = () => {
                     className={st(classes.btnCustomsEdit)}
                     onClick={handleClickEdit}
                   >
-                    sdaw
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="30"
+                      height="30"
+                    >
+                      <path d="M17.2928932,13 L5,13 L5,12 L17.2928932,12 L13.1452179,7.86036606 C12.9499557,7.66510391 12.9499557,7.34852142 13.1452179,7.15325928 C13.34048,6.95799713 13.6570625,6.95799713 13.8523247,7.15325928 L19.2071068,12.5 L13.8523247,17.8553162 C13.6570625,18.0505783 13.34048,18.0505783 13.1452179,17.8553162 C12.9499557,17.660054 12.9499557,17.3434715 13.1452179,17.1482094 L17.2928932,13 Z"></path>
+                    </svg>
                   </button>
                 </div>
               ) : (

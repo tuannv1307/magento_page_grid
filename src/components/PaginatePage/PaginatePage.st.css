@@ -9,34 +9,49 @@
 .dataTablesInfo {}
 
 
-.dataTablesPaginate {}
+.dataTablesPaginate {
+    display: flex;
+    align-items: center;
+}
 
 
 
 
-.actionPrevious {
+.actionPaginate {
+    -st-states: disabledPrev, disabledNext;
     margin-right: 2.5rem;
     text-indent: -0.25em;
     width: 44px;
     border-color: #adadad;
 
+    padding: 2px 7px;
+
 }
 
-
-/* .actionPrevious::before {
-    content: '<';
-
-} */
-
-.actionNext {
+.actionPaginate:last-child {
+    margin-right: 0;
     margin-left: 2.5rem;
     text-indent: -0.25em;
     width: 44px;
     border-color: #adadad;
 
+    padding: 2px 7px;
+
 }
 
+.actionPaginate:disabledPrev {
+    opacity: 0.5;
+    cursor: default;
+}
 
+.actionPaginate:disabledPrev > .svgPrev {}
+
+.actionPaginate:disabledNext {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.actionPaginate:disabledNext > .svgNext {}
 
 .inputPaginate {
     -webkit-appearance: none;
@@ -56,4 +71,9 @@
     text-align: center;
     width: 44px;
     outline: none;
+}
+
+
+.maxPageData {
+    margin-left: 10px;
 }

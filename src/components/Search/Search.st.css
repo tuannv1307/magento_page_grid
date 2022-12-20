@@ -1,0 +1,96 @@
+.root {
+    -st-states: searchData;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 3rem; 
+    
+    margin: 0 10px;
+    font-size: 13px; */
+    position: relative;
+
+}
+
+.root:searchData {
+    margin-bottom: 50px;
+}
+
+
+.inputSearch {
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    border-radius: 1px;
+    box-shadow: none;
+    color: #303030;
+    font-size: 14px;
+    font-weight: 400;
+    height: auto;
+    line-height: 1.36;
+    padding: 0.6rem 1rem 0.6rem;
+    transition: border-color .1s linear;
+    vertical-align: baseline;
+    width: auto;
+    padding-right: 20rem;
+    width: 100%;
+}
+
+
+.inputSearch:focus {
+
+    border-color: #007bdb;
+    box-shadow: none;
+    outline: 0;
+
+}
+
+
+.keyWordSeacrh {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    z-index: 3;
+    width: 381%;
+    border-top: 1px solid #adadad;
+    border-bottom: 1px solid #adadad;
+    padding: 15px;
+    align-items: center;
+}
+
+.title {
+    width: 127px;
+}
+
+.keyword {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.clearAll {
+    display: flex;
+    width: 127px;
+    justify-content: flex-end
+}
+
+.clearAll > span {
+    color: #007bdb;
+    cursor: pointer;
+}
+
+.clearAll > span:hover {
+    text-decoration: underline;
+}
+
+.deleteKeyword {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+.svgSearch {
+    position: absolute;
+    right: 20px;
+    top: 6px;
+    cursor: pointer;
+}

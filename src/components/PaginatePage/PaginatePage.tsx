@@ -1,62 +1,126 @@
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "../../store/magentoPageGridReducer";
+import {
+  Magento_Page,
+  setBtnPrevAndNext,
+  setCurrentPage,
+} from "../../store/magentoPageGridReducer";
 
 import { st, classes } from "./PaginatePage.st.css";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { searchFilters } from "../ColumnPageType/ColumnPageType";
 
 const PaginatePage = () => {
-  // const data: Data_Tables = useSelector(
-  //   (state: { datatable: Data_Tables }) => state.datatable
-  // );
-  // const dispatch = useDispatch();
-  // let dataTable = data?.data;
-  // const lengthData = dataTable?.length;
-  // const sizeData = data?.sizeData;
-  // const disabledPrev = data?.disabledPrev;
-  // const disabledNext = data?.disabledNext;
-  // let currentPage = data?.currentPage;
-  // let arrBtnPage = data?.arrBtnPage;
-  // let startIndex = currentPage * sizeData - sizeData;
-  // const endIndex = Math.min(startIndex + sizeData, lengthData);
+  const data: Magento_Page = useSelector(
+    (state: { magentopage: Magento_Page }) => state.magentopage
+  );
+  const dispatch = useDispatch();
+  let currentPage = data.currentPage;
 
-  // const handleClickBtn = (item: number) => {
-  //   dispatch(setCurrentPage({ currentPage: item }));
-  // };
+  const [currentPageP, setCurrentPageP] = useState(currentPage);
+  let tasks: any = data.data.tasks;
+  let searchData = data.searchData;
+  tasks = searchFilters(tasks, searchData);
+  const lengthData = _.size(tasks);
 
-  // const handleClickBtnPrevAndNext = (type: string) => {
-  //   if (!disabledPrev) {
-  //     if (type === "PREVIOUS") {
-  //       if (currentPage === 1) {
-  //         return;
-  //       }
-  //       currentPage = currentPage - 1;
-  //       dispatch(setCurrentPage({ currentPage }));
-  //     }
-  //   }
-  //   if (!disabledNext) {
-  //     if (type === "NEXT") {
-  //       if (currentPage === 6) {
-  //         return;
-  //       }
-  //       currentPage = currentPage + 1;
-  //       dispatch(setCurrentPage({ currentPage }));
-  //     }
-  //   }
-  // };
+  const valueChangePage = data.valueChange;
+
+  useEffect(() => {
+    setCurrentPageP(currentPage);
+  }, [currentPage]);
+
+  let disabledPrev = data.disabledPrev;
+  let disabledNext = data.disabledNext;
+
+  let numberPage = Math.ceil(lengthData / valueChangePage);
+
+  const handleChangeCurrentPage = (e: any) => {
+    setCurrentPageP(e.target.value);
+  };
+
+  const handleKeyDowSetCurrentPage = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (currentPageP > numberPage || currentPageP <= 0 || !currentPageP) {
+        setCurrentPageP(1);
+        dispatch(setCurrentPage(1));
+      } else {
+        dispatch(setCurrentPage(_.toNumber(currentPageP)));
+      }
+    }
+  };
+
+  const handleClickBtnPrevAndNext = (type: string) => {
+    if (!disabledPrev) {
+      if (type === "PREVIOUS") {
+        if (currentPage === 1) {
+          return;
+        }
+        currentPage = currentPage - 1;
+        dispatch(setCurrentPage(currentPage));
+      }
+    }
+    if (!disabledNext) {
+      if (type === "NEXT") {
+        if (currentPage === numberPage) {
+          return;
+        }
+        currentPage = currentPage + 1;
+        dispatch(setCurrentPage(currentPage));
+      }
+    }
+  };
+
+  if (lengthData === 0) {
+    numberPage = 1;
+  }
+
+  useEffect(() => {
+    disabledPrev = currentPage === 1 ? true : false;
+    disabledNext =
+      currentPage === numberPage ? true : false || numberPage === 0;
+    dispatch(setBtnPrevAndNext({ disabledPrev, disabledNext }));
+  }, [currentPage, numberPage]);
 
   return (
     <div className={st(classes.root)}>
       <div className={st(classes.dataTablesPaginate)}>
-        <button className={st(classes.actionPrevious)} data-hook="previous">
-          <svg viewBox="0 0 18 18" fill="currentColor" width="18" height="18">
+        <button
+          className={st(classes.actionPaginate, { disabledPrev })}
+          data-hook="previous"
+          onClick={() => handleClickBtnPrevAndNext("PREVIOUS")}
+        >
+          <svg
+            className={st(classes.svgPrev)}
+            viewBox="0 0 18 18"
+            fill="currentColor"
+            width="20"
+            height="20"
+          >
             <path d="M-7.14 11.145a.5.5 0 010 .707l-3.646 3.648 3.646 3.647a.5.5 0 11-.707.707L-12.2 15.5l4.353-4.355a.5.5 0 01.707 0zM11.987 13.93a.75.75 0 11-1.06 1.06L5.438 9.497l5.488-5.492a.75.75 0 011.06 1.061L7.561 9.498l4.426 4.431z"></path>
           </svg>
         </button>
         <span>
-          <input type="text" className={st(classes.inputPaginate)} />
+          <input
+            type="text"
+            className={st(classes.inputPaginate)}
+            value={currentPageP}
+            onChange={handleChangeCurrentPage}
+            onKeyDown={handleKeyDowSetCurrentPage}
+          />
         </span>
-        <button className={st(classes.actionNext)} data-hook="next">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+        <span className={st(classes.maxPageData)}>of {numberPage} </span>
+        <button
+          className={st(classes.actionPaginate, { disabledNext })}
+          data-hook="next"
+          onClick={() => handleClickBtnPrevAndNext("NEXT")}
+        >
+          <svg
+            className={st(classes.svgNext)}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="20"
+            height="20"
+          >
             <path d="M8.22083109,4 C8.51380539,3.70718788 8.9886791,3.70731936 9.28149122,4.00029365 L17.2763084,12 L9.28047689,19.9997063 C8.98766478,20.2926806 8.51279106,20.2928121 8.21981676,20 C7.92684246,19.7071879 7.92671099,19.2323142 8.21952311,18.9393399 L15.1555752,12 L8.22053744,5.06066013 C7.92772532,4.76768583 7.92785679,4.29281212 8.22083109,4 Z"></path>
           </svg>
         </button>

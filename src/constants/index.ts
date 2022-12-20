@@ -10,6 +10,7 @@ export const initialData = {
       extn: "5421",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "2",
@@ -21,6 +22,7 @@ export const initialData = {
       extn: "8422",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "3",
@@ -32,6 +34,7 @@ export const initialData = {
       extn: "1562",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "4",
@@ -43,6 +46,7 @@ export const initialData = {
       extn: "6224",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "5",
@@ -54,6 +58,7 @@ export const initialData = {
       extn: "5407",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "6",
@@ -65,6 +70,7 @@ export const initialData = {
       extn: "4804",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "7",
@@ -76,6 +82,7 @@ export const initialData = {
       extn: "9608",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "8",
@@ -87,6 +94,7 @@ export const initialData = {
       extn: "6200",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "9",
@@ -98,6 +106,7 @@ export const initialData = {
       extn: "2360",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "10",
@@ -109,6 +118,7 @@ export const initialData = {
       extn: "1667",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "11",
@@ -120,6 +130,7 @@ export const initialData = {
       extn: "3814",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "12",
@@ -131,6 +142,7 @@ export const initialData = {
       extn: "9497",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "13",
@@ -142,6 +154,7 @@ export const initialData = {
       extn: "6741",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "14",
@@ -153,6 +166,7 @@ export const initialData = {
       extn: "3597",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "15",
@@ -164,6 +178,7 @@ export const initialData = {
       extn: "1965",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "16",
@@ -175,6 +190,7 @@ export const initialData = {
       extn: "1581",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "17",
@@ -186,6 +202,7 @@ export const initialData = {
       extn: "3059",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "18",
@@ -197,6 +214,7 @@ export const initialData = {
       extn: "1721",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "19",
@@ -208,6 +226,7 @@ export const initialData = {
       extn: "2558",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "20",
@@ -219,6 +238,7 @@ export const initialData = {
       extn: "2290",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "21",
@@ -230,6 +250,7 @@ export const initialData = {
       extn: "1937",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "22",
@@ -241,6 +262,7 @@ export const initialData = {
       extn: "6154",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "23",
@@ -252,6 +274,7 @@ export const initialData = {
       extn: "8330",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "24",
@@ -263,6 +286,7 @@ export const initialData = {
       extn: "3023",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "25",
@@ -274,6 +298,7 @@ export const initialData = {
       extn: "5797",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "26",
@@ -285,6 +310,7 @@ export const initialData = {
       extn: "8822",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "27",
@@ -296,6 +322,7 @@ export const initialData = {
       extn: "9239",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "28",
@@ -307,6 +334,7 @@ export const initialData = {
       extn: "1314",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "29",
@@ -318,6 +346,7 @@ export const initialData = {
       extn: "2947",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "30",
@@ -329,6 +358,7 @@ export const initialData = {
       extn: "8899",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "31",
@@ -340,6 +370,7 @@ export const initialData = {
       extn: "2769",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "32",
@@ -351,6 +382,7 @@ export const initialData = {
       extn: "6832",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "33",
@@ -362,6 +394,7 @@ export const initialData = {
       extn: "3606",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "34",
@@ -373,6 +406,7 @@ export const initialData = {
       extn: "2860",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "35",
@@ -384,6 +418,7 @@ export const initialData = {
       extn: "8240",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "36",
@@ -395,6 +430,7 @@ export const initialData = {
       extn: "5384",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "37",
@@ -406,6 +442,7 @@ export const initialData = {
       extn: "7031",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "38",
@@ -417,6 +454,7 @@ export const initialData = {
       extn: "6318",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "39",
@@ -428,6 +466,7 @@ export const initialData = {
       extn: "9422",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "40",
@@ -439,6 +478,7 @@ export const initialData = {
       extn: "7580",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "41",
@@ -450,6 +490,7 @@ export const initialData = {
       extn: "1042",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "42",
@@ -461,6 +502,7 @@ export const initialData = {
       extn: "2120",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "43",
@@ -472,6 +514,7 @@ export const initialData = {
       extn: "6222",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "44",
@@ -483,6 +526,7 @@ export const initialData = {
       extn: "9383",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "45",
@@ -494,6 +538,7 @@ export const initialData = {
       extn: "8327",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "46",
@@ -505,6 +550,7 @@ export const initialData = {
       extn: "2927",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "47",
@@ -516,6 +562,7 @@ export const initialData = {
       extn: "8352",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "48",
@@ -527,6 +574,7 @@ export const initialData = {
       extn: "7439",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "49",
@@ -538,6 +586,7 @@ export const initialData = {
       extn: "4389",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "50",
@@ -549,6 +598,7 @@ export const initialData = {
       extn: "3431",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "51",
@@ -560,6 +610,7 @@ export const initialData = {
       extn: "3990",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "52",
@@ -571,6 +622,7 @@ export const initialData = {
       extn: "1016",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "53",
@@ -582,6 +634,7 @@ export const initialData = {
       extn: "6733",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "54",
@@ -593,6 +646,7 @@ export const initialData = {
       extn: "8196",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "55",
@@ -604,6 +658,7 @@ export const initialData = {
       extn: "6373",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "56",
@@ -615,6 +670,7 @@ export const initialData = {
       extn: "5384",
       status: "enable",
       selected: false,
+      isAction: false,
     },
     {
       id: "57",
@@ -626,6 +682,7 @@ export const initialData = {
       extn: "4226",
       status: "enable",
       selected: false,
+      isAction: false,
     },
   ],
   columns: {
@@ -633,42 +690,55 @@ export const initialData = {
       id: "column-1",
       title: "id",
       tasks: [],
+      disPlay: true,
     },
     "column-2": {
       id: "column-2",
       title: "name",
       tasks: [],
+      disPlay: true,
     },
     "column-3": {
       id: "column-3",
       title: "position",
       tasks: [],
+      disPlay: true,
     },
     "column-4": {
       id: "column-4",
       title: "office",
       tasks: [],
+      disPlay: true,
     },
     "column-5": {
       id: "column-5",
       title: "salary",
       tasks: [],
+      disPlay: true,
     },
     "column-6": {
       id: "column-6",
       title: "start date",
       tasks: [],
+      disPlay: true,
     },
     "column-7": {
       id: "column-7",
       title: "extn",
 
       tasks: [],
+      disPlay: true,
     },
     "column-8": {
       id: "column-8",
       title: "status",
       tasks: [],
+      disPlay: true,
+    },
+    "column-9": {
+      id: "column-9",
+      title: "actions",
+      disPlay: true,
     },
   },
   columnOrder: [
@@ -680,6 +750,7 @@ export const initialData = {
     "column-6",
     "column-7",
     "column-8",
+    "column-9",
   ],
 };
 

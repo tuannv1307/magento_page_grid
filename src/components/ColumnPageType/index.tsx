@@ -1,1 +1,1 @@
-export { default } from "./GribPage";
+export { default } from "./ColumnPageType";

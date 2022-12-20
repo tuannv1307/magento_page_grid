@@ -6,10 +6,15 @@ import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { sortColumnsOrder } from "../../store/magentoPageGridReducer";
 import ViewLength from "../ViewLength";
+import HideShowColumns from "../HideShowColumns";
+import Search from "../Search";
+import ColumnActions from "../ColumnActions";
+import ColumnCheck from "../ColumnCheck";
 
 const Products = () => {
   let data = useSelector((state: any) => state.magentopage);
   let columns = data.data.columns;
+
   let columnOrder = data.data.columnOrder;
   let tasks = data.data.tasks;
   // let tasksColumns;
@@ -24,6 +29,10 @@ const Products = () => {
     if (!destination) {
       return;
     }
+    if (draggableId === "column-9") {
+      return;
+    }
+
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -37,10 +46,7 @@ const Products = () => {
       newColumnOrder.splice(source.index, 1);
 
       newColumnOrder.splice(destination.index, 0, draggableId);
-      console.log(
-        "🚀 ~ file: Products.tsx:36 ~ onDragEnd ~ newColumnOrder",
-        newColumnOrder
-      );
+
       dispatch(sortColumnsOrder(newColumnOrder));
     }
   };
@@ -64,22 +70,17 @@ const Products = () => {
 
         <div className={st(classes.actionPage)}>
           <div className={st(classes.actionPageTop)}>
-            <div>
-              <input
-                type="text"
-                placeholder="Search by keyword"
-                className={st(classes.inputSearch)}
-              />
-            </div>
-            <div>
+            <Search />
+            <div className={st(classes.actionPageWrapLeft)}>
               <button className={st(classes.btnFilter)}>Filters</button>
-              <button className={st(classes.btnColumns)}>Columns</button>
+              <HideShowColumns />
             </div>
           </div>
           <div className={st(classes.actionPageBottom)}>
             <div className={st(classes.actionBtnSelect)}>
               <button className={st(classes.actionSelect)}>Actions</button>
             </div>
+            <div>78 records found (1 selected)</div>
             <div className={st(classes.dataGridPagerWrap)}>
               <ViewLength />
               <label className={st(classes.textPage)}>per page</label>
@@ -87,6 +88,7 @@ const Products = () => {
             </div>
           </div>
         </div>
+
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable
             droppableId="all-columns"
@@ -99,91 +101,116 @@ const Products = () => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                <div>check</div>
+                <ColumnCheck />
                 {
                   // _.map(titleColumns, (titleColumn) =>
                   _.map(columnOrder, (columnId, index) => {
-                    switch (columns[columnId].title) {
+                    switch (columns[columnId]?.title) {
                       case "id":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "name":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "position":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "office":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "salary":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "start date":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "extn":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "status":
                         return (
-                          <ColumnPageType
-                            column={columns[columnId]}
-                            index={index}
-                            key={columnId}
-                            typeColumn={columns[columnId].title}
-                          />
+                          columns[columnId].disPlay === true && (
+                            <ColumnPageType
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
                         );
                       case "option":
-                      case "action":
+                      case "actions":
+                        return (
+                          columns[columnId].disPlay === true && (
+                            <ColumnActions
+                              column={columns[columnId]}
+                              index={index}
+                              key={columnId}
+                              typeColumn={columns[columnId].title}
+                            />
+                          )
+                        );
                     }
                   })
                   // )
                 }
                 {provided.placeholder}
-                <div>Action</div>
               </div>
             )}
           </Droppable>

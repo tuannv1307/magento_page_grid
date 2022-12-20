@@ -1,0 +1,133 @@
+.root {
+    -st-states: isShowColums;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 3rem; */
+    position: relative;
+    margin: 0 10px;
+    font-size: 13px;
+}
+
+.btnColumns {
+    padding-right: 3.3rem;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #41362f;
+    display: inline-block;
+    /* font-size: 13px; */
+    font-weight: 400;
+    letter-spacing: -.025em;
+    padding: 10px 33px 15px 15px;
+    position: relative;
+    vertical-align: baseline;
+    z-index: 12;
+    /* border-color: #007bdb; */
+    display: flex;
+    gap: 10px;
+
+}
+
+.root:isShowColums > .btnColumns {
+    padding-right: 3.3rem;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #41362f;
+    display: inline-block;
+    /* font-size: 13px; */
+    font-weight: 400;
+    letter-spacing: -.025em;
+    padding: 10px 33px 15px 15px;
+    position: relative;
+    vertical-align: baseline;
+    z-index: 12;
+    /* border-color: #007bdb; */
+    border-color: #adadad;
+    border-bottom: none;
+    /* box-shadow: 1px 1px 5px rgb(0 0 0 / 50%); */
+    display: flex;
+    gap: 10px;
+}
+
+
+.dropDownShowColumns {
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+
+    line-height: 1.36;
+    margin-top: -1px;
+    min-width: 120%;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 100%;
+    transition: all .15s ease;
+    z-index: 10;
+    color: #333;
+    right: 0;
+}
+
+
+.dropDownHeader {
+    padding-bottom: 15px;
+
+}
+
+
+.dropDownContent {
+
+    max-height: 219px;
+    overflow-y: auto;
+    padding-top: 15px;
+    position: relative;
+    width: 474px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+.cloumnShowHide {
+    -st-states: disableSelect;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer !important;
+}
+
+.cloumnShowHide > input {
+    margin-right: 7px;
+    cursor: pointer !important;
+}
+
+.cloumnShowHide > label {
+    width: 100%;
+    cursor: pointer !important;
+}
+
+.cloumnShowHide:disableSelect {
+    opacity: .4;
+    cursor: default;
+}
+
+
+.dropDownAction {
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-between;
+}
+
+.dropDownAction > div > button {
+    border: none;
+    background-color: transparent;
+    color: #007bdb;
+}
+
+.dropDownAction > div > button:hover {
+    text-decoration: underline;
+}
