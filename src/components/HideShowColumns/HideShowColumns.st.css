@@ -98,14 +98,21 @@
     align-items: center;
     margin-bottom: 15px;
     cursor: pointer !important;
+    position: relative;
 }
 
-.cloumnShowHide > input {
-    margin-right: 7px;
+.svgCheck{
+    position: absolute;
+        bottom: -4px;
+    left: -6px;
+}
+.cloumnShowHide > svg {
+   
     cursor: pointer !important;
 }
 
 .cloumnShowHide > label {
+     margin-left: 10px;
     width: 100%;
     cursor: pointer !important;
 }

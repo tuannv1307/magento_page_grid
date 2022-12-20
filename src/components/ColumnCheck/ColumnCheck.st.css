@@ -25,6 +25,11 @@
     cursor: pointer;
 }
 
+.itemColumn > svg {
+
+    cursor: pointer;
+}
+
 .itemColumn:nth-child(odd) {
     background-color: #f5f5f5;
 }
@@ -35,12 +40,21 @@
 
 .titleColumn {
     margin: 0;
-    background-color: #514943;
+    background-color: #514b45;
     color: #fff;
-    padding: 10px;
+    padding: 12px;
 
     border-right: none;
     display: flex;
+    position: relative;
+}
+
+.svgDash {
+    position: absolute;
+    color: #000;
+    font-size: 15px;
+    left: 10px;
+    top: 11px;
 }
 
 .titleColumn > input {
@@ -48,12 +62,19 @@
     border: 1px solid #ffffff;
 }
 
-.titleColumn > input:focus {
+.svgSuare {
+    margin: 0;
+    border: 8px solid #ffffff;
+    cursor: pointer;
+}
+
+.svgSuare:focus {
     border-color: #007bdb;
+
 }
 
 .titleColumn > button {
-    padding: 0;
+    padding: 2px 2px;
     line-height: 0;
     border: 1px solid #ffffff;
 }
@@ -61,43 +82,3 @@
 .titleColumn > button:focus {
     border-color: #007bdb;
 }
-
-/* 
-.selectActions {
-    border: none;
-    color: #007bdb;
-    background-color: transparent;
-    font-weight: 300;
-    padding: 0;
-    cursor: pointer;
-
-}
-
-.selectAction {
-    height: 100px;
-}
-
-.dropDownAction {
-    background-color: #fff;
-    position: absolute;
-    border: 1px solid #007bdb;
-    right: 46px;
-
-}
-
-.dropDownAction > div > button {
-    border: none;
-    color: #333;
-    background-color: transparent;
-    font-weight: 300;
-    padding: 0;
-    cursor: pointer;
-    padding: 10px 60px 10px 10px;
-    width: 100%;
-    text-align: left;
-}
-
-
-.dropDownAction > div > button:hover {
-    background-color: #e3e3e3;
-} */

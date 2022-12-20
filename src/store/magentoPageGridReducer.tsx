@@ -186,6 +186,14 @@ export type Actions = {
     state: Magento_Page,
     action: PayloadAction<{ id: string }>
   ) => void;
+  checkboxTask: (
+    state: Magento_Page,
+    action: PayloadAction<{ id: string }>
+  ) => void;
+  checkboxTaskAll: (
+    state: Magento_Page
+    // action: PayloadAction<{ id: string }>
+  ) => void;
 };
 
 const initialData: Magento_Page = {
@@ -311,6 +319,23 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
+    checkboxTask: (state, action) => {
+      let { id } = action.payload;
+
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.id === id ? { ...task, selected: !task.selected } : task
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+    checkboxTaskAll: (state) => {
+      // let { id } = action.payload;
+      // state.data.tasks = _.map(state.data.tasks, (task) =>
+      //   task.id === id ? { ...task, selected: !task.selected } : task
+      // );
+      // state.data.tasks = _.cloneDeep(state.data.tasks);
+      // state = _.cloneDeep(state);
+    },
   },
   extraReducers: {},
 });
@@ -328,6 +353,8 @@ export const {
   resetColumns,
   setIsAction,
   DeleteTask,
+  checkboxTask,
+  checkboxTaskAll,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;
