@@ -1,0 +1,73 @@
+.root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 74px;
+}
+
+.actionBtnSelect {
+    position: relative;
+}
+
+
+.actionSelect {
+    width: 100%;
+    border: 1px solid;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #fff;
+    font-weight: 400;
+    text-align: left;
+    border-color: #adadad;
+    color: #514943;
+    outline: none;
+    font-size: 14px;
+    padding: 6px 32px 6px 14px;
+    padding-right: 199px;
+
+}
+
+.seclectMenuToggle {
+    padding-right: 24px;
+    padding-top: 8px;
+
+    background: transparent;
+    border-width: 0;
+    bottom: 0;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    background: #e3e3e3;
+
+    border: 1px solid #adadad;
+
+}
+
+
+.actionMenu {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    color: #303030;
+    background-color: #fff;
+    border: 1px solid #007bdb;
+    top: 37px;
+    left: 0px;
+    width: 100%;
+    z-index: 1;
+    border-radius: 1px;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+}
+
+.actionMenu > li {
+    list-style: none;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.actionMenu > li:hover {
+    background-color: #e3e3e3;
+}

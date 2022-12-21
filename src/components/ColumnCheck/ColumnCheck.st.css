@@ -64,12 +64,19 @@
 
 .svgSuare {
     margin: 0;
-    border: 8px solid #ffffff;
+    border: 9px solid #ffffff;
     cursor: pointer;
 }
 
+.svgCheckAll {
+    position: absolute;
+    cursor: pointer;
+    bottom: 13px;
+    color: #333;
+}
+
 .svgSuare:focus {
-    border-color: #007bdb;
+    color: #007bdb;
 
 }
 
@@ -81,4 +88,29 @@
 
 .titleColumn > button:focus {
     border-color: #007bdb;
+}
+
+
+.actionMenu {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    color: #303030;
+    background-color: #fff;
+    border: 1px solid #007bdb;
+    top: 30px;
+    left: 4px;
+    width: 100%;
+    border-radius: 1px;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+}
+
+.actionMenu > li {
+    list-style: none;
+    padding: 9px 13px;
+    cursor: pointer;
+}
+
+.actionMenu > li:hover {
+    background-color: #e3e3e3;
 }

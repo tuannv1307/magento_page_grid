@@ -14,13 +14,14 @@ import {
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
+import OutsideClickHandler from "react-outside-click-handler";
 
 export type ColumnActionsProps = {
   column: {
-    id: string;
+    id: string | number;
     title: string;
     tasks: {
-      id: string;
+      id: string | number;
       name: string;
       position: string;
       salary: string;
@@ -48,15 +49,18 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
   let searchData = data.searchData;
   tasks = searchFilters(tasks, searchData);
 
-  const handleShow = (id: string) => {
+  const handleShow = (id: number) => {
     if (id) {
       dispatch(setIsAction({ id }));
     }
   };
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     if (id) {
       dispatch(DeleteTask({ id }));
     }
+  };
+  const handleBlur = (id: number) => {
+    handleShow(id);
   };
   return (
     <div className={st(classes.root)}>
@@ -71,9 +75,11 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
               <button
                 className={st(classes.selectActions)}
                 onClick={() => handleShow(task.id)}
+                onBlur={() => handleBlur(task.id)}
               >
                 {typeColumn === "actions" && "Select"}
               </button>
+
               <span onClick={() => handleShow(task.id)}>
                 {task.isAction ? (
                   <svg
@@ -99,6 +105,7 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
                   </svg>
                 )}
               </span>
+
               {task.isAction && (
                 <div className={st(classes.dropDownAction)}>
                   <div className={st(classes.edit)}>

@@ -3,8 +3,14 @@ import { Draggable } from "react-beautiful-dnd";
 import { st, classes } from "./ColumnPageType.st.css";
 import { initialData } from "../../constants";
 import _ from "lodash";
-import { useSelector } from "react-redux";
-import type { Magento_Page } from "../../store/magentoPageGridReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Magento_Page,
+  changeIsSort,
+  changeName,
+  sortAsc,
+  sortDesc,
+} from "../../store/magentoPageGridReducer";
 export type ColumnPageTypeProps = {
   column: {
     id: string;
@@ -85,13 +91,36 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+  const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
   let sizeData = data.valueChange;
   let typeArr = data.typeArr;
   let currentPage = data.currentPage;
   let searchData = data.searchData;
+  let isSorted = data.isSort;
+  let sortName = data.sortName;
   tasks = searchFilters(tasks, searchData);
 
+  const handleClickIsSort = (type: string) => {
+    let isSort;
+    if (sortName === type) {
+      isSort = !isSorted;
+    } else {
+      isSort = true;
+    }
+    let nameSort = type;
+
+    dispatch(changeName({ nameSort }));
+    dispatch(changeIsSort({ isSort }));
+    if (isSort === true) {
+      dispatch(sortAsc({ nameSort }));
+    } else if (isSort === false) {
+      dispatch(sortDesc({ nameSort }));
+    }
+  };
+  const handleClickEdit = (id: number) => {
+    console.log(id);
+  };
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided, snapshot) => (
@@ -100,16 +129,29 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <p className={st(classes.titleColumn)} {...provided.dragHandleProps}>
+          {/* {console.log(
+            "🚀 ~ file: ColumnPageType.tsx:131 ~ ColumnPageType ~ snapshot",
+            snapshot
+          )} */}
+
+          <p
+            className={st(classes.titleColumn)}
+            {...provided.dragHandleProps}
+            onClick={() => handleClickIsSort(typeColumn)}
+          >
             {column.title}
           </p>
-          {tasks.length > 0 ? (
+          {tasks.length > 0 &&
             _.map(
               typeArr === "DATA_SET_LENGTH"
                 ? columnDataLenght(tasks, sizeData)
                 : getPaginatedData(tasks, currentPage, sizeData),
               (task: any, index) => (
-                <div className={st(classes.itemColumn)} key={index}>
+                <div
+                  className={st(classes.itemColumn)}
+                  key={index}
+                  onClick={() => handleClickEdit(task.id)}
+                >
                   <>{typeColumn === "id" && task.id}</>
                   <>{typeColumn === "name" && task.name}</>
                   <>{typeColumn === "position" && task.position}</>
@@ -120,10 +162,7 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
                   <>{typeColumn === "status" && task.status}</>
                 </div>
               )
-            )
-          ) : (
-            <div>We couldn't find any records.</div>
-          )}
+            )}
         </div>
       )}
     </Draggable>

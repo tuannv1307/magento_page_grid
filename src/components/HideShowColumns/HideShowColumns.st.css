@@ -31,10 +31,10 @@
 
 }
 
-.root:isShowColums > .btnColumns {
+.root:isShowColums > div > .btnColumns {
     padding-right: 3.3rem;
     background-color: #fff;
-    border: 1px solid transparent;
+    border: 1px solid #adadad;
     border-bottom: none;
     border-radius: 0;
     box-shadow: none;
@@ -101,18 +101,19 @@
     position: relative;
 }
 
-.svgCheck{
+.svgCheck {
     position: absolute;
-        bottom: -4px;
+    bottom: -4px;
     left: -6px;
 }
+
 .cloumnShowHide > svg {
-   
+
     cursor: pointer !important;
 }
 
 .cloumnShowHide > label {
-     margin-left: 10px;
+    margin-left: 10px;
     width: 100%;
     cursor: pointer !important;
 }

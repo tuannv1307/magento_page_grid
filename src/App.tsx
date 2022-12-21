@@ -14,8 +14,13 @@ import Header from "./components/Header/Header";
 import { st, classes } from "./App.st.css";
 import "./globals.st.css";
 import { initialData } from "./constants";
+import ModalWrap from "./components/ModalWrap/ModalWrap";
 
 function App() {
+  const data: Magento_Page = useSelector(
+    (state: { magentopage: Magento_Page }) => state.magentopage
+  );
+  const isShowModal = data.isShowModal;
   const dispatch = useDispatch();
 
   const localPage: any = localStorage.getItem("MAGENTO_PAGE");
@@ -40,6 +45,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className={st(classes.root)} data-hook="app">
+      <ModalWrap />
       <Header />
       <Nav />
       <Products />

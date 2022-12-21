@@ -9,6 +9,7 @@ import {
 import { st, classes } from "./PaginatePage.st.css";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { searchFilters } from "../ColumnPageType/ColumnPageType";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const PaginatePage = () => {
   const data: Magento_Page = useSelector(
@@ -40,7 +41,12 @@ const PaginatePage = () => {
 
   const handleKeyDowSetCurrentPage = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (currentPageP > numberPage || currentPageP <= 0 || !currentPageP) {
+      if (
+        currentPageP > numberPage ||
+        currentPageP <= 0 ||
+        !currentPageP ||
+        !_.isNaN(currentPageP)
+      ) {
         setCurrentPageP(1);
         dispatch(setCurrentPage(1));
       } else {
@@ -73,13 +79,27 @@ const PaginatePage = () => {
   if (lengthData === 0) {
     numberPage = 1;
   }
-
+  const handleOutsideClick = () => {
+    if (
+      currentPageP > numberPage ||
+      currentPageP <= 0 ||
+      !currentPageP ||
+      !_.isNaN(currentPageP)
+    ) {
+      setCurrentPageP(1);
+      dispatch(setCurrentPage(1));
+    } else {
+      dispatch(setCurrentPage(_.toNumber(currentPageP)));
+    }
+  };
   useEffect(() => {
     disabledPrev = currentPage === 1 ? true : false;
     disabledNext =
       currentPage === numberPage ? true : false || numberPage === 0;
     dispatch(setBtnPrevAndNext({ disabledPrev, disabledNext }));
   }, [currentPage, numberPage]);
+
+  console.log(currentPageP);
 
   return (
     <div className={st(classes.root)}>
@@ -100,13 +120,15 @@ const PaginatePage = () => {
           </svg>
         </button>
         <span>
-          <input
-            type="text"
-            className={st(classes.inputPaginate)}
-            value={currentPageP}
-            onChange={handleChangeCurrentPage}
-            onKeyDown={handleKeyDowSetCurrentPage}
-          />
+          <OutsideClickHandler onOutsideClick={handleOutsideClick}>
+            <input
+              type="text"
+              className={st(classes.inputPaginate)}
+              value={currentPageP}
+              onChange={handleChangeCurrentPage}
+              onKeyDown={handleKeyDowSetCurrentPage}
+            />
+          </OutsideClickHandler>
         </span>
         <span className={st(classes.maxPageData)}>of {numberPage} </span>
         <button

@@ -10,6 +10,7 @@ import HideShowColumns from "../HideShowColumns";
 import Search from "../Search";
 import ColumnActions from "../ColumnActions";
 import ColumnCheck from "../ColumnCheck";
+import ActionsSelect from "../ActionsSelect";
 
 const Products = () => {
   let data = useSelector((state: any) => state.magentopage);
@@ -77,10 +78,7 @@ const Products = () => {
             </div>
           </div>
           <div className={st(classes.actionPageBottom)}>
-            <div className={st(classes.actionBtnSelect)}>
-              <button className={st(classes.actionSelect)}>Actions</button>
-            </div>
-            <div>78 records found (1 selected)</div>
+            <ActionsSelect />
             <div className={st(classes.dataGridPagerWrap)}>
               <ViewLength />
               <label className={st(classes.textPage)}>per page</label>
@@ -194,7 +192,7 @@ const Products = () => {
                             />
                           )
                         );
-                      case "option":
+                      case "check":
                       case "actions":
                         return (
                           columns[columnId].disPlay === true && (
@@ -214,6 +212,7 @@ const Products = () => {
               </div>
             )}
           </Droppable>
+          <div>We couldn't find any records.</div>
         </DragDropContext>
       </main>
     </div>

@@ -90,54 +90,9 @@
     display: flex;
 }
 
-.actionBtnSelect {
-    position: relative;
-    display: flex;
 
-}
 
-.actionSelect {
-    width: 100%;
-    border: 1px solid;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    background-color: #fff;
-    font-weight: 400;
-    text-align: left;
-    border-color: #adadad;
-    color: #514943;
-    outline: none;
-    font-size: 14px;
-    padding: 6px 32px 6px 14px;
-    padding-right: 199px;
 
-}
-
-.actionSelect::before {
-    background-color: #e3e3e3;
-    border: 1px solid #adadad;
-    bottom: 0;
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 3.2rem;
-}
-
-.actionSelect::after {
-    border-color: #000 transparent transparent transparent;
-    border-style: solid;
-    border-width: 0.5rem 0.4rem 0 0.4rem;
-    content: '';
-    height: 0;
-    margin-top: -0.2rem;
-    position: absolute;
-    right: 1.2rem;
-    top: 50%;
-    transition: all .2s linear;
-    width: 0;
-}
 
 
 .dataGridPagerWrap {
@@ -162,6 +117,6 @@
 
 .pageColumns {
     display: grid;
-    grid-template-columns: 3% 3.5% 14% 20% 13% 12% 11% 8% 8.5% 7%;
-
+    grid-template-columns: repeat(10, 1fr);
+    /* grid-template-columns: auto; */
 }

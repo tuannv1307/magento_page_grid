@@ -5,7 +5,7 @@ export type Magento_Page = {
   prevDataColumns: {};
   data: {
     tasks?: {
-      id: string;
+      id: string | number;
       name: string;
       position: string;
       salary: string;
@@ -147,6 +147,13 @@ export type Magento_Page = {
   disabledNext: boolean;
   disableSelect: boolean;
   searchData: string;
+  isSort: boolean;
+  sortName: string;
+  isShowModal: boolean;
+  isItemTaskSelectd: boolean;
+  titleModal: string;
+  contentModal: string;
+  isCheckedAllByPage: boolean;
 };
 
 export type Actions = {
@@ -167,7 +174,7 @@ export type Actions = {
   ) => void;
   setDisplayColumn: (
     state: Magento_Page,
-    action: PayloadAction<{ id: string }>
+    action: PayloadAction<{ id: number }>
   ) => void;
   setDisableSelectColumn: (
     state: Magento_Page,
@@ -180,20 +187,57 @@ export type Actions = {
   resetColumns: (state: Magento_Page) => void;
   setIsAction: (
     state: Magento_Page,
-    action: PayloadAction<{ id: string }>
+    action: PayloadAction<{ id: number }>
   ) => void;
   DeleteTask: (
     state: Magento_Page,
-    action: PayloadAction<{ id: string }>
+    action: PayloadAction<{ id: number }>
   ) => void;
   checkboxTask: (
     state: Magento_Page,
-    action: PayloadAction<{ id: string }>
+    action: PayloadAction<{ id: number }>
   ) => void;
   checkboxTaskAll: (
-    state: Magento_Page
-    // action: PayloadAction<{ id: string }>
+    state: Magento_Page,
+    action: PayloadAction<{ checkedAll: boolean }>
   ) => void;
+
+  checkboxTaskAllBypage: (
+    state: Magento_Page,
+    action: PayloadAction<{ isCheckedAllByPage: boolean }>
+  ) => void;
+
+  sortDesc: (
+    state: Magento_Page,
+    action: PayloadAction<{ nameSort: string }>
+  ) => void;
+
+  sortAsc: (
+    state: Magento_Page,
+    action: PayloadAction<{ nameSort: string }>
+  ) => void;
+
+  changeIsSort: (
+    state: Magento_Page,
+    action: PayloadAction<{ isSort: boolean }>
+  ) => void;
+
+  changeName: (
+    state: Magento_Page,
+    action: PayloadAction<{ nameSort: string }>
+  ) => void;
+
+  setShowModal: (
+    state: Magento_Page,
+    action: PayloadAction<{
+      isShowModal: boolean;
+      isItemTaskSelectd: boolean;
+      titleModal: string;
+      contentModal: string;
+    }>
+  ) => void;
+
+  clearSelected: (state: Magento_Page) => void;
 };
 
 const initialData: Magento_Page = {
@@ -210,6 +254,13 @@ const initialData: Magento_Page = {
   disabledNext: false,
   disableSelect: false,
   searchData: "",
+  isSort: false,
+  sortName: "id",
+  isShowModal: false,
+  isItemTaskSelectd: false,
+  titleModal: "",
+  contentModal: "",
+  isCheckedAllByPage: false,
 };
 
 export type TicTacToeActionPayload = {};
@@ -220,6 +271,10 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
   reducers: {
     getDataColumns: (state, action) => {
       state.data = action.payload;
+      state.data.tasks = _.map(state.data.tasks, (task) => ({
+        ...task,
+        id: _.toNumber(task.id),
+      }));
       state.data = _.cloneDeep(state.data);
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
     },
@@ -328,13 +383,79 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
-    checkboxTaskAll: (state) => {
-      // let { id } = action.payload;
-      // state.data.tasks = _.map(state.data.tasks, (task) =>
-      //   task.id === id ? { ...task, selected: !task.selected } : task
-      // );
-      // state.data.tasks = _.cloneDeep(state.data.tasks);
-      // state = _.cloneDeep(state);
+    checkboxTaskAll: (state, action) => {
+      let { checkedAll } = action.payload;
+      state.data.tasks = _.map(state.data.tasks, (task) => ({
+        ...task,
+        selected: checkedAll,
+      }));
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    checkboxTaskAllBypage: (state, action) => {
+      let { isCheckedAllByPage } = action.payload;
+      state.isCheckedAllByPage = isCheckedAllByPage;
+      state = _.cloneDeep(state);
+    },
+
+    sortDesc: (state, action) => {
+      const {
+        payload: { nameSort },
+      } = action;
+      let sort = _.sortBy(state.data.tasks, [nameSort]);
+      sort = _.reverse(sort);
+
+      state.data.tasks = _.cloneDeep(sort);
+      state = _.cloneDeep(state);
+    },
+
+    sortAsc: (state, action) => {
+      let {
+        payload: { nameSort },
+      } = action;
+
+      const sort = _.sortBy(state.data.tasks, [nameSort]);
+
+      state.data.tasks = _.cloneDeep(sort);
+      state = _.cloneDeep(state);
+    },
+
+    changeIsSort: (state, action) => {
+      const {
+        payload: { isSort },
+      } = action;
+      state.isSort = isSort;
+      state = _.cloneDeep(state);
+    },
+
+    changeName: (state, action) => {
+      const {
+        payload: { nameSort },
+      } = action;
+      state.isSort = true;
+      state.sortName = nameSort;
+      state = _.cloneDeep(state);
+    },
+
+    setShowModal: (state, action) => {
+      const {
+        payload: { isShowModal, isItemTaskSelectd, titleModal, contentModal },
+      } = action;
+      state.isItemTaskSelectd = isItemTaskSelectd;
+      state.titleModal = titleModal;
+      state.contentModal = contentModal;
+      state.isShowModal = isShowModal;
+      state = _.cloneDeep(state);
+    },
+
+    clearSelected: (state) => {
+      state.data.tasks = _.filter(
+        state.data.tasks,
+        (task) => task.selected === false
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
     },
   },
   extraReducers: {},
@@ -355,6 +476,13 @@ export const {
   DeleteTask,
   checkboxTask,
   checkboxTaskAll,
+  sortDesc,
+  sortAsc,
+  changeIsSort,
+  changeName,
+  setShowModal,
+  clearSelected,
+  checkboxTaskAllBypage,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

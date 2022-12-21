@@ -1,0 +1,79 @@
+.root {
+    -st-states: isShowModal;
+    position: fixed;
+    /* max-width: 500px; */
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px rgb(0 0 0 / 35%);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: hidden;
+    /* top: 100px; */
+    margin: 100px 33%;
+    z-index: 10000;
+}
+
+.root:isShowModal {
+    visibility: visible;
+}
+
+.modalHeader {
+    padding: 30px 30px 12px;
+
+}
+
+.modalHeader h1 {
+    margin: 0;
+    font-weight: 400;
+}
+
+.modalContent {
+    padding: 0 30px;
+}
+
+.hideModal {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    padding: 10px;
+    line-height: 0;
+    top: 0;
+    right: 0;
+    color: #736963;
+
+}
+
+.hideModal:hover {
+
+    color: #58504b;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 36px 30px 30px;
+}
+
+.modalFooter button {
+    border: none;
+    line-height: 0;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+}
+
+.cancel {
+    text-shadow: none;
+    color: #007bdb;
+    background-color: transparent;
+    padding: 25px 10px;
+}
+
+.ok {
+    background-color: #4b443f;
+    border-color: #4b443f;
+    color: #fff;
+
+    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    padding: 25px 16px;
+}
