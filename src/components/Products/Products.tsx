@@ -4,20 +4,32 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { st, classes } from "./Products.st.css";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { sortColumnsOrder } from "../../store/magentoPageGridReducer";
+import {
+  Magento_Page,
+  sortColumnsOrder,
+} from "../../store/magentoPageGridReducer";
 import ViewLength from "../ViewLength";
 import HideShowColumns from "../HideShowColumns";
 import Search from "../Search";
 import ColumnActions from "../ColumnActions";
 import ColumnCheck from "../ColumnCheck";
 import ActionsSelect from "../ActionsSelect";
+import { useEffect } from "react";
+import {
+  columnDataLenght,
+  getPaginatedData,
+  searchFilters,
+} from "../ColumnPageType/ColumnPageType";
 
 const Products = () => {
-  let data = useSelector((state: any) => state.magentopage);
-  let columns = data.data.columns;
+  let data: Magento_Page = useSelector(
+    (state: { magentopage: Magento_Page }) => state.magentopage
+  );
+  let columns: any = data.data.columns;
 
-  let columnOrder = data.data.columnOrder;
-  let tasks = data.data.tasks;
+  let columnOrder: any = data.data.columnOrder;
+  let tasks: any = data.data.tasks;
+  let searchData = data.searchData;
   // let tasksColumns;
   // _.map(columnOrder, (columnID) => {
   //   tasksColumns = columns[columnID];
@@ -30,9 +42,9 @@ const Products = () => {
     if (!destination) {
       return;
     }
-    if (draggableId === "column-9") {
-      return;
-    }
+    // if (draggableId === "column-9") {
+    //   return;
+    // }
 
     if (
       destination.droppableId === source.droppableId &&
@@ -51,6 +63,7 @@ const Products = () => {
       dispatch(sortColumnsOrder(newColumnOrder));
     }
   };
+  tasks = searchFilters(tasks, searchData);
 
   return (
     <div className={st(classes.root)}>
@@ -212,7 +225,11 @@ const Products = () => {
               </div>
             )}
           </Droppable>
-          <div>We couldn't find any records.</div>
+          {_.size(tasks) === 0 && (
+            <div className={st(classes.notFinData)}>
+              We couldn't find any records.
+            </div>
+          )}
         </DragDropContext>
       </main>
     </div>

@@ -28,7 +28,6 @@ const HideShowColumns = () => {
   useEffect(() => {
     if (lengthDisplayColumn === 1) {
       let index = _.indexOf(columns, abc);
-      console.log(index, abc);
 
       disableSelect = true;
     } else {

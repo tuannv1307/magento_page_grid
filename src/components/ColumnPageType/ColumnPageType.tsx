@@ -118,14 +118,12 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
       dispatch(sortDesc({ nameSort }));
     }
   };
-  const handleClickEdit = (id: number) => {
-    console.log(id);
-  };
+  const handleClickEdit = (id: number) => {};
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided, snapshot) => (
         <div
-          className={st(classes.root)}
+          className={st(classes.root, typeColumn)}
           {...provided.draggableProps}
           ref={provided.innerRef}
         >

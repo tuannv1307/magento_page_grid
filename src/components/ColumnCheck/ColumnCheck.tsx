@@ -88,10 +88,7 @@ const ColumnCheck = () => {
   useEffect(() => {
     handleCheckAllOnPage();
   }, []);
-  console.log(
-    "🚀 ~ file: ColumnCheck.tsx:66 ~ handleCheckAllByPage ~ checkedAllByPage",
-    isCheckedAllByPage
-  );
+
   const handleoutsideClick = () => {
     setIsShow(false);
   };

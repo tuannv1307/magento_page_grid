@@ -99,8 +99,6 @@ const PaginatePage = () => {
     dispatch(setBtnPrevAndNext({ disabledPrev, disabledNext }));
   }, [currentPage, numberPage]);
 
-  console.log(currentPageP);
-
   return (
     <div className={st(classes.root)}>
       <div className={st(classes.dataTablesPaginate)}>

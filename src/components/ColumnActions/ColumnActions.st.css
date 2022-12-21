@@ -1,84 +1,78 @@
 .root {
-    /* display: flex; */
-    /* cursor: pointer;
+  /* display: flex; */
+  /* cursor: pointer;
     border: 0.1rem solid #8a837f; */
-    /* border-right: 1px solid #fff; */
-
+  /* border-right: 1px solid #fff; */
+  width: 100%;
 }
 
 .itemColumn {
-    background-color: #fff;
-    color: #303030;
+  background-color: #fff;
+  color: #303030;
 
-    border-left: 0.1rem dashed #d6d6d6;
-    border-right: 0.1rem dashed #d6d6d6;
+  border-left: 0.1rem dashed #d6d6d6;
+  border-right: 0.1rem dashed #d6d6d6;
 
-    padding: 1rem 1rem;
-    max-height: 44px;
-    text-align: center;
-
+  padding: 1rem 1rem;
+  max-height: 44px;
+  text-align: center;
 }
 
 .itemColumn > span {
-    padding-left: 4px;
-    color: #007bdb;
-    cursor: pointer;
+  padding-left: 4px;
+  color: #007bdb;
+  cursor: pointer;
 }
 
 .itemColumn:nth-child(odd) {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .itemColumn:last-child {
-    border-bottom: 0.1rem solid #d6d6d6;
+  border-bottom: 0.1rem solid #d6d6d6;
 }
 
 .titleColumn {
-    margin: 0;
-    background-color: #514943;
-    color: #fff;
-    padding: 10px;
-    border: 0.1rem solid #8a837f;
-    border-right: none;
-
+  margin: 0;
+  background-color: #514943;
+  color: #fff;
+  padding: 10px;
+  border: 0.1rem solid #8a837f;
+  border-right: none;
 }
 
-
 .selectActions {
-    border: none;
-    color: #007bdb;
-    background-color: transparent;
-    font-weight: 300;
-    padding: 0;
-    cursor: pointer;
-
+  border: none;
+  color: #007bdb;
+  background-color: transparent;
+  font-weight: 300;
+  padding: 0;
+  cursor: pointer;
 }
 
 .selectAction {
-    height: 100px;
+  height: 100px;
 }
 
 .dropDownAction {
-    background-color: #fff;
-    position: absolute;
-    border: 1px solid #007bdb;
-    right: 46px;
-
+  background-color: #fff;
+  position: absolute;
+  border: 1px solid #007bdb;
+  right: 46px;
 }
 
 .dropDownAction > div > button {
-    border: none;
-    color: #333;
-    background-color: transparent;
-    font-weight: 300;
-    padding: 0;
-    cursor: pointer;
-    padding: 10px 60px 10px 10px;
-    width: 100%;
-    text-align: left;
+  border: none;
+  color: #333;
+  background-color: transparent;
+  font-weight: 300;
+  padding: 0;
+  cursor: pointer;
+  padding: 10px 60px 10px 10px;
+  width: 100%;
+  text-align: left;
 }
 
-
 .dropDownAction > div > button:hover {
-    background-color: #e3e3e3;
+  background-color: #e3e3e3;
 }

@@ -116,7 +116,16 @@
 
 
 .pageColumns {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex;
+    width: 100%;
+    /* grid-template-columns: repeat(10, 1fr); */
     /* grid-template-columns: auto; */
+}
+
+.notFinData{
+    text-align: center;
+    padding: 24px 10px;
+    border: 1px solid #adadad;
+    font-weight: 600;
+    font-size: 15px;
 }
