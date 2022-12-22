@@ -15,6 +15,7 @@ export type Magento_Page = {
       status: string;
       selected: boolean;
       isAction: boolean;
+      isEdit: boolean;
     }[];
     columns?: {
       // "column-1": {
@@ -154,6 +155,8 @@ export type Magento_Page = {
   titleModal: string;
   contentModal: string;
   isCheckedAllByPage: boolean;
+  nameStatus: string;
+  isEditTask: boolean;
 };
 
 export type Actions = {
@@ -195,7 +198,7 @@ export type Actions = {
   ) => void;
   checkboxTask: (
     state: Magento_Page,
-    action: PayloadAction<{ id: number }>
+    action: PayloadAction<{ id: number; isSelected: boolean }>
   ) => void;
   checkboxTaskAll: (
     state: Magento_Page,
@@ -238,6 +241,28 @@ export type Actions = {
   ) => void;
 
   clearSelected: (state: Magento_Page) => void;
+
+  changeStatusTask: (
+    state: Magento_Page,
+    action: PayloadAction<{ nameStatus: string }>
+  ) => void;
+  checkIsEdit: (
+    state: Magento_Page,
+    action: PayloadAction<{ id: number; isEdit: boolean }>
+  ) => void;
+
+  editTask: (
+    state: Magento_Page,
+    action: PayloadAction<{
+      id: number;
+      inputEdit: {};
+    }>
+  ) => void;
+
+  checkIsEditTask: (
+    state: Magento_Page,
+    action: PayloadAction<boolean>
+  ) => void;
 };
 
 const initialData: Magento_Page = {
@@ -260,7 +285,10 @@ const initialData: Magento_Page = {
   isItemTaskSelectd: false,
   titleModal: "",
   contentModal: "",
+
   isCheckedAllByPage: false,
+  nameStatus: "enable" || "disable",
+  isEditTask: false,
 };
 
 export type TicTacToeActionPayload = {};
@@ -275,6 +303,10 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         ...task,
         id: _.toNumber(task.id),
       }));
+
+      // const sort = _.sortBy(state.data.tasks, [state.sortName]);
+
+      // state.data.tasks = _.cloneDeep(sort);
       state.data = _.cloneDeep(state.data);
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
     },
@@ -375,14 +407,15 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state = _.cloneDeep(state);
     },
     checkboxTask: (state, action) => {
-      let { id } = action.payload;
+      let { id, isSelected } = action.payload;
 
       state.data.tasks = _.map(state.data.tasks, (task) =>
-        task.id === id ? { ...task, selected: !task.selected } : task
+        task.id === id ? { ...task, selected: isSelected } : task
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
+
     checkboxTaskAll: (state, action) => {
       let { checkedAll } = action.payload;
       state.data.tasks = _.map(state.data.tasks, (task) => ({
@@ -457,6 +490,48 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
+
+    changeStatusTask: (state, action) => {
+      let { nameStatus } = action.payload;
+
+      state.nameStatus = nameStatus;
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.selected === true ? { ...task, status: nameStatus } : task
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    checkIsEdit: (state, action) => {
+      let { id, isEdit } = action.payload;
+
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.id === id ? { ...task, isEdit: isEdit } : task
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    editTask: (state, action) => {
+      let { id, inputEdit } = action.payload;
+
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.id === id
+          ? {
+              ...task,
+              inputEdit,
+            }
+          : task
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    checkIsEditTask: (state, action) => {
+      let isEditTask = action.payload;
+
+      state.isEditTask = isEditTask;
+    },
   },
   extraReducers: {},
 });
@@ -483,6 +558,10 @@ export const {
   setShowModal,
   clearSelected,
   checkboxTaskAllBypage,
+  changeStatusTask,
+  checkIsEdit,
+  editTask,
+  checkIsEditTask,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

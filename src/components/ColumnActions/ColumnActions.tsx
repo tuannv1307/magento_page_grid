@@ -16,6 +16,8 @@ import {
 } from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
 
+import Edit from "./edit.svg";
+
 export type ColumnActionsProps = {
   column: {
     id: string | number;
@@ -40,7 +42,7 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-  const [isShow, setIsShow] = useState(false);
+
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
   let sizeData = data.valueChange;
@@ -52,6 +54,9 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
   const handleShow = (id: number) => {
     if (id) {
       dispatch(setIsAction({ id }));
+      console.log("dadw");
+    } else {
+      console.log("dawddddd");
     }
   };
   const handleDelete = (id: number) => {
@@ -71,7 +76,7 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
             ? columnDataLenght(tasks, sizeData)
             : getPaginatedData(tasks, currentPage, sizeData),
           (task: any, index) => (
-            <div className={st(classes.itemColumn)} key={index}>
+            <div className={st(classes.itemColumn)} key={task.id}>
               <button
                 className={st(classes.selectActions)}
                 onClick={() => handleShow(task.id)}
@@ -93,6 +98,12 @@ const ColumnActions = ({ column, typeColumn }: ColumnActionsProps) => {
                     <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                   </svg>
                 ) : (
+                  // <>
+                  //   <img src={Edit} alt="Edit" />
+                  // </>
+                  // <>
+                  //   <img src={Edit} alt="Edit" />
+                  // </>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"

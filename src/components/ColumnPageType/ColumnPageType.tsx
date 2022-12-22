@@ -8,9 +8,12 @@ import {
   Magento_Page,
   changeIsSort,
   changeName,
+  checkboxTask,
   sortAsc,
   sortDesc,
 } from "../../store/magentoPageGridReducer";
+import EditDataTask from "../EditDataTask";
+import ItemTaskColumn from "../ItemTaskColumn";
 export type ColumnPageTypeProps = {
   column: {
     id: string;
@@ -26,6 +29,7 @@ export type ColumnPageTypeProps = {
       status: string;
       selected: boolean;
     }[];
+    disPlay: boolean;
   };
   index?: any;
   typeColumn: string;
@@ -91,6 +95,8 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
+  const [isShowEdit, setIsShowEdit] = useState(false);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
   let sizeData = data.valueChange;
@@ -106,24 +112,27 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
     if (sortName === type) {
       isSort = !isSorted;
     } else {
-      isSort = true;
+      isSort = false;
     }
     let nameSort = type;
 
     dispatch(changeName({ nameSort }));
     dispatch(changeIsSort({ isSort }));
-    if (isSort === true) {
+    if (isSort === false) {
       dispatch(sortAsc({ nameSort }));
-    } else if (isSort === false) {
+    } else if (isSort === true) {
       dispatch(sortDesc({ nameSort }));
     }
   };
-  const handleClickEdit = (id: number) => {};
+
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided, snapshot) => (
         <div
-          className={st(classes.root, typeColumn)}
+          className={st(classes.root, {
+            typeColumn,
+            sortName: sortName === column.title,
+          })}
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
@@ -132,34 +141,62 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
             snapshot
           )} */}
 
-          <p
-            className={st(classes.titleColumn)}
+          <span
+            className={st(classes.titleColumn, { isSorted })}
             {...provided.dragHandleProps}
             onClick={() => handleClickIsSort(typeColumn)}
           >
             {column.title}
-          </p>
+
+            <span>
+              {sortName === column.title && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-arrow-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
+                  />
+                </svg>
+              )}
+            </span>
+            <svg
+              xmlns="http:www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-arrow-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+              />
+            </svg>
+          </span>
           {tasks.length > 0 &&
             _.map(
               typeArr === "DATA_SET_LENGTH"
                 ? columnDataLenght(tasks, sizeData)
                 : getPaginatedData(tasks, currentPage, sizeData),
               (task: any, index) => (
-                <div
-                  className={st(classes.itemColumn)}
-                  key={index}
-                  onClick={() => handleClickEdit(task.id)}
-                >
-                  <>{typeColumn === "id" && task.id}</>
-                  <>{typeColumn === "name" && task.name}</>
-                  <>{typeColumn === "position" && task.position}</>
-                  <>{typeColumn === "office" && task.office}</>
-                  <>{typeColumn === "salary" && task.salary}</>
-                  <>{typeColumn === "start date" && task.start_date}</>
-                  <>{typeColumn === "extn" && task.extn}</>
-                  <>{typeColumn === "status" && task.status}</>
-                </div>
+                // task.selected ? (
+                <>
+                  <ItemTaskColumn
+                    task={task}
+                    typeColumn={typeColumn}
+                    key={task.id}
+                    column={column}
+                  />
+                </>
+                // ) : (
               )
+              //)
             )}
         </div>
       )}

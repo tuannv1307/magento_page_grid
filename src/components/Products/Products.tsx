@@ -108,7 +108,9 @@ const Products = () => {
           >
             {(provided, snapshot) => (
               <div
-                className={st(classes.pageColumns)}
+                className={st(classes.pageColumns, {
+                  isFalseTrue: snapshot.isDraggingOver,
+                })}
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >

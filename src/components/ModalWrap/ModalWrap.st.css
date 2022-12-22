@@ -1,14 +1,14 @@
 .root {
     -st-states: isShowModal;
     position: fixed;
-    /* max-width: 500px; */
+    width: 500px;
     background-color: #fff;
     box-shadow: 0 0 12px 2px rgb(0 0 0 / 35%);
     opacity: 1;
     pointer-events: auto;
     visibility: hidden;
     /* top: 100px; */
-    margin: 100px 33%;
+    margin: 100px 37%;
     z-index: 10000;
 }
 

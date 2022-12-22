@@ -65,9 +65,13 @@
 .actionPageBottom {
     display: flex;
     justify-content: space-between;
+
 }
 
+.actionPageBottom {
 
+    /* margin-top: 50px; */
+}
 
 .btnFilter {
     border: 1px solid;
@@ -116,13 +120,18 @@
 
 
 .pageColumns {
+    -st-states: isFalseTrue;
     display: flex;
     width: 100%;
     /* grid-template-columns: repeat(10, 1fr); */
     /* grid-template-columns: auto; */
 }
 
-.notFinData{
+.pageColumns:isFalseTrue {
+    background-color: #adadad;
+}
+
+.notFinData {
     text-align: center;
     padding: 24px 10px;
     border: 1px solid #adadad;

@@ -6,6 +6,7 @@ import {
   checkboxTask,
   checkboxTaskAll,
   checkboxTaskAllBypage,
+  checkIsEdit,
   DeleteTask,
   Magento_Page,
   setIsAction,
@@ -17,6 +18,7 @@ import {
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
+import EditDataTask from "../EditDataTask";
 
 const ColumnCheck = () => {
   let data: Magento_Page = useSelector(
@@ -33,15 +35,20 @@ const ColumnCheck = () => {
   tasks = searchFilters(tasks, searchData);
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
-  let taskByLength;
+  let haveIsEdit = _.some(tasks, ["isEdit", true]);
   let taskbyPaginate;
 
   const handleShow = () => {
     setIsShow(!isShow);
   };
-  const handleCheckbox = (id: number) => {
+  const handleCheckbox = (id: number, selected: boolean) => {
+    console.log(selected);
+
     if (id) {
-      dispatch(checkboxTask({ id }));
+      dispatch(checkboxTask({ id, isSelected: !selected }));
+      if (haveIsEdit) {
+        dispatch(checkIsEdit({ id, isEdit: !selected }));
+      }
     }
   };
 
@@ -82,7 +89,6 @@ const ColumnCheck = () => {
         ...task,
         selected: isCheckedAllByPage,
       }));
-      //  console.log(tasks);
     }
   };
   useEffect(() => {
@@ -93,12 +99,10 @@ const ColumnCheck = () => {
     setIsShow(false);
   };
 
-  console.log(tasks);
-  //console.log(handleCheckAllByPage());
   return (
     <div className={st(classes.root)}>
       <OutsideClickHandler onOutsideClick={handleoutsideClick}>
-        <p className={st(classes.titleColumn)}>
+        <div className={st(classes.titleColumn)}>
           {checkedAll && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -188,15 +192,15 @@ const ColumnCheck = () => {
               <li>Deselect All on This Page</li>
             </ul>
           )}
-        </p>
+        </div>
       </OutsideClickHandler>
 
       {tasks.length > 0 &&
         _.map(tasks, (task: any, index) => (
           <div
             className={st(classes.itemColumn)}
-            key={index}
-            onClick={() => handleCheckbox(task.id)}
+            key={task.id}
+            onClick={() => handleCheckbox(task.id, task.selected)}
           >
             {task.selected ? (
               <svg
@@ -222,6 +226,7 @@ const ColumnCheck = () => {
                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
               </svg>
             )}
+            {/* {task.isEdit && <EditDataTask task={task} key={task.id} />} */}
           </div>
         ))}
     </div>

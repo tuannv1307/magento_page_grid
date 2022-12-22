@@ -3,6 +3,7 @@ import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeStatusTask,
   checkboxTask,
   checkboxTaskAll,
   DeleteTask,
@@ -41,9 +42,9 @@ const ActionsSelect = () => {
   const handleShow = () => {
     setIsShow(!isShow);
   };
-  const handleCheckbox = (id: number) => {
+  const handleCheckbox = (id: number, isSelected: boolean) => {
     if (id) {
-      dispatch(checkboxTask({ id }));
+      dispatch(checkboxTask({ id, isSelected: !isSelected }));
     }
   };
   const checkedAll = _.every(data.data.tasks, ["selected", true]);
@@ -60,54 +61,79 @@ const ActionsSelect = () => {
 
   const ShowModal = (type: string) => {
     handleShow();
-    if (checkedTask) {
+    if (checkedTask && type === "DELETE") {
       isItemTaskSelectd = true;
       titleModal = "Delete items";
       contentModal = `Are you sure you want to delete selected items? (${lengthTask} record)`;
-    } else {
+      dispatch(
+        setShowModal({
+          isShowModal: !isShowModal,
+          isItemTaskSelectd: checkedTask,
+          titleModal,
+          contentModal,
+        })
+      );
+    }
+    if (checkedTask === false) {
       isItemTaskSelectd = false;
       titleModal = "Attention";
       contentModal = "You haven't selected any items!";
+      if (type === "DELETE") {
+        dispatch(
+          setShowModal({
+            isShowModal: !isShowModal,
+            isItemTaskSelectd: checkedTask,
+            titleModal,
+            contentModal,
+          })
+        );
+      }
+      if (type === "DISABLE") {
+        dispatch(
+          setShowModal({
+            isShowModal: !isShowModal,
+            isItemTaskSelectd: checkedTask,
+            titleModal,
+            contentModal,
+          })
+        );
+      }
+      if (type === "ENABLE") {
+        dispatch(
+          setShowModal({
+            isShowModal: !isShowModal,
+            isItemTaskSelectd: checkedTask,
+            titleModal,
+            contentModal,
+          })
+        );
+      }
+      if (type === "Edit") {
+        dispatch(
+          setShowModal({
+            isShowModal: !isShowModal,
+            isItemTaskSelectd: checkedTask,
+            titleModal,
+            contentModal,
+          })
+        );
+      }
     }
-    if (type === "DELETE") {
-      dispatch(
-        setShowModal({
-          isShowModal: !isShowModal,
-          isItemTaskSelectd: checkedTask,
-          titleModal,
-          contentModal,
-        })
-      );
-    }
-    if (type === "DISABLE" && isItemTaskSelectd === false) {
-      dispatch(
-        setShowModal({
-          isShowModal: !isShowModal,
-          isItemTaskSelectd: checkedTask,
-          titleModal,
-          contentModal,
-        })
-      );
-    }
-    if (type === "ENABLE" && isItemTaskSelectd === false) {
-      dispatch(
-        setShowModal({
-          isShowModal: !isShowModal,
-          isItemTaskSelectd: checkedTask,
-          titleModal,
-          contentModal,
-        })
-      );
-    }
-    if (type === "Edit" && isItemTaskSelectd === false) {
-      dispatch(
-        setShowModal({
-          isShowModal: !isShowModal,
-          isItemTaskSelectd: checkedTask,
-          titleModal,
-          contentModal,
-        })
-      );
+    if (checkedTask) {
+      if (type === "DISABLE") {
+        dispatch(
+          changeStatusTask({
+            nameStatus: "disable",
+          })
+        );
+      }
+      if (type === "ENABLE") {
+        dispatch(
+          changeStatusTask({
+            nameStatus: "enable",
+          })
+        );
+      }
     }
   };
   const handleOutsideClick = () => {

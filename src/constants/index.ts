@@ -11,6 +11,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "2",
@@ -23,6 +24,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "3",
@@ -35,6 +37,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "4",
@@ -47,6 +50,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "5",
@@ -59,6 +63,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "6",
@@ -71,6 +76,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "7",
@@ -83,6 +89,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "8",
@@ -95,6 +102,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "9",
@@ -107,6 +115,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "10",
@@ -119,6 +128,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "11",
@@ -131,6 +141,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "12",
@@ -143,6 +154,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "13",
@@ -155,6 +167,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "14",
@@ -167,6 +180,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "15",
@@ -179,6 +193,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "16",
@@ -191,6 +206,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "17",
@@ -203,6 +219,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "18",
@@ -215,6 +232,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "19",
@@ -227,6 +245,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "20",
@@ -239,6 +258,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "21",
@@ -251,6 +271,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "22",
@@ -263,6 +284,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "23",
@@ -275,6 +297,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "24",
@@ -287,6 +310,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "25",
@@ -299,6 +323,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "26",
@@ -311,6 +336,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "27",
@@ -323,6 +349,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "28",
@@ -335,6 +362,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "29",
@@ -347,6 +375,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "30",
@@ -359,6 +388,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "31",
@@ -371,6 +401,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "32",
@@ -383,6 +414,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "33",
@@ -395,6 +427,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "34",
@@ -407,6 +440,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "35",
@@ -419,6 +453,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "36",
@@ -431,6 +466,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "37",
@@ -443,6 +479,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "38",
@@ -455,6 +492,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "39",
@@ -467,6 +505,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "40",
@@ -479,6 +518,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "41",
@@ -491,6 +531,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "42",
@@ -503,6 +544,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "43",
@@ -515,6 +557,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "44",
@@ -527,6 +570,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "45",
@@ -539,6 +583,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "46",
@@ -551,6 +596,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "47",
@@ -563,6 +609,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "48",
@@ -575,6 +622,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "49",
@@ -587,6 +635,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "50",
@@ -599,6 +648,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "51",
@@ -611,6 +661,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "52",
@@ -623,6 +674,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "53",
@@ -635,6 +687,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "54",
@@ -647,6 +700,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "55",
@@ -659,6 +713,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "56",
@@ -671,6 +726,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
     {
       id: "57",
@@ -683,6 +739,7 @@ export const initialData = {
       status: "enable",
       selected: false,
       isAction: false,
+      isEdit: false,
     },
   ],
   columns: {

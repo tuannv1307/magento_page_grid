@@ -8,7 +8,11 @@ import {
 
 import { st, classes } from "./PaginatePage.st.css";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
-import { searchFilters } from "../ColumnPageType/ColumnPageType";
+import {
+  columnDataLenght,
+  getPaginatedData,
+  searchFilters,
+} from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
 
 const PaginatePage = () => {
@@ -18,7 +22,7 @@ const PaginatePage = () => {
   const dispatch = useDispatch();
   let currentPage = data.currentPage;
 
-  const [currentPageP, setCurrentPageP] = useState(currentPage);
+  const [currentPageP, setCurrentPageP] = useState(_.toString(currentPage));
   let tasks: any = data.data.tasks;
   let searchData = data.searchData;
   tasks = searchFilters(tasks, searchData);
@@ -27,12 +31,13 @@ const PaginatePage = () => {
   const valueChangePage = data.valueChange;
 
   useEffect(() => {
-    setCurrentPageP(currentPage);
+    setCurrentPageP(_.toString(currentPage));
   }, [currentPage]);
 
   let disabledPrev = data.disabledPrev;
   let disabledNext = data.disabledNext;
-
+  let typeArr = data.typeArr;
+  let sizeData = data.valueChange;
   let numberPage = Math.ceil(lengthData / valueChangePage);
 
   const handleChangeCurrentPage = (e: any) => {
@@ -42,12 +47,12 @@ const PaginatePage = () => {
   const handleKeyDowSetCurrentPage = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (
-        currentPageP > numberPage ||
-        currentPageP <= 0 ||
-        !currentPageP ||
-        !_.isNaN(currentPageP)
+        _.toNumber(currentPageP) > numberPage ||
+        _.toNumber(currentPageP) <= 0 ||
+        currentPageP === "" ||
+        _.isNaN(_.toNumber(currentPageP)) === true
       ) {
-        setCurrentPageP(1);
+        setCurrentPageP("1");
         dispatch(setCurrentPage(1));
       } else {
         dispatch(setCurrentPage(_.toNumber(currentPageP)));
@@ -79,19 +84,12 @@ const PaginatePage = () => {
   if (lengthData === 0) {
     numberPage = 1;
   }
-  const handleOutsideClick = () => {
-    if (
-      currentPageP > numberPage ||
-      currentPageP <= 0 ||
-      !currentPageP ||
-      !_.isNaN(currentPageP)
-    ) {
-      setCurrentPageP(1);
-      dispatch(setCurrentPage(1));
-    } else {
-      dispatch(setCurrentPage(_.toNumber(currentPageP)));
-    }
-  };
+
+  tasks =
+    typeArr === "DATA_SET_LENGTH"
+      ? columnDataLenght(tasks, sizeData)
+      : getPaginatedData(tasks, currentPage, sizeData);
+
   useEffect(() => {
     disabledPrev = currentPage === 1 ? true : false;
     disabledNext =
@@ -99,26 +97,40 @@ const PaginatePage = () => {
     dispatch(setBtnPrevAndNext({ disabledPrev, disabledNext }));
   }, [currentPage, numberPage]);
 
+  const handleOutsideClick = () => {
+    if (
+      _.toNumber(currentPageP) > numberPage ||
+      _.toNumber(currentPageP) <= 0 ||
+      currentPageP === "" ||
+      _.isNaN(_.toNumber(currentPageP)) === true
+    ) {
+      setCurrentPageP("1");
+      dispatch(setCurrentPage(1));
+    } else {
+      dispatch(setCurrentPage(_.toNumber(currentPageP)));
+    }
+  };
+
   return (
     <div className={st(classes.root)}>
-      <div className={st(classes.dataTablesPaginate)}>
-        <button
-          className={st(classes.actionPaginate, { disabledPrev })}
-          data-hook="previous"
-          onClick={() => handleClickBtnPrevAndNext("PREVIOUS")}
-        >
-          <svg
-            className={st(classes.svgPrev)}
-            viewBox="0 0 18 18"
-            fill="currentColor"
-            width="20"
-            height="20"
+      <OutsideClickHandler onOutsideClick={handleOutsideClick}>
+        <div className={st(classes.dataTablesPaginate)}>
+          <button
+            className={st(classes.actionPaginate, { disabledPrev })}
+            data-hook="previous"
+            onClick={() => handleClickBtnPrevAndNext("PREVIOUS")}
           >
-            <path d="M-7.14 11.145a.5.5 0 010 .707l-3.646 3.648 3.646 3.647a.5.5 0 11-.707.707L-12.2 15.5l4.353-4.355a.5.5 0 01.707 0zM11.987 13.93a.75.75 0 11-1.06 1.06L5.438 9.497l5.488-5.492a.75.75 0 011.06 1.061L7.561 9.498l4.426 4.431z"></path>
-          </svg>
-        </button>
-        <span>
-          <OutsideClickHandler onOutsideClick={handleOutsideClick}>
+            <svg
+              className={st(classes.svgPrev)}
+              viewBox="0 0 18 18"
+              fill="currentColor"
+              width="20"
+              height="20"
+            >
+              <path d="M-7.14 11.145a.5.5 0 010 .707l-3.646 3.648 3.646 3.647a.5.5 0 11-.707.707L-12.2 15.5l4.353-4.355a.5.5 0 01.707 0zM11.987 13.93a.75.75 0 11-1.06 1.06L5.438 9.497l5.488-5.492a.75.75 0 011.06 1.061L7.561 9.498l4.426 4.431z"></path>
+            </svg>
+          </button>
+          <span>
             <input
               type="text"
               className={st(classes.inputPaginate)}
@@ -126,25 +138,25 @@ const PaginatePage = () => {
               onChange={handleChangeCurrentPage}
               onKeyDown={handleKeyDowSetCurrentPage}
             />
-          </OutsideClickHandler>
-        </span>
-        <span className={st(classes.maxPageData)}>of {numberPage} </span>
-        <button
-          className={st(classes.actionPaginate, { disabledNext })}
-          data-hook="next"
-          onClick={() => handleClickBtnPrevAndNext("NEXT")}
-        >
-          <svg
-            className={st(classes.svgNext)}
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            width="20"
-            height="20"
+          </span>
+          <span className={st(classes.maxPageData)}>of {numberPage} </span>
+          <button
+            className={st(classes.actionPaginate, { disabledNext })}
+            data-hook="next"
+            onClick={() => handleClickBtnPrevAndNext("NEXT")}
           >
-            <path d="M8.22083109,4 C8.51380539,3.70718788 8.9886791,3.70731936 9.28149122,4.00029365 L17.2763084,12 L9.28047689,19.9997063 C8.98766478,20.2926806 8.51279106,20.2928121 8.21981676,20 C7.92684246,19.7071879 7.92671099,19.2323142 8.21952311,18.9393399 L15.1555752,12 L8.22053744,5.06066013 C7.92772532,4.76768583 7.92785679,4.29281212 8.22083109,4 Z"></path>
-          </svg>
-        </button>
-      </div>
+            <svg
+              className={st(classes.svgNext)}
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="20"
+              height="20"
+            >
+              <path d="M8.22083109,4 C8.51380539,3.70718788 8.9886791,3.70731936 9.28149122,4.00029365 L17.2763084,12 L9.28047689,19.9997063 C8.98766478,20.2926806 8.51279106,20.2928121 8.21981676,20 C7.92684246,19.7071879 7.92671099,19.2323142 8.21952311,18.9393399 L15.1555752,12 L8.22053744,5.06066013 C7.92772532,4.76768583 7.92785679,4.29281212 8.22083109,4 Z"></path>
+            </svg>
+          </button>
+        </div>
+      </OutsideClickHandler>
     </div>
   );
 };

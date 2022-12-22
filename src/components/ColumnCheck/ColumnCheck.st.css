@@ -3,7 +3,7 @@
     /* cursor: pointer;
     border: 0.1rem solid #8a837f; */
     /* border-right: 1px solid #fff; */
-/* width: 100%; */
+    /* width: 100%; */
 }
 
 .itemColumn {
@@ -16,7 +16,7 @@
     padding: 1rem 1rem;
     max-height: 44px;
     text-align: center;
-
+    cursor: pointer;
 }
 
 .itemColumn > span {
@@ -100,7 +100,7 @@
     border: 1px solid #007bdb;
     top: 30px;
     left: 4px;
-    width: 100%;
+    width: 190px;
     border-radius: 1px;
     box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
 }

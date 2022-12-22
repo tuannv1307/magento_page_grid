@@ -29,7 +29,7 @@ const ViewLength = () => {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      if (!inputValue || !_.isNaN(inputValue)) {
+      if (!inputValue || _.isNaN(_.toNumber(inputValue)) === true) {
         setInputValue("20");
         dispatch(changeViewLengthData(20));
       } else {
@@ -56,7 +56,7 @@ const ViewLength = () => {
 
   const handleKeyDowEdit = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      if (!inputValueEdit || !_.isNaN(inputValueEdit)) {
+      if (!inputValueEdit || _.isNaN(_.toNumber(inputValueEdit)) === true) {
         dispatch(changeViewLengthData(20));
         setInputValue("20");
         setIsShow(false);
@@ -70,7 +70,7 @@ const ViewLength = () => {
   };
 
   const handleOutSideClickInput = () => {
-    if (!inputValue || !_.isNaN(inputValue)) {
+    if (!inputValue || _.isNaN(_.toNumber(inputValue)) === true) {
       setInputValue("20");
       dispatch(changeViewLengthData(20));
     } else if (inputValue) {
@@ -79,7 +79,7 @@ const ViewLength = () => {
   };
 
   const handleClickEdit = () => {
-    if (!inputValueEdit || !_.isNaN(inputValueEdit)) {
+    if (!inputValueEdit || _.isNaN(_.toNumber(inputValueEdit)) === true) {
       setInputValue("20");
 
       dispatch(changeViewLengthData(20));
