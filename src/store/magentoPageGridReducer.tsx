@@ -157,6 +157,7 @@ export type Magento_Page = {
   isCheckedAllByPage: boolean;
   nameStatus: string;
   isEditTask: boolean;
+  isCheckOnPage: boolean;
 };
 
 export type Actions = {
@@ -263,6 +264,8 @@ export type Actions = {
     state: Magento_Page,
     action: PayloadAction<boolean>
   ) => void;
+
+  checkOnPage: (state: Magento_Page, action: PayloadAction<boolean>) => void;
 };
 
 const initialData: Magento_Page = {
@@ -289,6 +292,7 @@ const initialData: Magento_Page = {
   isCheckedAllByPage: false,
   nameStatus: "enable" || "disable",
   isEditTask: false,
+  isCheckOnPage: false,
 };
 
 export type TicTacToeActionPayload = {};
@@ -333,7 +337,10 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
       state.valueChange = valueChange;
       state.valueChange = _.cloneDeep(state.valueChange);
-      state.currentPage = 1;
+      if (_.size(state.data.tasks) < state.valueChange) {
+        state.currentPage = 1;
+      }
+      state.typeArr = "DATA_SET_LENGTH";
       state = _.cloneDeep(state);
       // localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
       localStorage.setItem(
@@ -532,6 +539,12 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
       state.isEditTask = isEditTask;
     },
+
+    checkOnPage: (state, action) => {
+      let isCheckOnPage = action.payload;
+
+      state.isCheckOnPage = isCheckOnPage;
+    },
   },
   extraReducers: {},
 });
@@ -562,6 +575,7 @@ export const {
   checkIsEdit,
   editTask,
   checkIsEditTask,
+  checkOnPage,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

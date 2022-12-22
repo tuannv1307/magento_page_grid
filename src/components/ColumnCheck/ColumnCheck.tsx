@@ -7,6 +7,7 @@ import {
   checkboxTaskAll,
   checkboxTaskAllBypage,
   checkIsEdit,
+  checkOnPage,
   DeleteTask,
   Magento_Page,
   setIsAction,
@@ -26,12 +27,13 @@ const ColumnCheck = () => {
   );
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false);
+  const [isShows, setIsShows] = useState(false);
   let tasks: any = data.data.tasks;
   let sizeData = data.valueChange;
   let typeArr = data.typeArr;
   let currentPage = data.currentPage;
   let searchData = data.searchData;
-  let isCheckedAllByPage = data.isCheckedAllByPage;
+  let isCheckOnPage = data.isCheckOnPage;
   tasks = searchFilters(tasks, searchData);
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
@@ -42,8 +44,6 @@ const ColumnCheck = () => {
     setIsShow(!isShow);
   };
   const handleCheckbox = (id: number, selected: boolean) => {
-    console.log(selected);
-
     if (id) {
       dispatch(checkboxTask({ id, isSelected: !selected }));
       if (haveIsEdit) {
@@ -71,34 +71,39 @@ const ColumnCheck = () => {
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
-
-  const handleCheckAllOnPage = () => {
-    if (isCheckedAllByPage) {
-      dispatch(
-        checkboxTaskAllBypage({ isCheckedAllByPage: !isCheckedAllByPage })
-      );
-      tasks = _.map(tasks, (task) => ({
-        ...task,
-        selected: isCheckedAllByPage,
-      }));
-    } else {
-      dispatch(
-        checkboxTaskAllBypage({ isCheckedAllByPage: !isCheckedAllByPage })
-      );
-      tasks = _.map(tasks, (task) => ({
-        ...task,
-        selected: isCheckedAllByPage,
-      }));
-    }
-  };
+  let abc;
   useEffect(() => {
-    handleCheckAllOnPage();
-  }, []);
+    tasks = _.forEach(
+      tasks,
+      (task) =>
+        (!task.selected && dispatch(checkOnPage(false))) ||
+        (task.selected && dispatch(checkOnPage(true)))
+    );
+  }, [typeArr]);
+  const handleCheckAllOnPage = (type: boolean) => {
+    dispatch(checkOnPage(type));
+  };
+
+  // useEffect(() => {
+  // tasks = _.map(columnDataLenght(tasks, sizeData), (task) => ({
+  //   ...task,
+  //   selected: isCheckOnPage,
+  // }));
+  // });
+  console.log(data, isCheckOnPage);
 
   const handleoutsideClick = () => {
     setIsShow(false);
   };
+  const selectAll = () => {
+    dispatch(checkboxTaskAll({ checkedAll: true }));
+    setIsShow(false);
+  };
 
+  const deSelectAll = () => {
+    dispatch(checkboxTaskAll({ checkedAll: false }));
+    setIsShow(false);
+  };
   return (
     <div className={st(classes.root)}>
       <OutsideClickHandler onOutsideClick={handleoutsideClick}>
@@ -169,27 +174,15 @@ const ColumnCheck = () => {
           </button>
           {isShow && (
             <ul className={st(classes.actionMenu)}>
-              {!checkedAll && (
-                <li
-                  onClick={() =>
-                    dispatch(checkboxTaskAll({ checkedAll: true }))
-                  }
-                >
-                  SelectAll
-                </li>
-              )}
+              {!checkedAll && <li onClick={selectAll}>SelectAll</li>}
 
-              {lengthTask > 0 && (
-                <li
-                  onClick={() =>
-                    dispatch(checkboxTaskAll({ checkedAll: false }))
-                  }
-                >
-                  Deselect All
-                </li>
-              )}
-              <li onClick={handleCheckAllOnPage}>Select All on This Page</li>
-              <li>Deselect All on This Page</li>
+              {lengthTask > 0 && <li onClick={deSelectAll}>Deselect All</li>}
+              <li onClick={() => handleCheckAllOnPage(true)}>
+                Select All on This Page
+              </li>
+              <li onClick={() => handleCheckAllOnPage(false)}>
+                Deselect All on This Page
+              </li>
             </ul>
           )}
         </div>

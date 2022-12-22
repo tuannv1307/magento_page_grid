@@ -10,6 +10,7 @@ import {
 } from "../../store/magentoPageGridReducer";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import _ from "lodash";
 type ItemTaskColumnProps = { task: any; typeColumn: string; column: any };
 
 const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
@@ -17,15 +18,25 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   const [isShow, setIsShow] = useState(false);
+  let tasks = data.data.tasks;
+  const lengtaskIsEdit = _.size(
+    _.filter(tasks, (task) => task.isEdit === true)
+  );
+
   let isEditTask = data.isEditTask;
   const dispatch = useDispatch();
   const handleClickEdit = (id: number, isEdit: boolean) => {
     setIsShow(!isShow);
     if (id) {
-      dispatch(checkIsEdit({ id, isEdit: true }));
-      dispatch(checkboxTask({ id, isSelected: !isEdit }));
+      if (lengtaskIsEdit > 0) {
+        dispatch(checkIsEdit({ id, isEdit: false }));
+      } else {
+        dispatch(checkIsEdit({ id, isEdit: true }));
+        dispatch(checkboxTask({ id, isSelected: !isEdit }));
+      }
     }
   };
+
   const handleEdittask = (id: number, inputEdit: {}) => [
     dispatch(editTask({ id, inputEdit })),
   ];

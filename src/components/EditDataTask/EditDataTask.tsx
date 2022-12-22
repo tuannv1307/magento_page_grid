@@ -61,7 +61,7 @@ const EditDataTask = ({
     <div className={st(classes.root, { typeColumn })}>
       <span>{typeColumn === "id" && task.id}</span>
       <>
-        {typeColumn === "name" && (
+        {typeColumn === "name" ? (
           <input
             onChange={handleOnChangeInputEdit}
             name={typeColumn}
@@ -69,10 +69,7 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "position" && (
+        ) : typeColumn === "position" ? (
           <input
             onChange={handleOnChangeInputEdit}
             name={typeColumn}
@@ -80,10 +77,7 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "office" && (
+        ) : typeColumn === "office" ? (
           <input
             onChange={handleOnChangeInputEdit}
             name={typeColumn}
@@ -91,10 +85,7 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "salary" && (
+        ) : typeColumn === "salary" ? (
           <input
             onChange={handleOnChangeInputEdit}
             name={typeColumn}
@@ -102,17 +93,7 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "start date" && (
-          // <input
-          //   onChange={handleOnChangeInputEdit}
-          //   name={typeColumn}
-          //   value={start_date}
-          //   type="text"
-          //   className={st(classes.inputEditTask)}
-          // />
+        ) : typeColumn === "start date" ? (
           <DatePicker
             selected={start_date}
             onChange={(date: Date) =>
@@ -124,10 +105,7 @@ const EditDataTask = ({
             dateFormat="yyyy/MM/dd"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "extn" && (
+        ) : typeColumn === "extn" ? (
           <input
             onChange={handleOnChangeInputEdit}
             name={typeColumn}
@@ -135,21 +113,18 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        )}
-      </>
-      <>
-        {typeColumn === "status" && (
-          <>
-            <select
-              name={typeColumn}
-              value={status}
-              className={st(classes.selectEditTask)}
-              onChange={handleOnChangeInputEdit}
-            >
-              <option value="enable">Enable</option>
-              <option value="disable">Disable</option>
-            </select>
-          </>
+        ) : typeColumn === "status" ? (
+          <select
+            name={typeColumn}
+            value={status}
+            className={st(classes.selectEditTask)}
+            onChange={handleOnChangeInputEdit}
+          >
+            <option value="enable">Enable</option>
+            <option value="disable">Disable</option>
+          </select>
+        ) : (
+          ""
         )}
       </>
     </div>
