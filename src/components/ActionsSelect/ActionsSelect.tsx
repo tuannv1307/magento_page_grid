@@ -14,6 +14,7 @@ import {
 import { st, classes } from "./ActionsSelect.st.css";
 import {
   columnDataLenght,
+  fiterDataByKeyword,
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
@@ -33,11 +34,20 @@ const ActionsSelect = () => {
   let titleModal = data.titleModal;
   let contentModal = data.contentModal;
   let searchData = data.searchData;
-  tasks = searchFilters(tasks, searchData);
+  let objFilters: any = data.objFilters;
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
+
+  if (_.some(objFilters, (obj) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
-  let taskByLength;
-  let taskbyPaginate;
+  // console.log(
+  //   "🚀 ~ file: ActionsSelect.tsx:47 ~ ActionsSelect ~ lengthTask",
+  //   lengthTask
+  // );
 
   const handleShow = () => {
     setIsShow(!isShow);
@@ -191,7 +201,7 @@ const ActionsSelect = () => {
         </OutsideClickHandler>
 
         <div>
-          {_.size(data.data.tasks)} records found{" "}
+          {_.size(tasks)} records found{" "}
           {lengthTask > 0 && `( ${lengthTask} selected)`}{" "}
         </div>
       </div>

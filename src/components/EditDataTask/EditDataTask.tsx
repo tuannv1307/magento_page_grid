@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { st, classes } from "./EditDataTask.st.css";
-import { useDispatch } from "react-redux";
-import { checkIsEdit, editTask } from "../../store/magentoPageGridReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Magento_Page,
+  checkIsEdit,
+  editTask,
+  inputEditTask,
+} from "../../store/magentoPageGridReducer";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "./DatePicker.scss";
@@ -20,6 +25,9 @@ const EditDataTask = ({
   column,
   handleEdittask,
 }: EditDataTaskProps) => {
+  const data: Magento_Page = useSelector(
+    (state: { magentopage: Magento_Page }) => state.magentopage
+  );
   const [isShow, setIsShow] = useState(false);
   const [inputEdit, setInputEdit] = useState({
     name: task.name,
@@ -31,32 +39,27 @@ const EditDataTask = ({
     status: task.status,
   });
 
-  const dispatch = useDispatch();
   let { name, position, office, salary, start_date, extn, status } = inputEdit;
+
+  const dispatch = useDispatch();
 
   const handleOnChangeInputEdit = (e: any) => {
     setInputEdit({ ...inputEdit, [e.target.name]: e.target.value });
   };
-
-  const handleEdit = (id: number) => {
-    if (id) {
-      let inputEdit = {
-        name,
-        position,
-        office,
-        salary,
-        start_date: _.toString(start_date),
-        extn,
-        status,
-      };
-      console.log(
-        "🚀 ~ file: EditDataTask.tsx:56 ~ handleEdit ~ inputEdit",
-        inputEdit
-      );
-      dispatch(checkIsEdit({ id, isEdit: true }));
-      handleEdittask(id, inputEdit);
-    }
-  };
+  useEffect(() => {
+    dispatch(
+      inputEditTask({
+        nameEdit: name,
+        positionEdit: position,
+        salaryEdit: salary,
+        start_dateEdit: start_date,
+        officeEdit: office,
+        extnEdit: extn,
+        statusEdit: status,
+      })
+    );
+  }, [inputEdit]);
+  console.log(data);
   return (
     <div className={st(classes.root, { typeColumn })}>
       <span>{typeColumn === "id" && task.id}</span>
@@ -78,13 +81,20 @@ const EditDataTask = ({
             className={st(classes.inputEditTask)}
           />
         ) : typeColumn === "office" ? (
-          <input
-            onChange={handleOnChangeInputEdit}
+          <select
             name={typeColumn}
             value={office}
-            type="text"
-            className={st(classes.inputEditTask)}
-          />
+            className={st(classes.selectEditTask)}
+            onChange={handleOnChangeInputEdit}
+          >
+            <option value="Tokyo">Tokyo</option>
+            <option value="Sydney">Sydney</option>
+            <option value="London">London</option>
+            <option value="Singapore">Singapore</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Edinburgh">Edinburgh</option>
+            <option value="New York">New York</option>
+          </select>
         ) : typeColumn === "salary" ? (
           <input
             onChange={handleOnChangeInputEdit}

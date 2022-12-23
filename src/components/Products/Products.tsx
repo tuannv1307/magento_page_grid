@@ -17,9 +17,11 @@ import ActionsSelect from "../ActionsSelect";
 import { useEffect } from "react";
 import {
   columnDataLenght,
+  fiterDataByKeyword,
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
+import FiltersData from "../FiltersData";
 
 const Products = () => {
   let data: Magento_Page = useSelector(
@@ -42,9 +44,9 @@ const Products = () => {
     if (!destination) {
       return;
     }
-    // if (draggableId === "column-9") {
-    //   return;
-    // }
+    if (draggableId === "column-9") {
+      return;
+    }
 
     if (
       destination.droppableId === source.droppableId &&
@@ -63,7 +65,14 @@ const Products = () => {
       dispatch(sortColumnsOrder(newColumnOrder));
     }
   };
-  tasks = searchFilters(tasks, searchData);
+  let objFilters: any = data.objFilters;
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
+
+  if (_.some(objFilters, (obj) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
 
   return (
     <div className={st(classes.root)}>
@@ -86,7 +95,7 @@ const Products = () => {
           <div className={st(classes.actionPageTop)}>
             <Search />
             <div className={st(classes.actionPageWrapLeft)}>
-              <button className={st(classes.btnFilter)}>Filters</button>
+              <FiltersData />
               <HideShowColumns />
             </div>
           </div>

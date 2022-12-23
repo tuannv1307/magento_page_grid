@@ -46,7 +46,11 @@ const HideShowColumns = () => {
 
   const handleClickChangeDisplay = (id: number) => {
     if (id) {
-      dispatch(setDisplayColumn({ id }));
+      if (
+        lengthDisplayColumn > 1 ||
+        (lengthDisplayColumn === 1 && !_.find(abc, { id }))
+      )
+        dispatch(setDisplayColumn({ id }));
     }
   };
 

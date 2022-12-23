@@ -98,17 +98,17 @@ const PaginatePage = () => {
   }, [currentPage, numberPage]);
 
   const handleOutsideClick = () => {
-    if (
-      _.toNumber(currentPageP) > numberPage ||
-      _.toNumber(currentPageP) <= 0 ||
-      currentPageP === "" ||
-      _.isNaN(_.toNumber(currentPageP)) === true
-    ) {
-      setCurrentPageP("1");
-      dispatch(setCurrentPage(1));
-    } else {
-      dispatch(setCurrentPage(_.toNumber(currentPageP)));
-    }
+    // if (
+    //   _.toNumber(currentPageP) > numberPage ||
+    //   _.toNumber(currentPageP) <= 0 ||
+    //   currentPageP === "" ||
+    //   _.isNaN(_.toNumber(currentPageP)) === true
+    // ) {
+    //   setCurrentPageP("1");
+    //   dispatch(setCurrentPage(1));
+    // } else {
+    //   dispatch(setCurrentPage(_.toNumber(currentPageP)));
+    // }
   };
 
   return (

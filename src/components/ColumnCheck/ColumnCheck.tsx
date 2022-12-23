@@ -15,6 +15,7 @@ import {
 import { st, classes } from "./ColumnCheck.st.css";
 import {
   columnDataLenght,
+  fiterDataByKeyword,
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
@@ -34,11 +35,17 @@ const ColumnCheck = () => {
   let currentPage = data.currentPage;
   let searchData = data.searchData;
   let isCheckOnPage = data.isCheckOnPage;
-  tasks = searchFilters(tasks, searchData);
+  let objFilters: any = data.objFilters;
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
+
+  if (_.some(objFilters, (obj) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
   let haveIsEdit = _.some(tasks, ["isEdit", true]);
-  let taskbyPaginate;
 
   const handleShow = () => {
     setIsShow(!isShow);
@@ -71,7 +78,7 @@ const ColumnCheck = () => {
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
-  let abc;
+
   useEffect(() => {
     tasks = _.forEach(
       tasks,
@@ -83,14 +90,6 @@ const ColumnCheck = () => {
   const handleCheckAllOnPage = (type: boolean) => {
     dispatch(checkOnPage(type));
   };
-
-  // useEffect(() => {
-  // tasks = _.map(columnDataLenght(tasks, sizeData), (task) => ({
-  //   ...task,
-  //   selected: isCheckOnPage,
-  // }));
-  // });
-  console.log(data, isCheckOnPage);
 
   const handleoutsideClick = () => {
     setIsShow(false);
@@ -104,6 +103,11 @@ const ColumnCheck = () => {
     dispatch(checkboxTaskAll({ checkedAll: false }));
     setIsShow(false);
   };
+
+  const handleCloseTask = () => {};
+
+  const handleSaveTask = (id: number) => {};
+
   return (
     <div className={st(classes.root)}>
       <OutsideClickHandler onOutsideClick={handleoutsideClick}>
@@ -190,36 +194,44 @@ const ColumnCheck = () => {
 
       {tasks.length > 0 &&
         _.map(tasks, (task: any, index) => (
-          <div
-            className={st(classes.itemColumn)}
-            key={task.id}
-            onClick={() => handleCheckbox(task.id, task.selected)}
-          >
-            {task.selected ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="17"
-                fill="currentColor"
-                className="bi bi-check-square"
-                viewBox="0 0 16 16"
-              >
-                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="17"
-                fill="currentColor"
-                className="bi bi-square"
-                viewBox="0 0 16 16"
-              >
-                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-              </svg>
-            )}
+          <div className={st(classes.itemColumn)} key={task.id}>
+            <div onClick={() => handleCheckbox(task.id, task.selected)}>
+              {task.selected ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  fill="currentColor"
+                  className="bi bi-check-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  fill="currentColor"
+                  className="bi bi-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                </svg>
+              )}
+            </div>
             {/* {task.isEdit && <EditDataTask task={task} key={task.id} />} */}
+            {/* temp: {
+              // office: "dasdad"
+            } */}
+
+            {task.isEdit && (
+              <div className={st(classes.actionClose)}>
+                <button onClick={handleCloseTask}>Cancel</button>
+                <button onClick={() => handleSaveTask(task.id)}>Save</button>
+              </div>
+            )}
           </div>
         ))}
     </div>

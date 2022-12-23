@@ -1,4 +1,4 @@
-import { createSlice, current, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 
 export type Magento_Page = {
@@ -158,6 +158,15 @@ export type Magento_Page = {
   nameStatus: string;
   isEditTask: boolean;
   isCheckOnPage: boolean;
+
+  nameEdit: string;
+  positionEdit: string;
+  salaryEdit: string;
+  start_dateEdit: string;
+  officeEdit: string;
+  extnEdit: string;
+  statusEdit: string;
+  objFilters: {};
 };
 
 export type Actions = {
@@ -266,6 +275,8 @@ export type Actions = {
   ) => void;
 
   checkOnPage: (state: Magento_Page, action: PayloadAction<boolean>) => void;
+  filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
+  inputEditTask: (state: Magento_Page, action: PayloadAction<any>) => void;
 };
 
 const initialData: Magento_Page = {
@@ -288,11 +299,47 @@ const initialData: Magento_Page = {
   isItemTaskSelectd: false,
   titleModal: "",
   contentModal: "",
-
   isCheckedAllByPage: false,
   nameStatus: "enable" || "disable",
   isEditTask: false,
   isCheckOnPage: false,
+
+  nameEdit: "",
+  positionEdit: "",
+  salaryEdit: "",
+  start_dateEdit: "",
+  officeEdit: "",
+  extnEdit: "",
+  statusEdit: "",
+
+  objFilters: {
+    idFrom: {
+      keyWord: "idFrom",
+      value: "",
+    },
+    idTo: {
+      keyWord: "idTo",
+      value: "",
+    },
+    name: {
+      keyWord: "name",
+      value: "",
+    },
+    office: {
+      keyWord: "office",
+      value: "",
+    },
+
+    start_date: {
+      keyWord: "start_date",
+      value: "",
+    },
+
+    status: {
+      keyWord: "status",
+      value: "",
+    },
+  },
 };
 
 export type TicTacToeActionPayload = {};
@@ -519,14 +566,14 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state = _.cloneDeep(state);
     },
 
-    editTask: (state, action) => {
+    editTask: (state: any, action) => {
       let { id, inputEdit } = action.payload;
 
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id
           ? {
               ...task,
-              inputEdit,
+              ...inputEdit,
             }
           : task
       );
@@ -544,6 +591,31 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       let isCheckOnPage = action.payload;
 
       state.isCheckOnPage = isCheckOnPage;
+    },
+
+    filtersData: (state, action) => {
+      let objFilters = action.payload;
+
+      state.objFilters = objFilters;
+    },
+
+    inputEditTask: (state, action) => {
+      const {
+        nameEdit,
+        positionEdit,
+        salaryEdit,
+        start_dateEdit,
+        officeEdit,
+        extnEdit,
+        statusEdit,
+      } = action.payload;
+      state.nameEdit = nameEdit;
+      state.positionEdit = positionEdit;
+      state.salaryEdit = salaryEdit;
+      state.start_dateEdit = start_dateEdit;
+      state.officeEdit = officeEdit;
+      state.extnEdit = extnEdit;
+      state.statusEdit = statusEdit;
     },
   },
   extraReducers: {},
@@ -576,6 +648,8 @@ export const {
   editTask,
   checkIsEditTask,
   checkOnPage,
+  filtersData,
+  inputEditTask,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

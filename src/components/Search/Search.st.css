@@ -94,3 +94,9 @@
     top: 6px;
     cursor: pointer;
 }
+
+
+.kewordFilter {
+    display: flex !important;
+    margin-right: 13px;
+}

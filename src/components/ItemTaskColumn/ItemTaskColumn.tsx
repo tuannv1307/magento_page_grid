@@ -26,26 +26,39 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
   let isEditTask = data.isEditTask;
   const dispatch = useDispatch();
   const handleClickEdit = (id: number, isEdit: boolean) => {
-    setIsShow(!isShow);
+    // setIsShow(!isShow);
+
     if (id) {
       if (lengtaskIsEdit > 0) {
         dispatch(checkIsEdit({ id, isEdit: false }));
       } else {
+        // console.log(id);
         dispatch(checkIsEdit({ id, isEdit: true }));
         dispatch(checkboxTask({ id, isSelected: !isEdit }));
       }
     }
   };
+  let name = data.nameEdit;
+  let position = data.positionEdit;
+  let office = data.officeEdit;
+  let salary = data.salaryEdit;
 
-  const handleEdittask = (id: number, inputEdit: {}) => [
-    dispatch(editTask({ id, inputEdit })),
-  ];
+  let start_date = data.start_dateEdit;
+  let extn = data.extnEdit;
+  let status = data.statusEdit;
+  const Edittask = (id: number, inputEdit: {}) => {
+    if (id) {
+    }
+  };
 
   const handleCheckIsEdit = (id: number) => {
     // dispatch(checkIsEditTask(true));
     dispatch(checkIsEdit({ id, isEdit: true }));
   };
 
+  const saveData = (id: number, value: any) => {
+    dispatch(editTask({ id, inputEdit: value }));
+  };
   return (
     <div className={st(classes.root)}>
       {task.isEdit ? (
@@ -55,9 +68,9 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
             task={task}
             key={task.id}
             column={column}
-            handleEdittask={handleEdittask}
+            handleEdittask={Edittask}
           />
-          <div>
+          {/* <div>
             <button
               onClick={() =>
                 dispatch(checkIsEdit({ id: task.id, isEdit: false }))
@@ -65,19 +78,13 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
             >
               Cancel
             </button>
-            <button
-              onClick={() =>
-                dispatch(checkIsEdit({ id: task.id, isEdit: false }))
-              }
-            >
-              Save
-            </button>
-          </div>
+            <button onClick={() => saveData(task.id, Edittask)}>Save</button>
+          </div> */}
         </div>
       ) : (
         <div
           className={st(classes.taskItem)}
-          onClick={() => handleClickEdit(task.id, task.isEdit)}
+          onDoubleClick={() => handleClickEdit(task.id, task.isEdit)}
         >
           <>{typeColumn === "id" && task.id}</>
           <>{typeColumn === "name" && task.name}</>

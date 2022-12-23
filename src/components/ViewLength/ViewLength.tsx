@@ -70,12 +70,12 @@ const ViewLength = () => {
   };
 
   const handleOutSideClickInput = () => {
-    if (!inputValue || _.isNaN(_.toNumber(inputValue)) === true) {
-      setInputValue("20");
-      dispatch(changeViewLengthData(20));
-    } else if (inputValue) {
-      dispatch(changeViewLengthData(_.toNumber(inputValue)));
-    }
+    // if (!inputValue || _.isNaN(_.toNumber(inputValue)) === true) {
+    //   setInputValue("20");
+    //   dispatch(changeViewLengthData(20));
+    // } else if (inputValue) {
+    //   dispatch(changeViewLengthData(_.toNumber(inputValue)));
+    // }
   };
 
   const handleClickEdit = () => {
@@ -101,7 +101,7 @@ const ViewLength = () => {
     //   setIsShow(false);
     //   setInputValueEdit("");
     // }
-    handleClickEdit();
+    // handleClickEdit();
   };
 
   const handleOutSideClick = () => {

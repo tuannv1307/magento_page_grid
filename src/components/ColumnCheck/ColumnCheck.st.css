@@ -7,6 +7,7 @@
 }
 
 .itemColumn {
+    position: relative;
     background-color: #fff;
     color: #303030;
 
@@ -113,4 +114,13 @@
 
 .actionMenu > li:hover {
     background-color: #e3e3e3;
+}
+
+.actionClose {
+    position: absolute;
+    display: flex;
+    left: 60px;
+    top: calc(100% - 3px);
+    z-index: 99;
+    box-shadow: 0 5px 5px rgb(0 0 0 / 25%);
 }

@@ -86,7 +86,71 @@ export const searchFilters = (arr: any[], searchData: string) => {
         task.start_date
           .toString()
           .toLowerCase()
-          .indexOf(searchData.toLowerCase()) > -1)
+          .indexOf(searchData.toLowerCase()) > -1) ||
+      (task.status &&
+        task.status.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
+          -1)
+    );
+  });
+};
+
+export const fiterDataByKeyword = (arr: any[], objFilters: any) => {
+  let keywordName: string,
+    keywordOffice: string,
+    keywordStartDate: string,
+    keywordNameStatus: string;
+  let keyIdFrom;
+  let keyIdTo;
+
+  _.map(objFilters, (obj) => {
+    if (obj.keyWord === "idFrom") {
+      keyIdFrom = obj.value;
+    }
+    if (obj.keyWord === "idTo") {
+      keyIdTo = obj.value;
+    }
+    if (obj.keyWord === "name") {
+      keywordName = obj.value;
+    }
+    if (obj.keyWord === "office") {
+      keywordOffice = obj.value;
+    }
+    if (obj.keyWord === "start_date") {
+      keywordStartDate = obj.value;
+    }
+
+    if (obj.keyWord === "status") {
+      keywordNameStatus = obj.value;
+    }
+  });
+
+  if (keyIdFrom && !keyIdTo) {
+    arr = arr;
+  }
+  if (!keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
+    arr = _.slice(arr, 0, keyIdTo);
+  }
+
+  if (keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
+    arr = _.slice(arr, keyIdFrom, keyIdTo);
+  }
+
+  return _.filter(arr, (task) => {
+    return (
+      task.name.toString().toLowerCase().indexOf(keywordName.toLowerCase()) >
+        -1 &&
+      task.office
+        .toString()
+        .toLowerCase()
+        .indexOf(keywordOffice.toLowerCase()) > -1 &&
+      task.start_date
+        .toString()
+        .toLowerCase()
+        .indexOf(keywordStartDate.toLowerCase()) > -1 &&
+      task.status
+        .toString()
+        .toLowerCase()
+        .indexOf(keywordNameStatus.toLowerCase()) > -1
     );
   });
 };
@@ -105,8 +169,19 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let searchData = data.searchData;
   let isSorted = data.isSort;
   let sortName = data.sortName;
-  tasks = searchFilters(tasks, searchData);
+  let objFilters: any = data.objFilters;
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
 
+  if (_.some(objFilters, (obj) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
+
+  tasks =
+    typeArr === "DATA_SET_LENGTH"
+      ? columnDataLenght(tasks, sizeData)
+      : getPaginatedData(tasks, currentPage, sizeData);
   const handleClickIsSort = (type: string) => {
     let isSort;
     if (sortName === type) {
@@ -136,11 +211,6 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          {/* {console.log(
-            "🚀 ~ file: ColumnPageType.tsx:131 ~ ColumnPageType ~ snapshot",
-            snapshot
-          )} */}
-
           <span
             className={st(classes.titleColumn, { isSorted })}
             {...provided.dragHandleProps}
@@ -181,19 +251,17 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           </span>
           {tasks.length > 0 &&
             _.map(
-              typeArr === "DATA_SET_LENGTH"
-                ? columnDataLenght(tasks, sizeData)
-                : getPaginatedData(tasks, currentPage, sizeData),
+              tasks,
               (task: any, index) => (
                 // task.selected ? (
-                <>
-                  <ItemTaskColumn
-                    task={task}
-                    typeColumn={typeColumn}
-                    key={task.id}
-                    column={column}
-                  />
-                </>
+                // <>
+                <ItemTaskColumn
+                  task={task}
+                  typeColumn={typeColumn}
+                  key={task.id}
+                  column={column}
+                />
+                // </>
                 // ) : (
               )
               //)
