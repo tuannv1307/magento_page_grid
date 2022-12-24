@@ -1,126 +1,150 @@
 .root {
-    /* display: flex; */
-    /* cursor: pointer;
+  /* display: flex; */
+  /* cursor: pointer;
     border: 0.1rem solid #8a837f; */
-    /* border-right: 1px solid #fff; */
-    /* width: 100%; */
+  /* border-right: 1px solid #fff; */
+  /* width: 100%; */
 }
 
 .itemColumn {
-    position: relative;
-    background-color: #fff;
-    color: #303030;
+  position: relative;
+  background-color: #fff;
+  color: #303030;
 
-    border-left: 0.1rem dashed #d6d6d6;
-    border-right: 0.1rem dashed #d6d6d6;
+  border-left: 0.1rem dashed #d6d6d6;
+  border-right: 0.1rem dashed #d6d6d6;
 
-    padding: 1rem 1rem;
-    max-height: 44px;
-    text-align: center;
-    cursor: pointer;
+  padding: 1rem 1rem;
+  max-height: 44px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .itemColumn > span {
-    padding-left: 4px;
-    color: #007bdb;
-    cursor: pointer;
+  padding-left: 4px;
+  color: #007bdb;
+  cursor: pointer;
 }
 
 .itemColumn > svg {
-
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .itemColumn:nth-child(odd) {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .itemColumn:last-child {
-    border-bottom: 0.1rem solid #d6d6d6;
+  border-bottom: 0.1rem solid #d6d6d6;
 }
 
 .titleColumn {
-    margin: 0;
-    background-color: #514b45;
-    color: #fff;
-    padding: 12px;
+  margin: 0;
+  background-color: #514b45;
+  color: #fff;
+  padding: 12px;
 
-    border-right: none;
-    display: flex;
-    position: relative;
+  border-right: none;
+  display: flex;
+  position: relative;
 }
 
 .svgDash {
-    position: absolute;
-    color: #000;
-    font-size: 15px;
-    left: 10px;
-    top: 11px;
+  position: absolute;
+  color: #000;
+  font-size: 15px;
+  left: 10px;
+  top: 11px;
 }
 
 .titleColumn > input {
-    margin: 0;
-    border: 1px solid #ffffff;
+  margin: 0;
+  border: 1px solid #ffffff;
 }
 
 .svgSuare {
-    margin: 0;
-    border: 9px solid #ffffff;
-    cursor: pointer;
+  margin: 0;
+  border: 9px solid #ffffff;
+  cursor: pointer;
 }
 
 .svgCheckAll {
-    position: absolute;
-    cursor: pointer;
-    bottom: 13px;
-    color: #333;
+  position: absolute;
+  cursor: pointer;
+  bottom: 13px;
+  color: #333;
 }
 
 .svgSuare:focus {
-    color: #007bdb;
-
+  color: #007bdb;
 }
 
 .titleColumn > button {
-    padding: 2px 2px;
-    line-height: 0;
-    border: 1px solid #ffffff;
+  padding: 2px 2px;
+  line-height: 0;
+  border: 1px solid #ffffff;
 }
 
 .titleColumn > button:focus {
-    border-color: #007bdb;
+  border-color: #007bdb;
 }
 
-
 .actionMenu {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    color: #303030;
-    background-color: #fff;
-    border: 1px solid #007bdb;
-    top: 30px;
-    left: 4px;
-    width: 190px;
-    border-radius: 1px;
-    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  color: #303030;
+  background-color: #fff;
+  border: 1px solid #007bdb;
+  top: 30px;
+  left: 4px;
+  width: 190px;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+  z-index: 10;
 }
 
 .actionMenu > li {
-    list-style: none;
-    padding: 9px 13px;
-    cursor: pointer;
+  list-style: none;
+  padding: 9px 13px;
+  cursor: pointer;
 }
 
 .actionMenu > li:hover {
-    background-color: #e3e3e3;
+  background-color: #e3e3e3;
 }
 
 .actionClose {
-    position: absolute;
-    display: flex;
-    left: 60px;
-    top: calc(100% - 3px);
-    z-index: 99;
-    box-shadow: 0 5px 5px rgb(0 0 0 / 25%);
+  position: absolute;
+  display: flex;
+  left: 100%;
+  top: calc(100% - 3px);
+  z-index: 99;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 25%);
+  padding: 5px;
+  padding: 15px 25px;
+  background-color: #fff;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: flex;
+  gap: 10px;
+  cursor: default;
+}
+
+.actionClose > button {
+  border: none;
+}
+
+.cancel {
+  color: #007bdb;
+  background-color: transparent;
+}
+.cancel:hover {
+  text-decoration: underline;
+}
+
+.save {
+  color: #fff;
+  background-color: #ff4500;
+  padding: 6px 20px;
 }

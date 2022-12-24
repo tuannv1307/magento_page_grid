@@ -9,6 +9,7 @@
 .root > svg {
     position: absolute;
     left: 4px;
+    cursor: pointer;
 }
 
 .btnFilter {

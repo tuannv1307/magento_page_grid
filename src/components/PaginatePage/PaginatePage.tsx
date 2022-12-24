@@ -10,6 +10,7 @@ import { st, classes } from "./PaginatePage.st.css";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import {
   columnDataLenght,
+  fiterDataByKeyword,
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
@@ -25,8 +26,6 @@ const PaginatePage = () => {
   const [currentPageP, setCurrentPageP] = useState(_.toString(currentPage));
   let tasks: any = data.data.tasks;
   let searchData = data.searchData;
-  tasks = searchFilters(tasks, searchData);
-  const lengthData = _.size(tasks);
 
   const valueChangePage = data.valueChange;
 
@@ -38,12 +37,19 @@ const PaginatePage = () => {
   let disabledNext = data.disabledNext;
   let typeArr = data.typeArr;
   let sizeData = data.valueChange;
-  let numberPage = Math.ceil(lengthData / valueChangePage);
 
+  let objFilters = data.objFilters;
+  if (_.some(objFilters, (obj: any) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
   const handleChangeCurrentPage = (e: any) => {
     setCurrentPageP(e.target.value);
   };
-
+  const lengthData = _.size(tasks);
+  let numberPage = Math.ceil(lengthData / valueChangePage);
   const handleKeyDowSetCurrentPage = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (
@@ -85,10 +91,10 @@ const PaginatePage = () => {
     numberPage = 1;
   }
 
-  tasks =
-    typeArr === "DATA_SET_LENGTH"
-      ? columnDataLenght(tasks, sizeData)
-      : getPaginatedData(tasks, currentPage, sizeData);
+  // tasks =
+  //   typeArr === "DATA_SET_LENGTH"
+  //     ? columnDataLenght(tasks, sizeData)
+  //     : getPaginatedData(tasks, currentPage, sizeData);
 
   useEffect(() => {
     disabledPrev = currentPage === 1 ? true : false;

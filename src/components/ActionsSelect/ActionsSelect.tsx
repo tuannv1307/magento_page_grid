@@ -35,12 +35,11 @@ const ActionsSelect = () => {
   let contentModal = data.contentModal;
   let searchData = data.searchData;
   let objFilters: any = data.objFilters;
-  if (searchData !== "") {
-    tasks = searchFilters(tasks, searchData);
-  }
-
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
+  }
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
   }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));

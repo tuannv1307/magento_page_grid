@@ -37,12 +37,11 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   let currentPage = data.currentPage;
   let searchData = data.searchData;
   let objFilters: any = data.objFilters;
-  if (searchData !== "") {
-    tasks = searchFilters(tasks, searchData);
-  }
-
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
+  }
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
   }
 
   const handleShow = (id: number) => {

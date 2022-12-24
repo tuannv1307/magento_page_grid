@@ -434,6 +434,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     searchDataByInput: (state, action) => {
       let searchData = action.payload;
       state.searchData = searchData;
+      state.currentPage = 1;
       state = _.cloneDeep(state);
     },
 

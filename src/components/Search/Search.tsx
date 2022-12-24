@@ -12,18 +12,30 @@ import {
 } from "../../store/magentoPageGridReducer";
 
 import { st, classes } from "./Search.st.css";
+import {
+  fiterDataByKeyword,
+  searchFilters,
+} from "../ColumnPageType/ColumnPageType";
 
 const Search = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   let searchData = data.searchData;
+
   const [inputSearch, setInputSearch] = useState(searchData);
   const dispatch = useDispatch();
+
+  let tasks: any = data.data.tasks;
   let objFilters: any = data.objFilters;
-  const columnOrder = data.data.columnOrder;
-  let columns = data.data.columns;
-  let disableSelect = data.disableSelect;
+
+  // if (_.some(objFilters, (obj) => obj.value !== "")) {
+  //   tasks = fiterDataByKeyword(tasks, objFilters);
+  // }
+  // if (searchData !== "") {
+  //   tasks = searchFilters(tasks, searchData);
+  // }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputSearch(e.target.value);
   };
@@ -112,11 +124,12 @@ const Search = () => {
                 {
                   <span className={st(classes.kewordFilter)}>
                     <>
-                      {objFilters.idFrom.keyWord === "idFrom" &&
+                      {objFilters.idFrom?.keyWord === "idFrom" &&
                       objFilters.idFrom.value !== "" &&
-                      objFilters.idTo.keyWord === "idTo" &&
+                      objFilters.idTo?.keyWord === "idTo" &&
                       objFilters.idTo.value !== "" ? (
                         <>
+                          Id:{" "}
                           {objFilters.idFrom.keyWord === "idFrom" &&
                             objFilters.idFrom.value}{" "}
                           -{" "}
@@ -141,11 +154,12 @@ const Search = () => {
                         ""
                       )}
 
-                      {objFilters.idFrom.keyWord === "idFrom" &&
+                      {objFilters.idFrom?.keyWord === "idFrom" &&
                       objFilters.idFrom.value !== "" &&
-                      objFilters.idTo.keyWord === "idTo" &&
+                      objFilters.idTo?.keyWord === "idTo" &&
                       objFilters.idTo.value === "" ? (
                         <>
+                          Id:{" "}
                           {objFilters.idFrom.keyWord === "idFrom" &&
                             objFilters.idFrom.value}{" "}
                           -...
@@ -167,12 +181,12 @@ const Search = () => {
                       ) : (
                         ""
                       )}
-                      {objFilters.idFrom.keyWord === "idFrom" &&
+                      {objFilters.idFrom?.keyWord === "idFrom" &&
                       objFilters.idFrom.value === "" &&
-                      objFilters.idTo.keyWord === "idTo" &&
+                      objFilters.idTo?.keyWord === "idTo" &&
                       objFilters.idTo.value !== "" ? (
                         <>
-                          ... -{" "}
+                          Id: ... -{" "}
                           {objFilters.idTo.keyWord === "idTo" &&
                             objFilters.idTo.value}{" "}
                           <svg

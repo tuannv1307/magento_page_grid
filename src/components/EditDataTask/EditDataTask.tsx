@@ -6,6 +6,7 @@ import {
   checkIsEdit,
   editTask,
   inputEditTask,
+  // inputEditTask,
 } from "../../store/magentoPageGridReducer";
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -29,63 +30,105 @@ const EditDataTask = ({
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   const [isShow, setIsShow] = useState(false);
-  const [inputEdit, setInputEdit] = useState({
-    name: task.name,
-    position: task.position,
-    office: task.office,
-    salary: task.salary,
-    start_date: moment(task.start_date).toDate(),
-    extn: task.extn,
-    status: task.status,
-  });
 
-  let { name, position, office, salary, start_date, extn, status } = inputEdit;
+  const [inputName, setInputName] = useState(task.name);
+  const [inputPosition, setInputPosition] = useState(task.position);
+  const [inputOffice, setInputOffice] = useState(task.office);
+  const [inputSalary, setInputSalary] = useState(task.salary);
+
+  const [inputStartDate, setInputStartDate] = useState(
+    moment(task.start_date).toDate()
+  );
+
+  const [inputExtn, setInputExtn] = useState(task.extn);
+
+  const [inputStatus, setInputStatus] = useState(task.status);
 
   const dispatch = useDispatch();
 
-  const handleOnChangeInputEdit = (e: any) => {
-    setInputEdit({ ...inputEdit, [e.target.name]: e.target.value });
-  };
+  let nameEdit = data.nameEdit;
+
+  let positionEdit = data.positionEdit;
+
+  let salaryEdit = data.salaryEdit;
+
+  let start_dateEdit = data.start_dateEdit;
+
+  let officeEdit = data.officeEdit;
+
+  let extnEdit = data.extnEdit;
+
+  let statusEdit = data.statusEdit;
+
+  // nameEdit = task.name;
+  // positionEdit = task.position;
+  // salaryEdit = task.salary;
+  // start_dateEdit = task.start_date;
+  // officeEdit = task.office;
+  // extnEdit = task.extn;
+  // statusEdit = task.status;
+
   useEffect(() => {
     dispatch(
       inputEditTask({
-        nameEdit: name,
-        positionEdit: position,
-        salaryEdit: salary,
-        start_dateEdit: start_date,
-        officeEdit: office,
-        extnEdit: extn,
-        statusEdit: status,
+        nameEdit:
+          inputName !== task.name
+            ? //&& nameEdit !== inputName
+              // &&
+              // nameEdit !== task.name
+              inputName
+            : nameEdit,
+        positionEdit:
+          inputPosition !== task.position
+            ? //&& positionEdit !== inputPosition
+              inputPosition
+            : positionEdit,
+        salaryEdit: inputSalary !== task.salary ? inputSalary : salaryEdit,
+        start_dateEdit:
+          moment(inputStartDate).format("YYYY/MM/DD") !== task.start_date
+            ? moment(inputStartDate).format("YYYY/MM/DD")
+            : start_dateEdit,
+        officeEdit: inputOffice !== task.office ? inputOffice : officeEdit,
+        extnEdit: inputExtn !== task.extn ? inputExtn : extnEdit,
+        statusEdit: inputStatus !== task.status ? inputStatus : statusEdit,
       })
     );
-  }, [inputEdit]);
-  console.log(data);
+  }, [
+    inputName,
+    inputPosition,
+    inputOffice,
+    inputExtn,
+    inputStartDate,
+    inputStatus,
+    inputSalary,
+  ]);
+
   return (
     <div className={st(classes.root, { typeColumn })}>
       <span>{typeColumn === "id" && task.id}</span>
       <>
         {typeColumn === "name" ? (
           <input
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputName(e.target.value)}
             name={typeColumn}
-            value={name}
+            value={inputName}
             type="text"
             className={st(classes.inputEditTask)}
           />
         ) : typeColumn === "position" ? (
           <input
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputPosition(e.target.value)}
             name={typeColumn}
-            value={position}
+            value={inputPosition}
             type="text"
             className={st(classes.inputEditTask)}
           />
         ) : typeColumn === "office" ? (
           <select
             name={typeColumn}
-            value={office}
+            value={inputOffice}
             className={st(classes.selectEditTask)}
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputOffice(e.target.value)}
           >
             <option value="Tokyo">Tokyo</option>
             <option value="Sydney">Sydney</option>
@@ -97,18 +140,16 @@ const EditDataTask = ({
           </select>
         ) : typeColumn === "salary" ? (
           <input
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputSalary(e.target.value)}
             name={typeColumn}
-            value={salary}
+            value={inputSalary}
             type="text"
             className={st(classes.inputEditTask)}
           />
         ) : typeColumn === "start date" ? (
           <DatePicker
-            selected={start_date}
-            onChange={(date: Date) =>
-              setInputEdit({ ...inputEdit, start_date: date })
-            }
+            selected={inputStartDate}
+            onChange={(date: Date) => setInputStartDate(date)}
             // onKeyDown={handleKeyDow}
             name={typeColumn}
             showPopperArrow={false}
@@ -117,18 +158,18 @@ const EditDataTask = ({
           />
         ) : typeColumn === "extn" ? (
           <input
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputExtn(e.target.value)}
             name={typeColumn}
-            value={extn}
+            value={inputExtn}
             type="text"
             className={st(classes.inputEditTask)}
           />
         ) : typeColumn === "status" ? (
           <select
             name={typeColumn}
-            value={status}
+            value={inputStatus}
             className={st(classes.selectEditTask)}
-            onChange={handleOnChangeInputEdit}
+            onChange={(e) => setInputStatus(e.target.value)}
           >
             <option value="enable">Enable</option>
             <option value="disable">Disable</option>

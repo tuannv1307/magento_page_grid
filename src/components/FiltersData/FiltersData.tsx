@@ -72,6 +72,7 @@ const FiltersData = () => {
   return (
     <div className={st(classes.root)}>
       <svg
+        onClick={hanldeShow}
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"

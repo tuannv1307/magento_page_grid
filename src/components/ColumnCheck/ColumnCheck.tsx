@@ -7,8 +7,11 @@ import {
   checkboxTaskAll,
   checkboxTaskAllBypage,
   checkIsEdit,
+  checkIsEditTask,
   checkOnPage,
   DeleteTask,
+  editTask,
+  inputEditTask,
   Magento_Page,
   setIsAction,
 } from "../../store/magentoPageGridReducer";
@@ -21,6 +24,7 @@ import {
 } from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
 import EditDataTask from "../EditDataTask";
+import moment from "moment";
 
 const ColumnCheck = () => {
   let data: Magento_Page = useSelector(
@@ -36,12 +40,21 @@ const ColumnCheck = () => {
   let searchData = data.searchData;
   let isCheckOnPage = data.isCheckOnPage;
   let objFilters: any = data.objFilters;
-  if (searchData !== "") {
-    tasks = searchFilters(tasks, searchData);
-  }
+
+  let name = data.nameEdit;
+  let position = data.positionEdit;
+  let office = data.officeEdit;
+  let salary = data.salaryEdit;
+
+  let start_date = data.start_dateEdit;
+  let extn = data.extnEdit;
+  let status = data.statusEdit;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
+  }
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
   }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
@@ -104,9 +117,37 @@ const ColumnCheck = () => {
     setIsShow(false);
   };
 
-  const handleCloseTask = () => {};
+  const handleCloseTask = (id: number) => {
+    dispatch(checkIsEdit({ id, isEdit: false }));
+  };
 
-  const handleSaveTask = (id: number) => {};
+  const handleSaveTask = (id: number, task: any) => {
+    let innputEdit = {
+      name: name !== "" ? name : task.name,
+      position: position !== "" ? position : task.position,
+      office: office !== "" ? office : task.office,
+      salary: salary !== "" ? salary : task.salary,
+      start_date: start_date !== "" ? start_date.toString() : task.start_date,
+      extn: extn !== "" ? extn : task.extn,
+      status: status !== "" ? status : task.status,
+    };
+
+    dispatch(editTask({ id, inputEdit: innputEdit }));
+    dispatch(checkIsEdit({ id, isEdit: false }));
+    dispatch(
+      inputEditTask({
+        nameEdit: "",
+        positionEdit: "",
+        salaryEdit: "",
+        start_dateEdit: "",
+        officeEdit: "",
+        extnEdit: "",
+        statusEdit: "",
+      })
+    );
+  };
+
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 
   return (
     <div className={st(classes.root)}>
@@ -226,10 +267,20 @@ const ColumnCheck = () => {
               // office: "dasdad"
             } */}
 
-            {task.isEdit && (
+            {task.isEdit && lenghtIsEdit === 1 && (
               <div className={st(classes.actionClose)}>
-                <button onClick={handleCloseTask}>Cancel</button>
-                <button onClick={() => handleSaveTask(task.id)}>Save</button>
+                <button
+                  onClick={() => handleCloseTask(task.id)}
+                  className={st(classes.cancel)}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSaveTask(task.id, task)}
+                  className={st(classes.save)}
+                >
+                  Save
+                </button>
               </div>
             )}
           </div>

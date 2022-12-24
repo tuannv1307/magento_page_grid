@@ -8,13 +8,11 @@
     margin: 0 10px;
     font-size: 13px; */
     position: relative;
-
 }
 
 .root:searchData {
     margin-bottom: 50px;
 }
-
 
 .inputSearch {
     -webkit-appearance: none;
@@ -28,22 +26,18 @@
     height: auto;
     line-height: 1.36;
     padding: 0.6rem 1rem 0.6rem;
-    transition: border-color .1s linear;
+    transition: border-color 0.1s linear;
     vertical-align: baseline;
     width: auto;
     padding-right: 20rem;
     width: 100%;
 }
 
-
 .inputSearch:focus {
-
     border-color: #007bdb;
     box-shadow: none;
     outline: 0;
-
 }
-
 
 .keyWordSeacrh {
     display: flex;
@@ -70,7 +64,7 @@
 .clearAll {
     display: flex;
     width: 127px;
-    justify-content: flex-end
+    justify-content: flex-end;
 }
 
 .clearAll > span {
@@ -87,7 +81,6 @@
     margin-left: 5px;
 }
 
-
 .svgSearch {
     position: absolute;
     right: 20px;
@@ -95,8 +88,8 @@
     cursor: pointer;
 }
 
-
 .kewordFilter {
     display: flex !important;
     margin-right: 13px;
+    align-items: center;
 }

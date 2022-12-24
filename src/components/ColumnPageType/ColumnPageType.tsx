@@ -127,12 +127,13 @@ export const fiterDataByKeyword = (arr: any[], objFilters: any) => {
   if (keyIdFrom && !keyIdTo) {
     arr = arr;
   }
+
   if (!keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
     arr = _.slice(arr, 0, keyIdTo);
   }
 
   if (keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
-    arr = _.slice(arr, keyIdFrom, keyIdTo);
+    arr = _.slice(arr, keyIdFrom - 1, keyIdTo);
   }
 
   return _.filter(arr, (task) => {
@@ -170,18 +171,19 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let isSorted = data.isSort;
   let sortName = data.sortName;
   let objFilters: any = data.objFilters;
-  if (searchData !== "") {
-    tasks = searchFilters(tasks, searchData);
-  }
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
-
+  if (searchData !== "") {
+    tasks = searchFilters(tasks, searchData);
+  }
   tasks =
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
+
+  console.log(tasks);
   const handleClickIsSort = (type: string) => {
     let isSort;
     if (sortName === type) {

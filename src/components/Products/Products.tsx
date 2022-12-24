@@ -32,6 +32,9 @@ const Products = () => {
   let columnOrder: any = data.data.columnOrder;
   let tasks: any = data.data.tasks;
   let searchData = data.searchData;
+  let typeArr = data.typeArr;
+  let sizeData = data.valueChange;
+  let currentPage = data.currentPage;
   // let tasksColumns;
   // _.map(columnOrder, (columnID) => {
   //   tasksColumns = columns[columnID];
@@ -66,14 +69,17 @@ const Products = () => {
     }
   };
   let objFilters: any = data.objFilters;
+  if (_.some(objFilters, (obj) => obj.value !== "")) {
+    tasks = fiterDataByKeyword(tasks, objFilters);
+  }
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
 
-  if (_.some(objFilters, (obj) => obj.value !== "")) {
-    tasks = fiterDataByKeyword(tasks, objFilters);
-  }
-
+  tasks =
+    typeArr === "DATA_SET_LENGTH"
+      ? columnDataLenght(tasks, sizeData)
+      : getPaginatedData(tasks, currentPage, sizeData);
   return (
     <div className={st(classes.root)}>
       <header className={st(classes.headerPagePro)}>
