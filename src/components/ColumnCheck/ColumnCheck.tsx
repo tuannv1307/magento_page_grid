@@ -7,7 +7,7 @@ import {
   checkboxTaskAll,
   checkboxTaskAllBypage,
   checkIsEdit,
-  checkIsEditTask,
+  checkCloseIsEditTaskAll,
   checkOnPage,
   DeleteTask,
   editTask,
@@ -34,21 +34,21 @@ const ColumnCheck = () => {
   const [isShow, setIsShow] = useState(false);
   const [isShows, setIsShows] = useState(false);
   let tasks: any = data.data.tasks;
-  let sizeData = data.valueChange;
-  let typeArr = data.typeArr;
-  let currentPage = data.currentPage;
-  let searchData = data.searchData;
+  const sizeData = data.valueChange;
+  const typeArr = data.typeArr;
+  const currentPage = data.currentPage;
+  const searchData = data.searchData;
   let isCheckOnPage = data.isCheckOnPage;
-  let objFilters: any = data.objFilters;
+  const objFilters: any = data.objFilters;
 
-  let name = data.nameEdit;
-  let position = data.positionEdit;
-  let office = data.officeEdit;
-  let salary = data.salaryEdit;
+  const name = data.nameEdit;
+  const position = data.positionEdit;
+  const office = data.officeEdit;
+  const salary = data.salaryEdit;
 
-  let start_date = data.start_dateEdit;
-  let extn = data.extnEdit;
-  let status = data.statusEdit;
+  const start_date = data.start_dateEdit;
+  const extn = data.extnEdit;
+  const status = data.statusEdit;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
@@ -58,8 +58,10 @@ const ColumnCheck = () => {
   }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
-  let haveIsEdit = _.some(tasks, ["isEdit", true]);
 
+  const haveIsEdit = _.some(tasks, ["isEdit", true]);
+
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
   const handleShow = () => {
     setIsShow(!isShow);
   };
@@ -146,11 +148,27 @@ const ColumnCheck = () => {
       })
     );
   };
+  const handleCancel = () => {
+    dispatch(checkCloseIsEditTaskAll());
+  };
 
-  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
-
+  const handleSaveEdits = () => {};
   return (
     <div className={st(classes.root)}>
+      {lenghtIsEdit > 1 && (
+        <div className={st(classes.actionCloseAndSave)}>
+          <button className={st(classes.cancel)} onClick={() => handleCancel()}>
+            Cancel
+          </button>
+          <button
+            className={st(classes.save)}
+            onClick={() => handleSaveEdits()}
+          >
+            Save Edits
+          </button>
+        </div>
+      )}
+
       <OutsideClickHandler onOutsideClick={handleoutsideClick}>
         <div className={st(classes.titleColumn)}>
           {checkedAll && (
@@ -232,7 +250,7 @@ const ColumnCheck = () => {
           )}
         </div>
       </OutsideClickHandler>
-
+      {lenghtIsEdit > 1 && <div className={st(classes.itemColumnEdit)}> </div>}
       {tasks.length > 0 &&
         _.map(tasks, (task: any, index) => (
           <div className={st(classes.itemColumn)} key={task.id}>
@@ -262,10 +280,6 @@ const ColumnCheck = () => {
                 </svg>
               )}
             </div>
-            {/* {task.isEdit && <EditDataTask task={task} key={task.id} />} */}
-            {/* temp: {
-              // office: "dasdad"
-            } */}
 
             {task.isEdit && lenghtIsEdit === 1 && (
               <div className={st(classes.actionClose)}>

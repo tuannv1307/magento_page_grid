@@ -775,7 +775,7 @@ export const initialData = {
     },
     "column-6": {
       id: "column-6",
-      title: "start date",
+      title: "start_date",
       tasks: [],
       disPlay: true,
     },

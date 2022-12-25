@@ -4,7 +4,20 @@
     border: 0.1rem solid #8a837f; */
   /* border-right: 1px solid #fff; */
   /* width: 100%; */
+  position: relative;
+
 }
+
+.actionCloseAndSave {
+  position: absolute;
+  top: -54px;
+  display: flex;
+  width: 1721px;
+  box-shadow: 0 0 5px rgb(0 0 0 / 50%);
+  justify-content: flex-end;
+  padding: 10px;
+}
+
 
 .itemColumn {
   position: relative;
@@ -18,6 +31,12 @@
   max-height: 44px;
   text-align: center;
   cursor: pointer;
+}
+
+.itemColumnEdit {
+  padding: 36px 29px;
+  border-left: 0.1rem dashed #d6d6d6;
+  border-right: 0.1rem dashed #d6d6d6;
 }
 
 .itemColumn > span {
@@ -131,7 +150,7 @@
   cursor: default;
 }
 
-.actionClose > button {
+.cancel {
   border: none;
 }
 
@@ -139,6 +158,7 @@
   color: #007bdb;
   background-color: transparent;
 }
+
 .cancel:hover {
   text-decoration: underline;
 }

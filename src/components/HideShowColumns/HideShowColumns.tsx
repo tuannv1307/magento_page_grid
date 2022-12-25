@@ -17,17 +17,21 @@ const HideShowColumns = () => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
 
+  const [isShowColums, setIsShowColumns] = useState(false);
   const dispatch = useDispatch();
 
   const columnOrder = data.data.columnOrder;
-  let columns: any = data.data.columns;
+  const columns: any = data.data.columns;
   let disableSelect = data.disableSelect;
-  let abc = _.filter(columns, (column: any) => column?.disPlay === true);
-  const lengthDisplayColumn = _.size(abc);
+  const columnDisplay = _.filter(
+    columns,
+    (column: any) => column?.disPlay === true
+  );
+  const lengthDisplayColumn = _.size(columnDisplay);
 
   useEffect(() => {
     if (lengthDisplayColumn === 1) {
-      let index = _.indexOf(columns, abc);
+      let index = _.indexOf(columns, columnDisplay);
 
       disableSelect = true;
     } else {
@@ -38,8 +42,6 @@ const HideShowColumns = () => {
 
   const numbeColumns = _.size(columnOrder);
 
-  const [isShowColums, setIsShowColumns] = useState(false);
-
   const handleShow = () => {
     setIsShowColumns(!isShowColums);
   };
@@ -48,7 +50,7 @@ const HideShowColumns = () => {
     if (id) {
       if (
         lengthDisplayColumn > 1 ||
-        (lengthDisplayColumn === 1 && !_.find(abc, { id }))
+        (lengthDisplayColumn === 1 && !_.find(columnDisplay, { id }))
       )
         dispatch(setDisplayColumn({ id }));
     }

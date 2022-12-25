@@ -24,17 +24,18 @@ import {
 import FiltersData from "../FiltersData";
 
 const Products = () => {
-  let data: Magento_Page = useSelector(
+  const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-  let columns: any = data.data.columns;
+  const columns: any = data.data.columns;
 
-  let columnOrder: any = data.data.columnOrder;
+  const columnOrder: any = data.data.columnOrder;
   let tasks: any = data.data.tasks;
-  let searchData = data.searchData;
-  let typeArr = data.typeArr;
-  let sizeData = data.valueChange;
-  let currentPage = data.currentPage;
+  const searchData = data.searchData;
+  const typeArr = data.typeArr;
+  const sizeData = data.valueChange;
+  const currentPage = data.currentPage;
+  const objFilters: any = data.objFilters;
   // let tasksColumns;
   // _.map(columnOrder, (columnID) => {
   //   tasksColumns = columns[columnID];
@@ -68,7 +69,7 @@ const Products = () => {
       dispatch(sortColumnsOrder(newColumnOrder));
     }
   };
-  let objFilters: any = data.objFilters;
+
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
@@ -189,7 +190,7 @@ const Products = () => {
                             />
                           )
                         );
-                      case "start date":
+                      case "start_date":
                         return (
                           columns[columnId].disPlay === true && (
                             <ColumnPageType

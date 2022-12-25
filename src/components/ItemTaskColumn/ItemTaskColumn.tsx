@@ -4,7 +4,6 @@ import EditDataTask from "../EditDataTask";
 import {
   Magento_Page,
   checkIsEdit,
-  checkIsEditTask,
   checkboxTask,
   editTask,
 } from "../../store/magentoPageGridReducer";
@@ -38,14 +37,7 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
       }
     }
   };
-  let name = data.nameEdit;
-  let position = data.positionEdit;
-  let office = data.officeEdit;
-  let salary = data.salaryEdit;
 
-  let start_date = data.start_dateEdit;
-  let extn = data.extnEdit;
-  let status = data.statusEdit;
   const Edittask = (id: number, inputEdit: {}) => {
     if (id) {
     }
@@ -59,6 +51,9 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
   const saveData = (id: number, value: any) => {
     dispatch(editTask({ id, inputEdit: value }));
   };
+
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
   return (
     <div className={st(classes.root)}>
       {task.isEdit ? (
@@ -92,7 +87,7 @@ const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
           <>{typeColumn === "office" && task.office}</>
           <>{typeColumn === "salary" && task.salary}</>
           <>
-            {typeColumn === "start date" &&
+            {typeColumn === "start_date" &&
               moment(task.start_date).format("yyyy/MM/DD")}
           </>
           <>{typeColumn === "extn" && task.extn}</>

@@ -16,27 +16,19 @@ const FiltersData = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-  let currentPage = data.currentPage;
-  let sizeData = data.valueChange;
+  const currentPage = data.currentPage;
+  const sizeData = data.valueChange;
   let tasks: any = data.data.tasks;
-
-  let typeArr = data.typeArr;
+  let objFilters = data.objFilters;
+  const typeArr = data.typeArr;
   tasks =
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
 
-  let objFilters = data.objFilters;
-
   const dispatch = useDispatch();
-
   const [isShow, setIsShow] = useState(false);
-
   const [startDate, setStartDate] = useState();
-  // console.log(
-  //   "🚀 ~ file: FiltersData.tsx:35 ~ FiltersData ~ startDate",
-  //   startDate
-  // );
   const [idFrom, setIdFrom] = useState("");
   const [idTo, setIdTo] = useState("");
   const [name, setName] = useState("");
@@ -50,9 +42,9 @@ const FiltersData = () => {
   objFilters = {
     idFrom: {
       keyWord: "idFrom",
-      value: !idFrom ? "" : _.toNumber(idFrom),
+      value: !idFrom ? "" : idFrom,
     },
-    idTo: { keyWord: "idTo", value: !idTo ? "" : _.toNumber(idTo) },
+    idTo: { keyWord: "idTo", value: !idTo ? "" : idTo },
     name: { keyWord: "name", value: !name ? "" : name },
     office: { keyWord: "office", value: !office ? "" : office },
     status: { keyWord: "status", value: !status ? "" : status },

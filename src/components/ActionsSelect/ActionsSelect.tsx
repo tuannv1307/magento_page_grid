@@ -8,6 +8,7 @@ import {
   checkboxTaskAll,
   DeleteTask,
   Magento_Page,
+  openEditTask,
   setIsAction,
   setShowModal,
 } from "../../store/magentoPageGridReducer";
@@ -29,12 +30,12 @@ const ActionsSelect = () => {
   const [isShow, setIsShow] = useState(false);
   let tasks: any = data.data.tasks;
 
-  let isShowModal = data.isShowModal;
+  const isShowModal = data.isShowModal;
   let isItemTaskSelectd = data.isItemTaskSelectd;
   let titleModal = data.titleModal;
   let contentModal = data.contentModal;
-  let searchData = data.searchData;
-  let objFilters: any = data.objFilters;
+  const searchData = data.searchData;
+  const objFilters: any = data.objFilters;
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
@@ -56,8 +57,11 @@ const ActionsSelect = () => {
       dispatch(checkboxTask({ id, isSelected: !isSelected }));
     }
   };
+
   const checkedAll = _.every(data.data.tasks, ["selected", true]);
+
   const checkedTask = _.some(data.data.tasks, ["selected", true]);
+
   const deselect = _.some(data.data.tasks, ["selected", true]);
 
   const handleCheckboxAll = () => {
@@ -117,7 +121,7 @@ const ActionsSelect = () => {
           })
         );
       }
-      if (type === "Edit") {
+      if (type === "EDIT") {
         dispatch(
           setShowModal({
             isShowModal: !isShowModal,
@@ -142,6 +146,10 @@ const ActionsSelect = () => {
             nameStatus: "enable",
           })
         );
+      }
+
+      if (type === "EDIT") {
+        dispatch(openEditTask());
       }
     }
   };

@@ -212,7 +212,7 @@ const Search = () => {
                 }
               </>
               {_.map(objFilters, (obj, index) => (
-                <>
+                <div key={index}>
                   {obj.keyWord === "name" && obj.value !== "" ? (
                     <span key={index} className={st(classes.kewordFilter)}>
                       name: {obj.value}
@@ -288,7 +288,7 @@ const Search = () => {
                   ) : (
                     ""
                   )}
-                </>
+                </div>
               ))}
             </>
           </div>

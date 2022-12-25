@@ -1,14 +1,19 @@
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { changeViewLengthData } from "../../store/magentoPageGridReducer";
+import {
+  changeViewLengthData,
+  Magento_Page,
+} from "../../store/magentoPageGridReducer";
 import { st, classes } from "./ViewLength.st.css";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 
 const ViewLength = () => {
-  let data = useSelector((state: any) => state.magentopage);
+  const data: Magento_Page = useSelector(
+    (state: { magentopage: Magento_Page }) => state.magentopage
+  );
 
-  let valueChange = data?.valueChange;
+  const valueChange = data?.valueChange;
   const [isShow, setIsShow] = useState(false);
   const [isShowCustoms, setIsShowCustoms] = useState(false);
   const [inputValue, setInputValue] = useState(_.toString(valueChange));

@@ -29,6 +29,8 @@ const EditDataTask = ({
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
+  let tasks = data.data.tasks;
   const [isShow, setIsShow] = useState(false);
 
   const [inputName, setInputName] = useState(task.name);
@@ -46,43 +48,26 @@ const EditDataTask = ({
 
   const dispatch = useDispatch();
 
-  let nameEdit = data.nameEdit;
+  const nameEdit = data.nameEdit;
 
-  let positionEdit = data.positionEdit;
+  const positionEdit = data.positionEdit;
 
-  let salaryEdit = data.salaryEdit;
+  const salaryEdit = data.salaryEdit;
 
-  let start_dateEdit = data.start_dateEdit;
+  const start_dateEdit = data.start_dateEdit;
 
-  let officeEdit = data.officeEdit;
+  const officeEdit = data.officeEdit;
 
-  let extnEdit = data.extnEdit;
+  const extnEdit = data.extnEdit;
 
-  let statusEdit = data.statusEdit;
-
-  // nameEdit = task.name;
-  // positionEdit = task.position;
-  // salaryEdit = task.salary;
-  // start_dateEdit = task.start_date;
-  // officeEdit = task.office;
-  // extnEdit = task.extn;
-  // statusEdit = task.status;
+  const statusEdit = data.statusEdit;
 
   useEffect(() => {
     dispatch(
       inputEditTask({
-        nameEdit:
-          inputName !== task.name
-            ? //&& nameEdit !== inputName
-              // &&
-              // nameEdit !== task.name
-              inputName
-            : nameEdit,
+        nameEdit: inputName !== task.name ? inputName : nameEdit,
         positionEdit:
-          inputPosition !== task.position
-            ? //&& positionEdit !== inputPosition
-              inputPosition
-            : positionEdit,
+          inputPosition !== task.position ? inputPosition : positionEdit,
         salaryEdit: inputSalary !== task.salary ? inputSalary : salaryEdit,
         start_dateEdit:
           moment(inputStartDate).format("YYYY/MM/DD") !== task.start_date
@@ -146,7 +131,7 @@ const EditDataTask = ({
             type="text"
             className={st(classes.inputEditTask)}
           />
-        ) : typeColumn === "start date" ? (
+        ) : typeColumn === "start_date" ? (
           <DatePicker
             selected={inputStartDate}
             onChange={(date: Date) => setInputStartDate(date)}

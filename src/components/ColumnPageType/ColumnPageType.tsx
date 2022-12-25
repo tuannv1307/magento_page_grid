@@ -14,6 +14,7 @@ import {
 } from "../../store/magentoPageGridReducer";
 import EditDataTask from "../EditDataTask";
 import ItemTaskColumn from "../ItemTaskColumn";
+import EditMultiDataTask from "../EditMultiDataTask";
 export type ColumnPageTypeProps = {
   column: {
     id: string;
@@ -129,11 +130,11 @@ export const fiterDataByKeyword = (arr: any[], objFilters: any) => {
   }
 
   if (!keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
-    arr = _.slice(arr, 0, keyIdTo);
+    arr = _.slice(arr, 0, _.toNumber(keyIdTo));
   }
 
   if (keyIdFrom && keyIdTo && keyIdTo <= _.size(arr)) {
-    arr = _.slice(arr, keyIdFrom - 1, keyIdTo);
+    arr = _.slice(arr, _.toNumber(keyIdFrom - 1), _.toNumber(keyIdTo));
   }
 
   return _.filter(arr, (task) => {
@@ -164,13 +165,13 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   const [isShowEdit, setIsShowEdit] = useState(false);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
-  let sizeData = data.valueChange;
-  let typeArr = data.typeArr;
-  let currentPage = data.currentPage;
-  let searchData = data.searchData;
-  let isSorted = data.isSort;
-  let sortName = data.sortName;
-  let objFilters: any = data.objFilters;
+  const sizeData = data.valueChange;
+  const typeArr = data.typeArr;
+  const currentPage = data.currentPage;
+  const searchData = data.searchData;
+  const isSorted = data.isSort;
+  const sortName = data.sortName;
+  const objFilters: any = data.objFilters;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
@@ -183,7 +184,8 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
 
-  console.log(tasks);
+  console.log(data);
+
   const handleClickIsSort = (type: string) => {
     let isSort;
     if (sortName === type) {
@@ -201,7 +203,7 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
       dispatch(sortDesc({ nameSort }));
     }
   };
-
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided, snapshot) => (
@@ -219,7 +221,6 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
             onClick={() => handleClickIsSort(typeColumn)}
           >
             {column.title}
-
             <span>
               {sortName === column.title && (
                 <svg
@@ -251,6 +252,8 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
               />
             </svg>
           </span>
+
+          {lenghtIsEdit > 1 && <EditMultiDataTask typeColumn={typeColumn} />}
           {tasks.length > 0 &&
             _.map(
               tasks,

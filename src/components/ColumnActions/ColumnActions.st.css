@@ -76,3 +76,23 @@
 .dropDownAction > div > button:hover {
   background-color: #e3e3e3;
 }
+
+.itemColumnEdit {
+  display: flex;
+  justify-content: center;
+  padding: 20px 5px;
+  border-left: 0.1rem dashed #d6d6d6;
+  border-right: 0.1rem dashed #d6d6d6;
+}
+
+.itemColumnEdit > button {
+  border-color: #adadad;
+  font-weight: 400;
+  cursor: default;
+}
+
+.itemColumnEdit > button:hover {
+  background-color: #dbdbdb;
+  color: #515043;
+
+}

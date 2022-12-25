@@ -1,18 +1,11 @@
 .root {
-    -st-states: typeColumn(enum(id));
+    /* -st-states: typeColumn(enum(id)); */
     font-size: 14px;
 
-    /* background-color: #31302b; */
-    /* z-index: 600;
-    margin-bottom: 1px; */
-    /* color: #FFF; */
-    /* float: left;
-    width: 100%;
-    position: absolute;
-    top: 0; */
     display: flex;
     padding: 7px 10px;
-    max-height: 44px;
+    padding-left: 16px;
+    height: 73px;
     align-items: center;
     position: relative;
     width: 100%;
@@ -21,22 +14,19 @@
     box-shadow: 0 3px 2px 0px rgb(0 0 0 / 25%);
 }
 
-.root:typeColumn(id) {
+/* .root:typeColumn(id) {
     height: 44px;
-}
+} */
 
 .root > span {
     padding-left: 5px;
 }
-.root > div {
-   width: 100%;
-}
+
 .inputEditTask {
     max-height: 44px;
     width: 100%;
     border: 1px solid #adadad;
     padding: 6px 10px;
-   
 }
 
 .inputEditTask:hover {
@@ -50,39 +40,9 @@
 }
 
 
-
-.btn {
-    background-color: transparent;
-    border: 1px solid #adadad;
-}
-
-/* .btnToglle:focus {
-    border: none;
-    box-shadow: none;
-   
-} */
-
-.btnStatus:focus {
-    border-color: #007bdb;
-}
-
-.btnToglle:focus {
-    border-color: #007bdb;
-}
-
-.btnEnable {
-    border: none;
-}
-
-.btnDisable {
-    border: none;
-}
-
-
 .selectEditTask {
     padding: 6px 44px 6px 10px;
     outline: none;
-     width: 100%;
 }
 
 .selectEditTask:active {
@@ -94,4 +54,15 @@
     font-size: 14px;
     padding: 10px;
     height: 44px;
+}
+
+.contentEdit {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contentEdit > label {
+    margin-bottom: 7px;
+    font-size: 14px;
 }

@@ -214,7 +214,7 @@ export type Actions = {
     state: Magento_Page,
     action: PayloadAction<{ checkedAll: boolean }>
   ) => void;
-
+  checkCloseIsEditTaskAll: (state: Magento_Page) => void;
   checkboxTaskAllBypage: (
     state: Magento_Page,
     action: PayloadAction<{ isCheckedAllByPage: boolean }>
@@ -269,10 +269,7 @@ export type Actions = {
     }>
   ) => void;
 
-  checkIsEditTask: (
-    state: Magento_Page,
-    action: PayloadAction<boolean>
-  ) => void;
+  openEditTask: (state: Magento_Page) => void;
 
   checkOnPage: (state: Magento_Page, action: PayloadAction<boolean>) => void;
   filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
@@ -481,6 +478,16 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state = _.cloneDeep(state);
     },
 
+    checkCloseIsEditTaskAll: (state) => {
+      state.data.tasks = _.map(state.data.tasks, (task) => ({
+        ...task,
+        isEdit: false,
+        //   selected: false,
+      }));
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
     checkboxTaskAllBypage: (state, action) => {
       let { isCheckedAllByPage } = action.payload;
       state.isCheckedAllByPage = isCheckedAllByPage;
@@ -582,10 +589,15 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state = _.cloneDeep(state);
     },
 
-    checkIsEditTask: (state, action) => {
-      let isEditTask = action.payload;
-
-      state.isEditTask = isEditTask;
+    openEditTask: (state) => {
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.selected === true
+          ? {
+              ...task,
+              isEdit: true,
+            }
+          : task
+      );
     },
 
     checkOnPage: (state, action) => {
@@ -637,6 +649,7 @@ export const {
   DeleteTask,
   checkboxTask,
   checkboxTaskAll,
+  checkCloseIsEditTaskAll,
   sortDesc,
   sortAsc,
   changeIsSort,
@@ -647,7 +660,7 @@ export const {
   changeStatusTask,
   checkIsEdit,
   editTask,
-  checkIsEditTask,
+  openEditTask,
   checkOnPage,
   filtersData,
   inputEditTask,

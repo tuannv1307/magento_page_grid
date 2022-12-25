@@ -4,6 +4,8 @@ import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  checkboxTask,
+  checkIsEdit,
   DeleteTask,
   Magento_Page,
   setIsAction,
@@ -32,11 +34,11 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   const refOutsideClick = useRef<any>(null);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
-  let sizeData = data.valueChange;
-  let typeArr = data.typeArr;
-  let currentPage = data.currentPage;
-  let searchData = data.searchData;
-  let objFilters: any = data.objFilters;
+  const sizeData = data.valueChange;
+  const typeArr = data.typeArr;
+  const currentPage = data.currentPage;
+  const searchData = data.searchData;
+  const objFilters: any = data.objFilters;
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
@@ -77,7 +79,19 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   // const handleBlur = (id: number) => {
   //   handleShow(id);
   // };
+  const handleEditTask = (id: number) => {
+    dispatch(checkIsEdit({ id, isEdit: true }));
+    setTimeout(() => {
+      dispatch(setIsAction({ id }));
+      dispatch(checkboxTask({ id, isSelected: true }));
+    }, 200);
+  };
 
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
+  const handleApply = () => {
+    console.log("apply");
+  };
   return (
     <Draggable draggableId={column.id} index={index} isDragDisabled>
       {(provided, snapshot) => (
@@ -87,6 +101,13 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
           ref={provided.innerRef}
         >
           <p className={st(classes.titleColumn)}>{column.title}</p>
+          {lenghtIsEdit > 1 && (
+            <div className={st(classes.itemColumnEdit)}>
+              <button disabled onClick={() => handleApply()}>
+                Apply
+              </button>
+            </div>
+          )}
           {tasks.length > 0 &&
             _.map(
               typeArr === "DATA_SET_LENGTH"
@@ -140,7 +161,9 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
                       ref={refOutsideClick}
                     >
                       <div className={st(classes.edit)}>
-                        <button>Edit</button>
+                        <button onClick={() => handleEditTask(task.id)}>
+                          Edit
+                        </button>
                       </div>
                       <div className={st(classes.delete)}>
                         <button onClick={() => handleDelete(task.id)}>

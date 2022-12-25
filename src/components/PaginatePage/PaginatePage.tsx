@@ -25,8 +25,8 @@ const PaginatePage = () => {
 
   const [currentPageP, setCurrentPageP] = useState(_.toString(currentPage));
   let tasks: any = data.data.tasks;
-  let searchData = data.searchData;
-
+  const searchData = data.searchData;
+  const objFilters = data.objFilters;
   const valueChangePage = data.valueChange;
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const PaginatePage = () => {
   let typeArr = data.typeArr;
   let sizeData = data.valueChange;
 
-  let objFilters = data.objFilters;
   if (_.some(objFilters, (obj: any) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
