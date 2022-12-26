@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  checkboxOnlyAction,
+  checkboxOnlyTask,
   checkboxTask,
   checkIsEdit,
   DeleteTask,
+  inputEditMultiTask,
+  inputEditTask,
   Magento_Page,
   setIsAction,
+  Tasks,
 } from "../../store/magentoPageGridReducer";
-import { st, classes } from "./ColumnActions.st.css";
 import {
   columnDataLenght,
   fiterDataByKeyword,
@@ -18,12 +21,15 @@ import {
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
-
-import Edit from "./edit.svg";
+import moment from "moment";
+import { st, classes } from "./ColumnActions.st.css";
 
 export type ColumnActionsProps = {
-  column: any;
-  index?: any;
+  column: {
+    id: string;
+    title: string;
+  };
+  index: string;
   typeColumn: string;
 };
 
@@ -31,6 +37,7 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
   const refOutsideClick = useRef<any>(null);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
@@ -46,15 +53,6 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
     tasks = searchFilters(tasks, searchData);
   }
 
-  const handleShow = (id: number) => {
-    if (id) {
-      dispatch(setIsAction({ id }));
-      console.log("dadw");
-    } else {
-      console.log("dawddddd");
-    }
-  };
-
   const handleDelete = (id: number) => {
     if (id) {
       dispatch(DeleteTask({ id }));
@@ -67,7 +65,6 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
         refOutsideClick.current &&
         !refOutsideClick.current.contains(event.target)
       ) {
-        //setSelectAction(false);
       }
     }
     document.addEventListener("click", handleClickOutside);
@@ -76,24 +73,118 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
     };
   }, [refOutsideClick]);
 
-  // const handleBlur = (id: number) => {
-  //   handleShow(id);
-  // };
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
   const handleEditTask = (id: number) => {
     dispatch(checkIsEdit({ id, isEdit: true }));
     setTimeout(() => {
       dispatch(setIsAction({ id }));
       dispatch(checkboxTask({ id, isSelected: true }));
+      if (lenghtIsEdit === 0) dispatch(checkboxOnlyTask({ id }));
     }, 200);
   };
 
-  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+  const [disableBtn, setDisableBtn] = useState(true);
+
+  const nameEdit = data.nameEdit;
+
+  const positionEdit = data.positionEdit;
+
+  const salaryEdit = data.salaryEdit;
+
+  const start_dateEdit = data.start_dateEdit;
+
+  const officeEdit = data.officeEdit;
+
+  const extnEdit = data.extnEdit;
+
+  const statusEdit = data.statusEdit;
+
+  const nameEditMul = data.nameEditMul;
+
+  const positionEditMul = data.positionEditMul;
+
+  const salaryEditMul = data.salaryEditMul;
+
+  const start_dateEditMul = data.start_dateEditMul;
+
+  const officeEditMul = data.officeEditMul;
+
+  const extnEditMul = data.extnEditMul;
+
+  const statusEditMul = data.statusEditMul;
+
+  useEffect(() => {
+    if (
+      nameEditMul !== "" ||
+      positionEditMul !== "" ||
+      salaryEditMul !== "" ||
+      start_dateEditMul !== "" ||
+      officeEditMul !== "" ||
+      extnEditMul !== "" ||
+      statusEditMul !== ""
+    ) {
+      setDisableBtn(false);
+    }
+  }, [
+    nameEditMul,
+    positionEditMul,
+    salaryEditMul,
+    start_dateEditMul,
+    officeEditMul,
+    extnEditMul,
+    statusEditMul,
+  ]);
 
   const handleApply = () => {
-    console.log("apply");
+    if (lenghtIsEdit > 1) {
+      dispatch(
+        inputEditTask({
+          nameEdit: nameEditMul !== "" ? nameEditMul : nameEdit,
+          positionEdit: positionEditMul !== "" ? positionEditMul : positionEdit,
+          salaryEdit: salaryEditMul !== "" ? salaryEditMul : salaryEdit,
+          start_dateEdit:
+            moment(start_dateEditMul).format("YYYY/MM/DD") !== "Invalid date"
+              ? moment(start_dateEditMul).format("YYYY/MM/DD")
+              : start_dateEdit,
+          officeEdit: officeEditMul !== "" ? officeEditMul : officeEdit,
+          extnEdit: extnEditMul !== "" ? extnEditMul : extnEdit,
+          statusEdit: statusEditMul !== "" ? statusEditMul : statusEdit,
+        })
+      );
+
+      dispatch(
+        inputEditMultiTask({
+          nameEditMul: "",
+          positionEditMul: "",
+          salaryEditMul: "",
+          start_dateEditMul: "",
+          officeEditMul: "",
+          extnEditMul: "",
+          statusEditMul: "",
+        })
+      );
+    }
   };
+  const lenghtIsAction = _.size(
+    _.filter(tasks, (task) => task.isAction === true)
+  );
+  const handleShow = (id: number) => {
+    if (id) {
+      // if (lenghtIsAction > 0) {
+      //   dispatch(setIsAction({ id }));
+      //   // dispatch(checkboxOnlyAction({ id }));
+      // }
+      dispatch(setIsAction({ id }));
+    }
+  };
+
   return (
-    <Draggable draggableId={column.id} index={index} isDragDisabled>
+    <Draggable
+      draggableId={column?.id}
+      index={_.toNumber(index)}
+      isDragDisabled
+    >
       {(provided, snapshot) => (
         <div
           className={st(classes.root)}
@@ -102,8 +193,8 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
         >
           <p className={st(classes.titleColumn)}>{column.title}</p>
           {lenghtIsEdit > 1 && (
-            <div className={st(classes.itemColumnEdit)}>
-              <button disabled onClick={() => handleApply()}>
+            <div className={st(classes.itemColumnEdit, { disableBtn })}>
+              <button disabled={disableBtn} onClick={() => handleApply()}>
                 Apply
               </button>
             </div>
@@ -113,12 +204,11 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
               typeArr === "DATA_SET_LENGTH"
                 ? columnDataLenght(tasks, sizeData)
                 : getPaginatedData(tasks, currentPage, sizeData),
-              (task: any, index) => (
+              (task: Tasks) => (
                 <div className={st(classes.itemColumn)} key={task.id}>
                   <button
                     className={st(classes.selectActions)}
                     onClick={() => handleShow(task.id)}
-                    //  onBlur={() => handleBlur(task.id)}
                   >
                     {typeColumn === "actions" && "Select"}
                   </button>
@@ -136,12 +226,6 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
                         <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                       </svg>
                     ) : (
-                      // <>
-                      //   <img src={Edit} alt="Edit" />
-                      // </>
-                      // <>
-                      //   <img src={Edit} alt="Edit" />
-                      // </>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="12"

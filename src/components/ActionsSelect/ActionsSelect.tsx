@@ -1,26 +1,18 @@
 import { useState } from "react";
-import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeStatusTask,
-  checkboxTask,
-  checkboxTaskAll,
-  DeleteTask,
   Magento_Page,
   openEditTask,
-  setIsAction,
   setShowModal,
 } from "../../store/magentoPageGridReducer";
-import { st, classes } from "./ActionsSelect.st.css";
 import {
-  columnDataLenght,
   fiterDataByKeyword,
-  getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
-import ModalWrap from "../ModalWrap/ModalWrap";
 import OutsideClickHandler from "react-outside-click-handler";
+import { st, classes } from "./ActionsSelect.st.css";
 
 const ActionsSelect = () => {
   let data: Magento_Page = useSelector(
@@ -31,11 +23,12 @@ const ActionsSelect = () => {
   let tasks: any = data.data.tasks;
 
   const isShowModal = data.isShowModal;
-  let isItemTaskSelectd = data.isItemTaskSelectd;
   let titleModal = data.titleModal;
   let contentModal = data.contentModal;
   const searchData = data.searchData;
   const objFilters: any = data.objFilters;
+  let isItemTaskSelectd = data.isItemTaskSelectd;
+
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
@@ -44,33 +37,12 @@ const ActionsSelect = () => {
   }
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
-  // console.log(
-  //   "🚀 ~ file: ActionsSelect.tsx:47 ~ ActionsSelect ~ lengthTask",
-  //   lengthTask
-  // );
 
   const handleShow = () => {
     setIsShow(!isShow);
   };
-  const handleCheckbox = (id: number, isSelected: boolean) => {
-    if (id) {
-      dispatch(checkboxTask({ id, isSelected: !isSelected }));
-    }
-  };
-
-  const checkedAll = _.every(data.data.tasks, ["selected", true]);
 
   const checkedTask = _.some(data.data.tasks, ["selected", true]);
-
-  const deselect = _.some(data.data.tasks, ["selected", true]);
-
-  const handleCheckboxAll = () => {
-    if (checkedAll) {
-      dispatch(checkboxTaskAll({ checkedAll: false }));
-    } else {
-      dispatch(checkboxTaskAll({ checkedAll: true }));
-    }
-  };
 
   const ShowModal = (type: string) => {
     handleShow();

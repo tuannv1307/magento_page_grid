@@ -14,9 +14,7 @@
 
 .btnFilter {
     -st-states: isShow;
-    /* border: none; */
     font-weight: 400;
-    /* padding-top: 0; */
     background: #e3e3e3;
     border-color: #adadad;
     border-color: #adadad;
@@ -62,18 +60,15 @@
 
 
 .itemFilter {
-
     width: 192px;
-    /* background-color: #adadad; */
     margin-left: 14px;
 }
 
 .itemFilter:first-child {
-
     display: flex;
     margin-left: 0;
     width: 205px;
-    /* background-color: #adadad; */
+
 }
 
 .itemFilter > h4 {
@@ -90,11 +85,7 @@
 }
 
 .itemFilter:last-child {
-
     display: flex;
-    /* margin-left: 0;
-    width: 205px; */
-    /* background-color: #adadad; */
     justify-content: space-between;
 }
 

@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
   checkboxTask,
   checkboxTaskAll,
-  checkboxTaskAllBypage,
   checkIsEdit,
   checkCloseIsEditTaskAll,
   checkOnPage,
-  DeleteTask,
   editTask,
   inputEditTask,
   Magento_Page,
-  setIsAction,
+  editMultiTask,
+  inputEditMultiTask,
+  Tasks,
 } from "../../store/magentoPageGridReducer";
-import { st, classes } from "./ColumnCheck.st.css";
 import {
   columnDataLenght,
   fiterDataByKeyword,
@@ -23,8 +21,7 @@ import {
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
 import OutsideClickHandler from "react-outside-click-handler";
-import EditDataTask from "../EditDataTask";
-import moment from "moment";
+import { st, classes } from "./ColumnCheck.st.css";
 
 const ColumnCheck = () => {
   let data: Magento_Page = useSelector(
@@ -32,13 +29,12 @@ const ColumnCheck = () => {
   );
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false);
-  const [isShows, setIsShows] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
   let tasks: any = data.data.tasks;
   const sizeData = data.valueChange;
   const typeArr = data.typeArr;
   const currentPage = data.currentPage;
   const searchData = data.searchData;
-  let isCheckOnPage = data.isCheckOnPage;
   const objFilters: any = data.objFilters;
 
   const name = data.nameEdit;
@@ -50,6 +46,42 @@ const ColumnCheck = () => {
   const extn = data.extnEdit;
   const status = data.statusEdit;
 
+  const nameEditMul = data.nameEditMul;
+
+  const positionEditMul = data.positionEditMul;
+
+  const salaryEditMul = data.salaryEditMul;
+
+  const start_dateEditMul = data.start_dateEditMul;
+
+  const officeEditMul = data.officeEditMul;
+
+  const extnEditMul = data.extnEditMul;
+
+  const statusEditMul = data.statusEditMul;
+
+  useEffect(() => {
+    if (
+      nameEditMul !== "" ||
+      positionEditMul !== "" ||
+      salaryEditMul !== "" ||
+      start_dateEditMul !== "" ||
+      officeEditMul !== "" ||
+      extnEditMul !== "" ||
+      statusEditMul !== ""
+    ) {
+      setDisableBtn(true);
+    } else setDisableBtn(false);
+  }, [
+    nameEditMul,
+    positionEditMul,
+    salaryEditMul,
+    start_dateEditMul,
+    officeEditMul,
+    extnEditMul,
+    statusEditMul,
+  ]);
+
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
@@ -57,14 +89,21 @@ const ColumnCheck = () => {
     tasks = searchFilters(tasks, searchData);
   }
 
+  tasks =
+    typeArr === "DATA_SET_LENGTH"
+      ? columnDataLenght(tasks, sizeData)
+      : getPaginatedData(tasks, currentPage, sizeData);
+
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
 
   const haveIsEdit = _.some(tasks, ["isEdit", true]);
 
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
   const handleShow = () => {
     setIsShow(!isShow);
   };
+
   const handleCheckbox = (id: number, selected: boolean) => {
     if (id) {
       dispatch(checkboxTask({ id, isSelected: !selected }));
@@ -76,11 +115,6 @@ const ColumnCheck = () => {
 
   const checkedAll = _.every(data.data.tasks, ["selected", true]);
 
-  const checkedAllByPage = _.every(columnDataLenght(tasks, sizeData), [
-    "selected",
-    true,
-  ]);
-
   const handleCheckboxAll = () => {
     if (checkedAll) {
       dispatch(checkboxTaskAll({ checkedAll: false }));
@@ -89,26 +123,50 @@ const ColumnCheck = () => {
     }
   };
 
-  tasks =
-    typeArr === "DATA_SET_LENGTH"
-      ? columnDataLenght(tasks, sizeData)
-      : getPaginatedData(tasks, currentPage, sizeData);
-
-  useEffect(() => {
-    tasks = _.forEach(
-      tasks,
-      (task) =>
-        (!task.selected && dispatch(checkOnPage(false))) ||
-        (task.selected && dispatch(checkOnPage(true)))
-    );
-  }, [typeArr]);
   const handleCheckAllOnPage = (type: boolean) => {
-    dispatch(checkOnPage(type));
+    const selectTask: {
+      id: string | number;
+      name: string;
+      position: string;
+      salary: string;
+      start_date: string;
+      office: string;
+      extn: string;
+      status: string;
+      selected: boolean;
+      isAction: boolean;
+      isEdit: boolean;
+    }[] = [];
+    _.forEach(data.data.tasks, (task) => {
+      let newTask = { ...task };
+      _.forEach(tasks, (dataTask) => {
+        if (dataTask.id === task.id) {
+          newTask = {
+            id: dataTask.id,
+            name: dataTask.name,
+            position: dataTask.position,
+            office: dataTask.office,
+            extn: dataTask.extn,
+            start_date: dataTask.start_date,
+            salary: dataTask.salary,
+            status: dataTask.status,
+            selected: type,
+            isAction: dataTask.isAction,
+            isEdit: dataTask.isEdit,
+          };
+        }
+      });
+      selectTask.push(newTask);
+    });
+
+    dispatch(checkOnPage({ tasks: selectTask }));
+    setIsShow(false);
   };
 
   const handleoutsideClick = () => {
     setIsShow(false);
   };
+
   const selectAll = () => {
     dispatch(checkboxTaskAll({ checkedAll: true }));
     setIsShow(false);
@@ -123,7 +181,7 @@ const ColumnCheck = () => {
     dispatch(checkIsEdit({ id, isEdit: false }));
   };
 
-  const handleSaveTask = (id: number, task: any) => {
+  const handleSaveTask = (id: number, task: Tasks) => {
     let innputEdit = {
       name: name !== "" ? name : task.name,
       position: position !== "" ? position : task.position,
@@ -135,6 +193,7 @@ const ColumnCheck = () => {
     };
 
     dispatch(editTask({ id, inputEdit: innputEdit }));
+
     dispatch(checkIsEdit({ id, isEdit: false }));
     dispatch(
       inputEditTask({
@@ -148,11 +207,74 @@ const ColumnCheck = () => {
       })
     );
   };
+
   const handleCancel = () => {
     dispatch(checkCloseIsEditTaskAll());
   };
 
-  const handleSaveEdits = () => {};
+  const handleSaveEdits = () => {
+    const taskEditMulti: any = [];
+    let inputEditMulti = {
+      name: name,
+      position: position,
+      office: office,
+      salary: salary,
+      start_date: start_date,
+      extn: extn,
+      status: status,
+    };
+    _.forEach(data.data.tasks, (task) => {
+      let newTask = { ...task };
+      _.forEach(tasks, (dataTask) => {
+        if (dataTask.id === task.id) {
+          newTask = {
+            id: dataTask.id,
+            name: dataTask.name,
+            position: dataTask.position,
+            office: dataTask.office,
+            extn: dataTask.extn,
+            start_date: dataTask.start_date,
+            salary: dataTask.salary,
+            status: dataTask.status,
+            selected: false,
+            isAction: dataTask.isAction,
+            isEdit: dataTask.isEdit,
+          };
+        }
+      });
+      taskEditMulti.push(newTask);
+    });
+
+    dispatch(editMultiTask({ taskEditMulti: taskEditMulti }));
+    dispatch(checkCloseIsEditTaskAll());
+    dispatch(
+      inputEditTask({
+        nameEdit: "",
+        positionEdit: "",
+        salaryEdit: "",
+        start_dateEdit: "",
+        officeEdit: "",
+        extnEdit: "",
+        statusEdit: "",
+      })
+    );
+    dispatch(
+      inputEditMultiTask({
+        nameEditMul: "",
+        positionEditMul: "",
+        salaryEditMul: "",
+        start_dateEditMul: "",
+        officeEditMul: "",
+        extnEditMul: "",
+        statusEditMul: "",
+      })
+    );
+  };
+  const checkboxPage = _.every(tasks, (task) => task.selected === true);
+  console.log(
+    "🚀 ~ file: ColumnCheck.tsx:250 ~ ColumnCheck ~ checkboxPage",
+    checkboxPage
+  );
   return (
     <div className={st(classes.root)}>
       {lenghtIsEdit > 1 && (
@@ -161,8 +283,9 @@ const ColumnCheck = () => {
             Cancel
           </button>
           <button
-            className={st(classes.save)}
+            className={st(classes.saveEdit, { disableBtn })}
             onClick={() => handleSaveEdits()}
+            disabled={disableBtn}
           >
             Save Edits
           </button>
@@ -240,19 +363,23 @@ const ColumnCheck = () => {
               {!checkedAll && <li onClick={selectAll}>SelectAll</li>}
 
               {lengthTask > 0 && <li onClick={deSelectAll}>Deselect All</li>}
-              <li onClick={() => handleCheckAllOnPage(true)}>
-                Select All on This Page
-              </li>
-              <li onClick={() => handleCheckAllOnPage(false)}>
-                Deselect All on This Page
-              </li>
+
+              {!checkboxPage ? (
+                <li onClick={() => handleCheckAllOnPage(true)}>
+                  Select All on This Page
+                </li>
+              ) : (
+                <li onClick={() => handleCheckAllOnPage(false)}>
+                  Deselect All on This Page
+                </li>
+              )}
             </ul>
           )}
         </div>
       </OutsideClickHandler>
       {lenghtIsEdit > 1 && <div className={st(classes.itemColumnEdit)}> </div>}
       {tasks.length > 0 &&
-        _.map(tasks, (task: any, index) => (
+        _.map(tasks, (task: Tasks) => (
           <div className={st(classes.itemColumn)} key={task.id}>
             <div onClick={() => handleCheckbox(task.id, task.selected)}>
               {task.selected ? (

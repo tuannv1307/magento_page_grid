@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type {
+import {
   Magento_Page,
-  checkIsEdit,
-  editTask,
-  inputEditTask,
+  inputEditMultiTask,
 } from "../../store/magentoPageGridReducer";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import _ from "lodash";
 import "./DatePicker.scss";
 import { st, classes } from "./EditMultiDataTask.st.css";
+
 export type EditMultiDataTaskProps = {
   typeColumn: string;
-  // task: any;
-  // column: any;
-  // handleEdittask: any;
 };
 
 const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
@@ -23,13 +19,14 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
 
-  let tasks = data.data.tasks;
-  const [isShow, setIsShow] = useState(false);
-
   const [inputName, setInputName] = useState("");
+
   const [inputPosition, setInputPosition] = useState("");
+
   const [inputOffice, setInputOffice] = useState("");
+
   const [inputSalary, setInputSalary] = useState("");
+
   const [inputStartDate, setInputStartDate] = useState<any>("");
   const [inputExtn, setInputExtn] = useState("");
   const [inputStatus, setInputStatus] = useState("");
@@ -50,14 +47,95 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
 
   const statusEdit = data.statusEdit;
 
-  useEffect(() => {}, [
-    inputName,
-    inputPosition,
-    inputOffice,
-    inputExtn,
-    inputStartDate,
-    inputStatus,
-    inputSalary,
+  const nameEditMul = data.nameEditMul;
+
+  const positionEditMul = data.positionEditMul;
+
+  const salaryEditMul = data.salaryEditMul;
+
+  const start_dateEditMul = data.start_dateEditMul;
+
+  const officeEditMul = data.officeEditMul;
+
+  const extnEditMul = data.extnEditMul;
+
+  const statusEditMul = data.statusEditMul;
+
+  const handleBlurInput = () => {
+    dispatch(
+      inputEditMultiTask({
+        nameEditMul: inputName !== "" ? inputName : nameEditMul,
+        positionEditMul: inputPosition !== "" ? inputPosition : positionEditMul,
+        salaryEditMul: inputSalary !== "" ? inputSalary : salaryEditMul,
+        start_dateEditMul:
+          inputStartDate !== ""
+            ? moment(inputStartDate).format("YYYY/MM/DD")
+            : start_dateEditMul,
+        officeEditMul: inputOffice !== "" ? inputOffice : officeEditMul,
+        extnEditMul: inputExtn !== "" ? inputExtn : extnEditMul,
+        statusEditMul: inputStatus !== "" ? inputStatus : statusEditMul,
+      })
+    );
+  };
+
+  useEffect(() => {
+    handleBlurInput();
+  }, [inputOffice, inputStatus, inputStartDate]);
+
+  useEffect(() => {
+    if (
+      nameEdit === nameEditMul ||
+      positionEdit === positionEditMul ||
+      salaryEdit === salaryEditMul ||
+      officeEdit === officeEditMul ||
+      extnEdit === extnEditMul ||
+      start_dateEdit === start_dateEditMul ||
+      statusEdit === statusEditMul
+    ) {
+      setInputName("");
+      setInputPosition("");
+      setInputExtn("");
+      setInputSalary("");
+      setInputOffice("");
+      setInputStartDate("");
+      setInputStatus("");
+    }
+  }, [
+    nameEdit,
+    positionEdit,
+    salaryEdit,
+    officeEdit,
+    extnEdit,
+    start_dateEdit,
+    statusEdit,
+  ]);
+
+  useEffect(() => {
+    if (
+      inputName === "" ||
+      inputPosition === "" ||
+      inputOffice === "" ||
+      inputExtn === "" ||
+      inputSalary === "" ||
+      inputStartDate === "" ||
+      inputStatus === ""
+    ) {
+      setInputName("");
+      setInputPosition("");
+      setInputExtn("");
+      setInputSalary("");
+      setInputOffice("");
+      setInputStartDate("");
+      setInputStatus("");
+    }
+  }, [
+    nameEdit,
+    positionEdit,
+    salaryEdit,
+    officeEdit,
+    extnEdit,
+    start_dateEdit,
+    statusEdit,
   ]);
 
   return (
@@ -72,6 +150,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               className={st(classes.inputEditTask)}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
+              onBlur={handleBlurInput}
             />
           </>
         )}
@@ -84,6 +163,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               className={st(classes.inputEditTask)}
               value={inputPosition}
               onChange={(e) => setInputPosition(e.target.value)}
+              onBlur={handleBlurInput}
             />
           </>
         )}
@@ -96,8 +176,9 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               value={inputOffice}
               className={st(classes.selectEditTask)}
               onChange={(e) => setInputOffice(e.target.value)}
+              onBlur={handleBlurInput}
             >
-              <option></option>
+              <option value=""></option>
               <option value="Tokyo">Tokyo</option>
               <option value="Sydney">Sydney</option>
               <option value="London">London</option>
@@ -117,6 +198,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               className={st(classes.inputEditTask)}
               value={inputSalary}
               onChange={(e) => setInputSalary(e.target.value)}
+              onBlur={handleBlurInput}
             />
           </>
         )}
@@ -127,11 +209,11 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
             <DatePicker
               selected={inputStartDate}
               onChange={(date: Date) => setInputStartDate(date)}
-              // onKeyDown={handleKeyDow}
               name={typeColumn}
               showPopperArrow={false}
               dateFormat="yyyy/MM/dd"
               className={st(classes.inputEditTask)}
+              onBlur={handleBlurInput}
             />
           </>
         )}
@@ -139,7 +221,13 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
         {typeColumn === "extn" && (
           <>
             <label>All in column</label>
-            <input type="text" className={st(classes.inputEditTask)} />
+            <input
+              type="text"
+              className={st(classes.inputEditTask)}
+              value={inputExtn}
+              onChange={(e) => setInputExtn(e.target.value)}
+              onBlur={handleBlurInput}
+            />
           </>
         )}
 
@@ -151,8 +239,9 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               value={inputStatus}
               className={st(classes.selectEditTask)}
               onChange={(e) => setInputStatus(e.target.value)}
+              onBlur={handleBlurInput}
             >
-              <option></option>
+              <option value=""></option>
               <option value="enable">Enable</option>
               <option value="disable">Disable</option>
             </select>

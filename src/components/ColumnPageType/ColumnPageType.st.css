@@ -1,9 +1,5 @@
 .root {
     -st-states: typeColumn(enum(id, position, status, extn, salary)), sortName, ;
-    /* display: flex; */
-    /* cursor: pointer;
-    border: 0.1rem solid #8a837f; */
-    /* border-right: 1px solid #fff; */
     width: 100%;
 
 }
@@ -29,9 +25,6 @@
 }
 
 
-
-
-
 .titleColumn {
     -st-states: isSorted;
     margin: 0;
@@ -50,12 +43,6 @@
     border-right: 0.1rem solid #8a837f;
 }
 
-
-
-
-/* .root:sortName .titleColumn > svg {
-    display: none;
-} */
 
 .titleColumn > svg {
     position: absolute;

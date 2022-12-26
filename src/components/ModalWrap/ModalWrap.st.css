@@ -7,7 +7,6 @@
     opacity: 1;
     pointer-events: auto;
     visibility: hidden;
-    /* top: 100px; */
     margin: 100px 37%;
     z-index: 10000;
 }
@@ -73,7 +72,6 @@
     background-color: #4b443f;
     border-color: #4b443f;
     color: #fff;
-
     text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
     padding: 25px 16px;
 }

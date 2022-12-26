@@ -1,10 +1,9 @@
-import { useEffect, ChangeEvent } from "react";
-import { Provider, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
 import store from "./store/store";
 import {
-  Magento_Page,
   getDataColumns,
   getPrevDataColumns,
 } from "./store/magentoPageGridReducer";
@@ -17,10 +16,6 @@ import { initialData } from "./constants";
 import ModalWrap from "./components/ModalWrap/ModalWrap";
 
 function App() {
-  const data: Magento_Page = useSelector(
-    (state: { magentopage: Magento_Page }) => state.magentopage
-  );
-  const isShowModal = data.isShowModal;
   const dispatch = useDispatch();
 
   const localPage: any = localStorage.getItem("MAGENTO_PAGE");

@@ -1,80 +1,48 @@
-import { useState } from "react";
-import { st, classes } from "./ItemTaskColumn.st.css";
 import EditDataTask from "../EditDataTask";
 import {
   Magento_Page,
+  Tasks,
   checkIsEdit,
+  checkboxOnlyTask,
   checkboxTask,
-  editTask,
 } from "../../store/magentoPageGridReducer";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import _ from "lodash";
-type ItemTaskColumnProps = { task: any; typeColumn: string; column: any };
+import { st, classes } from "./ItemTaskColumn.st.css";
 
-const ItemTaskColumn = ({ task, typeColumn, column }: ItemTaskColumnProps) => {
+type ItemTaskColumnProps = {
+  task: Tasks;
+  typeColumn: string;
+};
+
+const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-  const [isShow, setIsShow] = useState(false);
+
   let tasks = data.data.tasks;
-  const lengtaskIsEdit = _.size(
-    _.filter(tasks, (task) => task.isEdit === true)
-  );
+  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 
-  let isEditTask = data.isEditTask;
   const dispatch = useDispatch();
-  const handleClickEdit = (id: number, isEdit: boolean) => {
-    // setIsShow(!isShow);
 
+  const handleClickEdit = (id: number, isEdit: boolean) => {
     if (id) {
-      if (lengtaskIsEdit > 0) {
+      if (lenghtIsEdit > 0) {
         dispatch(checkIsEdit({ id, isEdit: false }));
       } else {
-        // console.log(id);
         dispatch(checkIsEdit({ id, isEdit: true }));
         dispatch(checkboxTask({ id, isSelected: !isEdit }));
+        dispatch(checkboxOnlyTask({ id }));
       }
     }
   };
 
-  const Edittask = (id: number, inputEdit: {}) => {
-    if (id) {
-    }
-  };
-
-  const handleCheckIsEdit = (id: number) => {
-    // dispatch(checkIsEditTask(true));
-    dispatch(checkIsEdit({ id, isEdit: true }));
-  };
-
-  const saveData = (id: number, value: any) => {
-    dispatch(editTask({ id, inputEdit: value }));
-  };
-
-  const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
-
   return (
     <div className={st(classes.root)}>
-      {task.isEdit ? (
+      {task?.isEdit ? (
         <div>
-          <EditDataTask
-            typeColumn={typeColumn}
-            task={task}
-            key={task.id}
-            column={column}
-            handleEdittask={Edittask}
-          />
-          {/* <div>
-            <button
-              onClick={() =>
-                dispatch(checkIsEdit({ id: task.id, isEdit: false }))
-              }
-            >
-              Cancel
-            </button>
-            <button onClick={() => saveData(task.id, Edittask)}>Save</button>
-          </div> */}
+          <EditDataTask typeColumn={typeColumn} task={task} key={task.id} />
         </div>
       ) : (
         <div

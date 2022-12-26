@@ -1,8 +1,8 @@
 import { Provider } from "react-redux";
 import store from "../../store/store";
-import HideShowColumns from "./HideShowColumns";
+import FiltersData from "./FiltersData";
 
-describe("HideShowColumns.cy.tsx", () => {
+describe("FiltersData.cy.tsx", () => {
   // beforeEach(() => {
   //   cy.wait(1000);
   // });
@@ -12,7 +12,7 @@ describe("HideShowColumns.cy.tsx", () => {
 
     cy.mount(
       <Provider store={store}>
-        <HideShowColumns />
+        <FiltersData />
       </Provider>
     );
   });

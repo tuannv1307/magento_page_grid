@@ -1,21 +1,12 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Magento_Page,
   filtersData,
   searchDataByInput,
-  setBtnPrevAndNext,
-  setCurrentPage,
-  setDisableSelectColumn,
-  setDisplayColumn,
 } from "../../store/magentoPageGridReducer";
-
 import { st, classes } from "./Search.st.css";
-import {
-  fiterDataByKeyword,
-  searchFilters,
-} from "../ColumnPageType/ColumnPageType";
 
 const Search = () => {
   const data: Magento_Page = useSelector(
@@ -25,16 +16,7 @@ const Search = () => {
 
   const [inputSearch, setInputSearch] = useState(searchData);
   const dispatch = useDispatch();
-
-  let tasks: any = data.data.tasks;
   let objFilters: any = data.objFilters;
-
-  // if (_.some(objFilters, (obj) => obj.value !== "")) {
-  //   tasks = fiterDataByKeyword(tasks, objFilters);
-  // }
-  // if (searchData !== "") {
-  //   tasks = searchFilters(tasks, searchData);
-  // }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputSearch(e.target.value);

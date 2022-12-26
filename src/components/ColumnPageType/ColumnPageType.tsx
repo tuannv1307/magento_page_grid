@@ -1,20 +1,18 @@
-import { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { st, classes } from "./ColumnPageType.st.css";
-import { initialData } from "../../constants";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Magento_Page,
+  Tasks,
   changeIsSort,
   changeName,
-  checkboxTask,
   sortAsc,
   sortDesc,
 } from "../../store/magentoPageGridReducer";
-import EditDataTask from "../EditDataTask";
 import ItemTaskColumn from "../ItemTaskColumn";
 import EditMultiDataTask from "../EditMultiDataTask";
+import { st, classes } from "./ColumnPageType.st.css";
+
 export type ColumnPageTypeProps = {
   column: {
     id: string;
@@ -32,29 +30,16 @@ export type ColumnPageTypeProps = {
     }[];
     disPlay: boolean;
   };
-  index?: any;
+  index: string;
   typeColumn: string;
 };
 
-export const columnDataLenght = (
-  arr?: {
-    id: string;
-    name: string;
-    position: string;
-    salary: string;
-    start_date: string;
-    office: string;
-    extn: string;
-    status: string;
-    selected: boolean;
-  }[],
-  sizeData?: number
-) => {
+export const columnDataLenght = (arr: Tasks[], sizeData?: number) => {
   return _.slice(arr, 0, sizeData);
 };
 
 export const getPaginatedData = (
-  arr: any,
+  arr: Tasks[],
   currentPage: number,
   sizeData: number
 ) => {
@@ -63,7 +48,7 @@ export const getPaginatedData = (
   return _.slice(arr, startIndex, endIndex);
 };
 
-export const searchFilters = (arr: any[], searchData: string) => {
+export const searchFilters = (arr: Tasks[], searchData: string) => {
   return _.filter(arr, (task) => {
     return (
       (task.name &&
@@ -95,7 +80,7 @@ export const searchFilters = (arr: any[], searchData: string) => {
   });
 };
 
-export const fiterDataByKeyword = (arr: any[], objFilters: any) => {
+export const fiterDataByKeyword = (arr: Tasks[], objFilters: any) => {
   let keywordName: string,
     keywordOffice: string,
     keywordStartDate: string,
@@ -162,7 +147,6 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
 
-  const [isShowEdit, setIsShowEdit] = useState(false);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
   const sizeData = data.valueChange;
@@ -179,12 +163,11 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
+
   tasks =
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
-
-  console.log(data);
 
   const handleClickIsSort = (type: string) => {
     let isSort;
@@ -203,9 +186,11 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
       dispatch(sortDesc({ nameSort }));
     }
   };
+
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
   return (
-    <Draggable draggableId={column.id} index={index}>
+    <Draggable draggableId={column.id} index={_.toNumber(index)}>
       {(provided, snapshot) => (
         <div
           className={st(classes.root, {
@@ -257,14 +242,13 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           {tasks.length > 0 &&
             _.map(
               tasks,
-              (task: any, index) => (
+              (task: Tasks) => (
                 // task.selected ? (
                 // <>
                 <ItemTaskColumn
                   task={task}
                   typeColumn={typeColumn}
                   key={task.id}
-                  column={column}
                 />
                 // </>
                 // ) : (

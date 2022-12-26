@@ -1,12 +1,5 @@
 .root {
     -st-states: searchData;
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 3rem; 
-    
-    margin: 0 10px;
-    font-size: 13px; */
     position: relative;
 }
 
@@ -15,7 +8,7 @@
 }
 
 .inputSearch {
-    -webkit-appearance: none;
+
     background-color: #fff;
     border: 1px solid #adadad;
     border-radius: 1px;
@@ -31,6 +24,13 @@
     width: auto;
     padding-right: 20rem;
     width: 100%;
+
+}
+
+.inputSearch::placeholder {
+
+    font-style: italic;
+    opacity: 0.8;
 }
 
 .inputSearch:focus {

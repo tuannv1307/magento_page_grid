@@ -1,6 +1,20 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 
+export type Tasks = {
+  id: number;
+  name: string;
+  position: string;
+  salary: string;
+  start_date: string;
+  office: string;
+  extn: string;
+  status: string;
+  selected: boolean;
+  isAction: boolean;
+  isEdit: boolean;
+};
+
 export type Magento_Page = {
   prevDataColumns: {};
   data: {
@@ -17,128 +31,7 @@ export type Magento_Page = {
       isAction: boolean;
       isEdit: boolean;
     }[];
-    columns?: {
-      // "column-1": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-2": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-3": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-4": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-5": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-6": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-7": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-      // "column-8": {
-      //   id: string;
-      //   title: string;
-      //   tasks: {
-      //     id: string;
-      //     name: string;
-      //     position: string;
-      //     salary: string;
-      //     start_date: string;
-      //     office: string;
-      //     extn: string;
-      //     status: string;
-      //     selected: boolean;
-      //   }[];
-      // };
-    };
+    columns?: {};
     columnOrder?: string[];
   };
   valueChange: number;
@@ -155,9 +48,8 @@ export type Magento_Page = {
   titleModal: string;
   contentModal: string;
   isCheckedAllByPage: boolean;
-  nameStatus: string;
-  isEditTask: boolean;
-  isCheckOnPage: boolean;
+
+  inputEditDataTask: [];
 
   nameEdit: string;
   positionEdit: string;
@@ -166,55 +58,88 @@ export type Magento_Page = {
   officeEdit: string;
   extnEdit: string;
   statusEdit: string;
+
+  nameEditMul: string;
+  positionEditMul: string;
+  salaryEditMul: string;
+  start_dateEditMul: string;
+  officeEditMul: string;
+  extnEditMul: string;
+  statusEditMul: string;
   objFilters: {};
 };
 
 export type Actions = {
   getDataColumns: (state: Magento_Page, action: PayloadAction<{}>) => void;
+
   getPrevDataColumns: (state: Magento_Page, action: PayloadAction<{}>) => void;
+
   sortColumnsOrder: (
     state: Magento_Page,
     action: PayloadAction<string[]>
   ) => void;
+
   changeViewLengthData: (
     state: Magento_Page,
     action: PayloadAction<number>
   ) => void;
+
   setCurrentPage: (state: Magento_Page, action: PayloadAction<number>) => void;
+
   setBtnPrevAndNext: (
     state: Magento_Page,
     action: PayloadAction<{ disabledPrev: boolean; disabledNext: boolean }>
   ) => void;
+
   setDisplayColumn: (
     state: Magento_Page,
-    action: PayloadAction<{ id: number }>
+    action: PayloadAction<{ id: string }>
   ) => void;
+
   setDisableSelectColumn: (
     state: Magento_Page,
     action: PayloadAction<boolean>
   ) => void;
+
   searchDataByInput: (
     state: Magento_Page,
     action: PayloadAction<string>
   ) => void;
+
   resetColumns: (state: Magento_Page) => void;
+
   setIsAction: (
     state: Magento_Page,
     action: PayloadAction<{ id: number }>
   ) => void;
+
   DeleteTask: (
     state: Magento_Page,
     action: PayloadAction<{ id: number }>
   ) => void;
+
   checkboxTask: (
     state: Magento_Page,
     action: PayloadAction<{ id: number; isSelected: boolean }>
   ) => void;
+
+  checkboxOnlyTask: (
+    state: Magento_Page,
+    action: PayloadAction<{ id: number }>
+  ) => void;
+
+  checkboxOnlyAction: (
+    state: Magento_Page,
+    action: PayloadAction<{ id: number }>
+  ) => void;
+
   checkboxTaskAll: (
     state: Magento_Page,
     action: PayloadAction<{ checkedAll: boolean }>
   ) => void;
+
   checkCloseIsEditTaskAll: (state: Magento_Page) => void;
+
   checkboxTaskAllBypage: (
     state: Magento_Page,
     action: PayloadAction<{ isCheckedAllByPage: boolean }>
@@ -268,12 +193,40 @@ export type Actions = {
       inputEdit: {};
     }>
   ) => void;
+  editMultiTask: (
+    state: Magento_Page,
+    action: PayloadAction<{
+      taskEditMulti: [];
+    }>
+  ) => void;
 
   openEditTask: (state: Magento_Page) => void;
 
-  checkOnPage: (state: Magento_Page, action: PayloadAction<boolean>) => void;
+  checkOnPage: (
+    state: Magento_Page,
+    action: PayloadAction<{
+      tasks: {
+        id: string | number;
+        name: string;
+        position: string;
+        salary: string;
+        start_date: string;
+        office: string;
+        extn: string;
+        status: string;
+        selected: boolean;
+        isAction: boolean;
+        isEdit: boolean;
+      }[];
+    }>
+  ) => void;
   filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
   inputEditTask: (state: Magento_Page, action: PayloadAction<any>) => void;
+  inputEditMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
+  setInputEditDataTask: (
+    state: Magento_Page,
+    action: PayloadAction<any>
+  ) => void;
 };
 
 const initialData: Magento_Page = {
@@ -297,9 +250,8 @@ const initialData: Magento_Page = {
   titleModal: "",
   contentModal: "",
   isCheckedAllByPage: false,
-  nameStatus: "enable" || "disable",
-  isEditTask: false,
-  isCheckOnPage: false,
+
+  inputEditDataTask: [],
 
   nameEdit: "",
   positionEdit: "",
@@ -308,6 +260,14 @@ const initialData: Magento_Page = {
   officeEdit: "",
   extnEdit: "",
   statusEdit: "",
+
+  nameEditMul: "",
+  positionEditMul: "",
+  salaryEditMul: "",
+  start_dateEditMul: "",
+  officeEditMul: "",
+  extnEditMul: "",
+  statusEditMul: "",
 
   objFilters: {
     idFrom: {
@@ -351,17 +311,12 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         ...task,
         id: _.toNumber(task.id),
       }));
-
-      // const sort = _.sortBy(state.data.tasks, [state.sortName]);
-
-      // state.data.tasks = _.cloneDeep(sort);
       state.data = _.cloneDeep(state.data);
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
     },
 
     getPrevDataColumns: (state, action) => {
       state.prevDataColumns = action.payload;
-
       localStorage.setItem(
         "PREV_DATA_COLUMNS",
         JSON.stringify(state.prevDataColumns)
@@ -371,22 +326,18 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     sortColumnsOrder: (state, action) => {
       state.data.columnOrder = action.payload;
       state.data.columnOrder = _.cloneDeep(state.data.columnOrder);
-
       state.data = _.cloneDeep(state.data);
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
     },
 
     changeViewLengthData: (state, action) => {
       let valueChange = action.payload;
-
       state.valueChange = valueChange;
       state.valueChange = _.cloneDeep(state.valueChange);
-      if (_.size(state.data.tasks) < state.valueChange) {
-        state.currentPage = 1;
-      }
+      state.currentPage = 1;
       state.typeArr = "DATA_SET_LENGTH";
       state = _.cloneDeep(state);
-      // localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
+
       localStorage.setItem(
         "MAGENTO_PAGE_VALUE",
         JSON.stringify(state.valueChange)
@@ -413,11 +364,13 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     setDisplayColumn: (state, action) => {
       let { id } = action.payload;
+
       _.map(state.data.columns, (column: any) =>
         column.id === id ? (column.disPlay = !column.disPlay) : column.disPlay
       );
+
       state.data.columns = _.cloneDeep(state.data.columns);
-      // state.prevDataColumns.push(_.cloneDeep(state.data));
+
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
       state = _.cloneDeep(state);
     },
@@ -451,6 +404,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
+
     DeleteTask: (state, action) => {
       let { id } = action.payload;
 
@@ -458,11 +412,36 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
     },
+
     checkboxTask: (state, action) => {
       let { id, isSelected } = action.payload;
 
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id ? { ...task, selected: isSelected } : task
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    checkboxOnlyTask: (state, action) => {
+      let { id } = action.payload;
+
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.id === id
+          ? { ...task, selected: true }
+          : { ...task, selected: false }
+      );
+      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    checkboxOnlyAction: (state, action) => {
+      let { id } = action.payload;
+
+      state.data.tasks = _.map(state.data.tasks, (task) =>
+        task.id === id
+          ? { ...task, isAction: true }
+          : { ...task, isAction: false }
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
       state = _.cloneDeep(state);
@@ -556,7 +535,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     changeStatusTask: (state, action) => {
       let { nameStatus } = action.payload;
 
-      state.nameStatus = nameStatus;
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.selected === true ? { ...task, status: nameStatus } : task
       );
@@ -574,7 +552,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state = _.cloneDeep(state);
     },
 
-    editTask: (state: any, action) => {
+    editTask: (state, action) => {
       let { id, inputEdit } = action.payload;
 
       state.data.tasks = _.map(state.data.tasks, (task) =>
@@ -586,6 +564,12 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
           : task
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
+      state = _.cloneDeep(state);
+    },
+
+    editMultiTask: (state, action) => {
+      const { taskEditMulti } = action.payload;
+      state.data.tasks = taskEditMulti;
       state = _.cloneDeep(state);
     },
 
@@ -601,9 +585,8 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     },
 
     checkOnPage: (state, action) => {
-      let isCheckOnPage = action.payload;
-
-      state.isCheckOnPage = isCheckOnPage;
+      let { tasks } = action.payload;
+      state.data.tasks = tasks;
     },
 
     filtersData: (state, action) => {
@@ -630,6 +613,31 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.extnEdit = extnEdit;
       state.statusEdit = statusEdit;
     },
+
+    inputEditMultiTask: (state, action) => {
+      const {
+        nameEditMul,
+        positionEditMul,
+        salaryEditMul,
+        start_dateEditMul,
+        officeEditMul,
+        extnEditMul,
+        statusEditMul,
+      } = action.payload;
+
+      state.nameEditMul = nameEditMul;
+      state.positionEditMul = positionEditMul;
+      state.salaryEditMul = salaryEditMul;
+      state.start_dateEditMul = start_dateEditMul;
+      state.officeEditMul = officeEditMul;
+      state.extnEditMul = extnEditMul;
+      state.statusEditMul = statusEditMul;
+    },
+
+    setInputEditDataTask: (state, action) => {
+      const { arrInputEdit } = action.payload;
+      state.inputEditDataTask = arrInputEdit;
+    },
   },
   extraReducers: {},
 });
@@ -648,6 +656,8 @@ export const {
   setIsAction,
   DeleteTask,
   checkboxTask,
+  checkboxOnlyTask,
+  checkboxOnlyAction,
   checkboxTaskAll,
   checkCloseIsEditTaskAll,
   sortDesc,
@@ -660,10 +670,13 @@ export const {
   changeStatusTask,
   checkIsEdit,
   editTask,
+  editMultiTask,
   openEditTask,
   checkOnPage,
   filtersData,
   inputEditTask,
+  inputEditMultiTask,
+  setInputEditDataTask,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

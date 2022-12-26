@@ -4,9 +4,9 @@ import {
   changeViewLengthData,
   Magento_Page,
 } from "../../store/magentoPageGridReducer";
-import { st, classes } from "./ViewLength.st.css";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
+import { st, classes } from "./ViewLength.st.css";
 
 const ViewLength = () => {
   const data: Magento_Page = useSelector(
@@ -74,13 +74,11 @@ const ViewLength = () => {
     }
   };
 
-  const handleOutSideClickInput = () => {
-    // if (!inputValue || _.isNaN(_.toNumber(inputValue)) === true) {
-    //   setInputValue("20");
-    //   dispatch(changeViewLengthData(20));
-    // } else if (inputValue) {
-    //   dispatch(changeViewLengthData(_.toNumber(inputValue)));
-    // }
+  const handleOutsideCustomsEdit = () => {
+    setTimeout(() => {
+      setIsShow(false);
+      setInputValueEdit("");
+    }, 200);
   };
 
   const handleClickEdit = () => {
@@ -89,7 +87,7 @@ const ViewLength = () => {
 
       dispatch(changeViewLengthData(20));
       setIsShow(false);
-    } else {
+    } else if (inputValueEdit !== inputValue) {
       dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
       setInputValue(inputValueEdit);
       setIsShow(false);
@@ -97,16 +95,13 @@ const ViewLength = () => {
     }
   };
 
-  const handleOutsideCustomsEdit = () => {
-    // if (!inputValueEdit) {
-    //   setIsShow(false);
-    // } else {
-    //   dispatch(changeViewLengthData(_.toNumber(inputValueEdit)));
-    //   setInputValue(inputValueEdit);
-    //   setIsShow(false);
-    //   setInputValueEdit("");
-    // }
-    // handleClickEdit();
+  const handleOutSideClickInput = () => {
+    if (!inputValue || _.isNaN(_.toNumber(inputValue))) {
+      setInputValue("20");
+      dispatch(changeViewLengthData(20));
+    } else if (_.toNumber(inputValue) !== valueChange) {
+      dispatch(changeViewLengthData(_.toNumber(inputValue)));
+    }
   };
 
   const handleOutSideClick = () => {

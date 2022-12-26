@@ -1,7 +1,6 @@
 import ColumnPageType from "../ColumnPageType/";
 import PaginatePage from "../PaginatePage";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { st, classes } from "./Products.st.css";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,7 +13,7 @@ import Search from "../Search";
 import ColumnActions from "../ColumnActions";
 import ColumnCheck from "../ColumnCheck";
 import ActionsSelect from "../ActionsSelect";
-import { useEffect } from "react";
+
 import {
   columnDataLenght,
   fiterDataByKeyword,
@@ -22,6 +21,7 @@ import {
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
 import FiltersData from "../FiltersData";
+import { st, classes } from "./Products.st.css";
 
 const Products = () => {
   const data: Magento_Page = useSelector(
@@ -36,11 +36,7 @@ const Products = () => {
   const sizeData = data.valueChange;
   const currentPage = data.currentPage;
   const objFilters: any = data.objFilters;
-  // let tasksColumns;
-  // _.map(columnOrder, (columnID) => {
-  //   tasksColumns = columns[columnID];
-  //   tasksColumns = tasks;
-  // });
+
   const dispatch = useDispatch();
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId, type } = result;
@@ -60,7 +56,7 @@ const Products = () => {
     }
 
     if (type === "column") {
-      const newColumnOrder: any = Array.from(columnOrder);
+      const newColumnOrder: string[] = Array.from(columnOrder);
 
       newColumnOrder.splice(source.index, 1);
 
@@ -131,114 +127,110 @@ const Products = () => {
                 ref={provided.innerRef}
               >
                 <ColumnCheck />
-                {
-                  // _.map(titleColumns, (titleColumn) =>
-                  _.map(columnOrder, (columnId, index) => {
-                    switch (columns[columnId]?.title) {
-                      case "id":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "name":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "position":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "office":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "salary":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "start_date":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "extn":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "status":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnPageType
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                      case "check":
-                      case "actions":
-                        return (
-                          columns[columnId].disPlay === true && (
-                            <ColumnActions
-                              column={columns[columnId]}
-                              index={index}
-                              key={columnId}
-                              typeColumn={columns[columnId].title}
-                            />
-                          )
-                        );
-                    }
-                  })
-                  // )
-                }
+                {_.map(columnOrder, (columnId, index) => {
+                  switch (columns[columnId]?.title) {
+                    case "id":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "name":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "position":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "office":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "salary":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "start_date":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "extn":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "status":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnPageType
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                    case "check":
+                    case "actions":
+                      return (
+                        columns[columnId].disPlay === true && (
+                          <ColumnActions
+                            column={columns[columnId]}
+                            index={index}
+                            key={columnId}
+                            typeColumn={columns[columnId].title}
+                          />
+                        )
+                      );
+                  }
+                })}
                 {provided.placeholder}
               </div>
             )}

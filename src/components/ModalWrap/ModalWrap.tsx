@@ -1,11 +1,10 @@
-import React from "react";
-import { st, classes } from "./ModalWrap.st.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Magento_Page,
   clearSelected,
   setShowModal,
 } from "../../store/magentoPageGridReducer";
+import { st, classes } from "./ModalWrap.st.css";
 
 const ModalWrap = () => {
   const data: Magento_Page = useSelector(

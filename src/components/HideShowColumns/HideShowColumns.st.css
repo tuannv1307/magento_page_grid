@@ -1,9 +1,5 @@
 .root {
     -st-states: isShowColums;
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 3rem; */
     position: relative;
     margin: 0 10px;
     font-size: 13px;
@@ -18,14 +14,12 @@
     box-shadow: none;
     color: #41362f;
     display: inline-block;
-    /* font-size: 13px; */
     font-weight: 400;
     letter-spacing: -.025em;
     padding: 10px 33px 15px 15px;
     position: relative;
     vertical-align: baseline;
     z-index: 12;
-    /* border-color: #007bdb; */
     display: flex;
     gap: 10px;
 
@@ -66,7 +60,6 @@
     min-width: 120%;
     padding: 0.5rem 1rem;
     position: absolute;
-    /* top: 100%; */
     transition: all .15s ease;
     z-index: 10;
     color: #333;

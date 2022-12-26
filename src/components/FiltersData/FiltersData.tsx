@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "./DatePicker.scss";
-import { st, classes } from "./FiltersData.st.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Magento_Page, filtersData } from "../../store/magentoPageGridReducer";
 import {
   columnDataLenght,
   getPaginatedData,
-  searchFilters,
 } from "../ColumnPageType/ColumnPageType";
 import _ from "lodash";
+import { st, classes } from "./FiltersData.st.css";
 
 const FiltersData = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
   const currentPage = data.currentPage;
   const sizeData = data.valueChange;
   let tasks: any = data.data.tasks;
   let objFilters = data.objFilters;
   const typeArr = data.typeArr;
+
   tasks =
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
