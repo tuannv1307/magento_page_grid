@@ -21,3 +21,23 @@
     border-left: 0.1rem dashed #d6d6d6;
     border-right: 0.1rem dashed #d6d6d6;
 }
+/* .editTask {
+    position: relative;
+} */
+.actionClose {
+  position: absolute;
+  display: flex;
+  left: 100px;
+  /* top: calc(100% - 3px); */
+  top: 800px;
+  z-index: 99;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 25%);
+  padding: 5px;
+  padding: 15px 25px;
+  background-color: #fff;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: flex;
+  gap: 10px;
+  cursor: default;
+}

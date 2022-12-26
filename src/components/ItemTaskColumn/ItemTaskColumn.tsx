@@ -5,11 +5,18 @@ import {
   checkIsEdit,
   checkboxOnlyTask,
   checkboxTask,
+  setArrayEditDataTask,
+  editTask,
 } from "../../store/magentoPageGridReducer";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import _ from "lodash";
 import { st, classes } from "./ItemTaskColumn.st.css";
+import {
+  columnDataLenght,
+  getPaginatedData,
+} from "../ColumnPageType/ColumnPageType";
+import { useState } from "react";
 
 type ItemTaskColumnProps = {
   task: Tasks;
@@ -21,10 +28,34 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
 
-  let tasks = data.data.tasks;
+  let tasks: any = data.data.tasks;
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 
   const dispatch = useDispatch();
+
+  const sizeData = data.valueChange;
+  const typeArr = data.typeArr;
+  const currentPage = data.currentPage;
+  tasks =
+    typeArr === "DATA_SET_LENGTH"
+      ? columnDataLenght(tasks, sizeData)
+      : getPaginatedData(tasks, currentPage, sizeData);
+
+  const handleChangeValues = (id: number, value: any) => {
+    const arrInputEdit: Tasks[] = [];
+    _.each(tasks, (taskEdit) => {
+      if (taskEdit.id === id) {
+        arrInputEdit.push({
+          ...task,
+          ...value,
+        });
+      } else arrInputEdit.push(taskEdit);
+    });
+    console.log(arrInputEdit);
+    //dispatch(setArrayEditDataTask({ arrInputEdit }));
+  };
+  const [isEditTask, setIsEditTask] = useState(false);
+  const handledbClick = () => {};
 
   const handleClickEdit = (id: number, isEdit: boolean) => {
     if (id) {
@@ -34,16 +65,51 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
         dispatch(checkIsEdit({ id, isEdit: true }));
         dispatch(checkboxTask({ id, isSelected: !isEdit }));
         dispatch(checkboxOnlyTask({ id }));
+        setIsEditTask(true);
       }
     }
   };
-
+  const handleCloseTask = () => {
+    setIsEditTask(false);
+  };
+  let arrayEditDataTask = data.arrayEditDataTask;
+  const handleSaveTask = () => {
+    dispatch(editTask({ arrayEditDataTask }));
+    setIsEditTask(false);
+  };
   return (
     <div className={st(classes.root)}>
-      {task?.isEdit ? (
-        <div>
-          <EditDataTask typeColumn={typeColumn} task={task} key={task.id} />
-        </div>
+      {isEditTask ? (
+        lenghtIsEdit > 0 && (
+          <div className={st(classes.editTask)}>
+            {_.map(
+              _.filter(tasks, (task) => task.isEdit === true),
+              (task) => (
+                <EditDataTask
+                  typeColumn={typeColumn}
+                  task={task}
+                  key={task.id}
+                  handleChangeValues={handleChangeValues}
+                />
+              )
+            )}
+
+            <div className={st(classes.actionClose)}>
+              <button
+                onClick={() => handleCloseTask()}
+                className={st(classes.cancel)}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleSaveTask()}
+                className={st(classes.save)}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        )
       ) : (
         <div
           className={st(classes.taskItem)}

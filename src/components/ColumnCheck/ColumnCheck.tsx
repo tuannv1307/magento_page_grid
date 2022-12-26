@@ -180,19 +180,19 @@ const ColumnCheck = () => {
   const handleCloseTask = (id: number) => {
     dispatch(checkIsEdit({ id, isEdit: false }));
   };
-
+  let arrayEditDataTask = data.arrayEditDataTask;
   const handleSaveTask = (id: number, task: Tasks) => {
-    let innputEdit = {
-      name: name !== "" ? name : task.name,
-      position: position !== "" ? position : task.position,
-      office: office !== "" ? office : task.office,
-      salary: salary !== "" ? salary : task.salary,
-      start_date: start_date !== "" ? start_date.toString() : task.start_date,
-      extn: extn !== "" ? extn : task.extn,
-      status: status !== "" ? status : task.status,
-    };
+    // let innputEdit = {
+    //   name: name !== "" ? name : task.name,
+    //   position: position !== "" ? position : task.position,
+    //   office: office !== "" ? office : task.office,
+    //   salary: salary !== "" ? salary : task.salary,
+    //   start_date: start_date !== "" ? start_date.toString() : task.start_date,
+    //   extn: extn !== "" ? extn : task.extn,
+    //   status: status !== "" ? status : task.status,
+    // };
 
-    dispatch(editTask({ id, inputEdit: innputEdit }));
+    dispatch(editTask({ arrayEditDataTask }));
 
     dispatch(checkIsEdit({ id, isEdit: false }));
     dispatch(
@@ -213,39 +213,7 @@ const ColumnCheck = () => {
   };
 
   const handleSaveEdits = () => {
-    const taskEditMulti: any = [];
-    let inputEditMulti = {
-      name: name,
-      position: position,
-      office: office,
-      salary: salary,
-      start_date: start_date,
-      extn: extn,
-      status: status,
-    };
-    _.forEach(data.data.tasks, (task) => {
-      let newTask = { ...task };
-      _.forEach(tasks, (dataTask) => {
-        if (dataTask.id === task.id) {
-          newTask = {
-            id: dataTask.id,
-            name: dataTask.name,
-            position: dataTask.position,
-            office: dataTask.office,
-            extn: dataTask.extn,
-            start_date: dataTask.start_date,
-            salary: dataTask.salary,
-            status: dataTask.status,
-            selected: false,
-            isAction: dataTask.isAction,
-            isEdit: dataTask.isEdit,
-          };
-        }
-      });
-      taskEditMulti.push(newTask);
-    });
-
-    dispatch(editMultiTask({ taskEditMulti: taskEditMulti }));
+    dispatch(editTask({ arrayEditDataTask }));
     dispatch(checkCloseIsEditTaskAll());
     dispatch(
       inputEditTask({
@@ -408,7 +376,7 @@ const ColumnCheck = () => {
               )}
             </div>
 
-            {task.isEdit && lenghtIsEdit === 1 && (
+            {/* {task.isEdit && lenghtIsEdit === 1 && (
               <div className={st(classes.actionClose)}>
                 <button
                   onClick={() => handleCloseTask(task.id)}
@@ -423,7 +391,7 @@ const ColumnCheck = () => {
                   Save
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         ))}
     </div>

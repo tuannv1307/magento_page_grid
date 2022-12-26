@@ -22,6 +22,7 @@ import {
 } from "../ColumnPageType/ColumnPageType";
 import FiltersData from "../FiltersData";
 import { st, classes } from "./Products.st.css";
+import ItemTaskColumn from "../ItemTaskColumn";
 
 const Products = () => {
   const data: Magento_Page = useSelector(

@@ -49,7 +49,7 @@ export type Magento_Page = {
   contentModal: string;
   isCheckedAllByPage: boolean;
 
-  inputEditDataTask: [];
+  arrayEditDataTask: [];
 
   nameEdit: string;
   positionEdit: string;
@@ -189,8 +189,7 @@ export type Actions = {
   editTask: (
     state: Magento_Page,
     action: PayloadAction<{
-      id: number;
-      inputEdit: {};
+      arrayEditDataTask: [];
     }>
   ) => void;
   editMultiTask: (
@@ -223,7 +222,7 @@ export type Actions = {
   filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
   inputEditTask: (state: Magento_Page, action: PayloadAction<any>) => void;
   inputEditMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
-  setInputEditDataTask: (
+  setArrayEditDataTask: (
     state: Magento_Page,
     action: PayloadAction<any>
   ) => void;
@@ -251,7 +250,7 @@ const initialData: Magento_Page = {
   contentModal: "",
   isCheckedAllByPage: false,
 
-  inputEditDataTask: [],
+  arrayEditDataTask: [],
 
   nameEdit: "",
   positionEdit: "",
@@ -553,17 +552,9 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     },
 
     editTask: (state, action) => {
-      let { id, inputEdit } = action.payload;
+      let { arrayEditDataTask } = action.payload;
 
-      state.data.tasks = _.map(state.data.tasks, (task) =>
-        task.id === id
-          ? {
-              ...task,
-              ...inputEdit,
-            }
-          : task
-      );
-      state.data.tasks = _.cloneDeep(state.data.tasks);
+      state.data.tasks = _.cloneDeep(arrayEditDataTask);
       state = _.cloneDeep(state);
     },
 
@@ -634,9 +625,9 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.statusEditMul = statusEditMul;
     },
 
-    setInputEditDataTask: (state, action) => {
+    setArrayEditDataTask: (state, action) => {
       const { arrInputEdit } = action.payload;
-      state.inputEditDataTask = arrInputEdit;
+      state.arrayEditDataTask = arrInputEdit;
     },
   },
   extraReducers: {},
@@ -676,7 +667,7 @@ export const {
   filtersData,
   inputEditTask,
   inputEditMultiTask,
-  setInputEditDataTask,
+  setArrayEditDataTask,
 } = MagentoPageSlice.actions;
 
 export default MagentoPageSlice.reducer;

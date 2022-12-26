@@ -12,6 +12,7 @@ import {
 import ItemTaskColumn from "../ItemTaskColumn";
 import EditMultiDataTask from "../EditMultiDataTask";
 import { st, classes } from "./ColumnPageType.st.css";
+import { useState } from "react";
 
 export type ColumnPageTypeProps = {
   column: {
@@ -239,22 +240,26 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           </span>
 
           {lenghtIsEdit > 1 && <EditMultiDataTask typeColumn={typeColumn} />}
-          {tasks.length > 0 &&
-            _.map(
-              tasks,
-              (task: Tasks) => (
-                // task.selected ? (
-                // <>
-                <ItemTaskColumn
-                  task={task}
-                  typeColumn={typeColumn}
-                  key={task.id}
-                />
-                // </>
-                // ) : (
-              )
-              //)
-            )}
+          <div className={st(classes.content)}>
+            {tasks.length > 0 &&
+              _.map(
+                tasks,
+                (task: Tasks) => (
+                  // task.selected ? (
+                  // <>
+
+                  <ItemTaskColumn
+                    task={task}
+                    typeColumn={typeColumn}
+                    key={task.id}
+                  />
+
+                  // </>
+                  // ) : (
+                )
+                //)
+              )}
+          </div>
         </div>
       )}
     </Draggable>
