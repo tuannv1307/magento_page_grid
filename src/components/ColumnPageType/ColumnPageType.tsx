@@ -123,18 +123,22 @@ export const fiterDataByKeyword = (arr: Tasks[], objFilters: any) => {
     arr = _.slice(arr, _.toNumber(keyIdFrom - 1), _.toNumber(keyIdTo));
   }
 
-  return _.filter(arr, (task) => {
+  return _.filter(arr, (task: Tasks) => {
     return (
+      task.name &&
       task.name.toString().toLowerCase().indexOf(keywordName.toLowerCase()) >
         -1 &&
+      task.office &&
       task.office
         .toString()
         .toLowerCase()
         .indexOf(keywordOffice.toLowerCase()) > -1 &&
+      task.start_date &&
       task.start_date
         .toString()
         .toLowerCase()
         .indexOf(keywordStartDate.toLowerCase()) > -1 &&
+      task.status &&
       task.status
         .toString()
         .toLowerCase()

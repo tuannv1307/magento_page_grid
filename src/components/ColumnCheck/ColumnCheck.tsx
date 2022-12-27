@@ -8,11 +8,12 @@ import {
   checkCloseIsEditTaskAll,
   checkOnPage,
   editTask,
-  inputEditTask,
+  inputEditMultiTask,
   Magento_Page,
   editMultiTask,
-  inputEditMultiTask,
+  editInputMultiTask,
   Tasks,
+  closeEdit,
 } from "../../store/magentoPageGridReducer";
 import {
   columnDataLenght,
@@ -37,14 +38,14 @@ const ColumnCheck = () => {
   const searchData = data.searchData;
   const objFilters: any = data.objFilters;
 
-  const name = data.nameEdit;
-  const position = data.positionEdit;
-  const office = data.officeEdit;
-  const salary = data.salaryEdit;
+  const name = data.nameAllColumn;
+  const position = data.positionAllColumn;
+  const office = data.officeAllColumn;
+  const salary = data.salaryAllColumn;
 
-  const start_date = data.start_dateEdit;
-  const extn = data.extnEdit;
-  const status = data.statusEdit;
+  const start_date = data.start_dateAllColumn;
+  const extn = data.extnAllColumn;
+  const status = data.statusAllColumn;
 
   const nameEditMul = data.nameEditMul;
 
@@ -104,7 +105,7 @@ const ColumnCheck = () => {
     setIsShow(!isShow);
   };
 
-  const handleCheckbox = (id: number, selected: boolean) => {
+  const handleCheckbox = (id?: number, selected?: boolean) => {
     if (id) {
       dispatch(checkboxTask({ id, isSelected: !selected }));
       if (haveIsEdit) {
@@ -124,21 +125,9 @@ const ColumnCheck = () => {
   };
 
   const handleCheckAllOnPage = (type: boolean) => {
-    const selectTask: {
-      id: string | number;
-      name: string;
-      position: string;
-      salary: string;
-      start_date: string;
-      office: string;
-      extn: string;
-      status: string;
-      selected: boolean;
-      isAction: boolean;
-      isEdit: boolean;
-    }[] = [];
+    const selectTask: Tasks[] = [];
     _.forEach(data.data.tasks, (task) => {
-      let newTask = { ...task };
+      let newTask: any = { ...task };
       _.forEach(tasks, (dataTask) => {
         if (dataTask.id === task.id) {
           newTask = {
@@ -180,69 +169,42 @@ const ColumnCheck = () => {
   const handleCloseTask = (id: number) => {
     dispatch(checkIsEdit({ id, isEdit: false }));
   };
-  let arrayEditDataTask = data.arrayEditDataTask;
-  const handleSaveTask = (id: number, task: Tasks) => {
-    // let innputEdit = {
-    //   name: name !== "" ? name : task.name,
-    //   position: position !== "" ? position : task.position,
-    //   office: office !== "" ? office : task.office,
-    //   salary: salary !== "" ? salary : task.salary,
-    //   start_date: start_date !== "" ? start_date.toString() : task.start_date,
-    //   extn: extn !== "" ? extn : task.extn,
-    //   status: status !== "" ? status : task.status,
-    // };
 
-    dispatch(editTask({ arrayEditDataTask }));
-
-    dispatch(checkIsEdit({ id, isEdit: false }));
-    dispatch(
-      inputEditTask({
-        nameEdit: "",
-        positionEdit: "",
-        salaryEdit: "",
-        start_dateEdit: "",
-        officeEdit: "",
-        extnEdit: "",
-        statusEdit: "",
-      })
-    );
-  };
+  let arrTasksEdit = data.arrTasks;
 
   const handleCancel = () => {
     dispatch(checkCloseIsEditTaskAll());
   };
 
   const handleSaveEdits = () => {
-    dispatch(editTask({ arrayEditDataTask }));
-    dispatch(checkCloseIsEditTaskAll());
-    dispatch(
-      inputEditTask({
-        nameEdit: "",
-        positionEdit: "",
-        salaryEdit: "",
-        start_dateEdit: "",
-        officeEdit: "",
-        extnEdit: "",
-        statusEdit: "",
-      })
-    );
-    dispatch(
-      inputEditMultiTask({
-        nameEditMul: "",
-        positionEditMul: "",
-        salaryEditMul: "",
-        start_dateEditMul: "",
-        officeEditMul: "",
-        extnEditMul: "",
-        statusEditMul: "",
-      })
-    );
+    // dispatch(editMultiTask({ arrTasksEdit: arrTasksEdit }));
+    // dispatch(checkCloseIsEditTaskAll());
+    // dispatch(
+    //   editInputMultiTask({
+    //     nameAllColumn: "",
+    //     positionAllColumn: "",
+    //     salaryAllColumn: "",
+    //     start_dateAllColumn: "",
+    //     officeAllColumn: "",
+    //     extnAllColumn: "",
+    //     statusAllColumn: "",
+    //   })
+    // );
+    // dispatch(
+    //   inputEditMultiTask({
+    //     nameEditMul: "",
+    //     positionEditMul: "",
+    //     salaryEditMul: "",
+    //     start_dateEditMul: "",
+    //     officeEditMul: "",
+    //     extnEditMul: "",
+    //     statusEditMul: "",
+    //   })
+    // );
   };
+
   const checkboxPage = _.every(tasks, (task) => task.selected === true);
-  console.log(
-    "🚀 ~ file: ColumnCheck.tsx:250 ~ ColumnCheck ~ checkboxPage",
-    checkboxPage
-  );
+
   return (
     <div className={st(classes.root)}>
       {lenghtIsEdit > 1 && (

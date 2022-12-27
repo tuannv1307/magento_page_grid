@@ -1,7 +1,7 @@
 .root {
     background-color: #fff;
     color: #303030;
-    max-height: 44px;
+    height: 44px;
 
 }
 
@@ -17,27 +17,79 @@
 
 
 .taskItem {
-    padding: 1rem 1rem;
+    padding: 15px 20px;
     border-left: 0.1rem dashed #d6d6d6;
     border-right: 0.1rem dashed #d6d6d6;
+    position: relative;
 }
+
 /* .editTask {
     position: relative;
 } */
 .actionClose {
-  position: absolute;
-  display: flex;
-  left: 100px;
-  /* top: calc(100% - 3px); */
-  top: 800px;
-  z-index: 99;
-  box-shadow: 0 5px 5px rgb(0 0 0 / 25%);
-  padding: 5px;
-  padding: 15px 25px;
-  background-color: #fff;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  display: flex;
-  gap: 10px;
-  cursor: default;
+    position: absolute;
+    display: flex;
+    left: 100px;
+
+    top: 43px;
+    z-index: 99;
+    box-shadow: 2px 3px 5px rgb(0 0 0 / 10%);
+    padding: 5px;
+    padding: 15px 25px;
+    background-color: #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    display: flex;
+    gap: 10px;
+    cursor: default;
+}
+
+
+.editTask {
+    position: absolute;
+    left: 14%;
+    width: 1471px;
+}
+
+
+.itemTask {
+    display: flex;
+    width: 100%;
+
+}
+
+.itemTask > input {
+    max-height: 44px;
+    width: 100%;
+    border: 1px solid #adadad;
+    padding: 6px 10px;
+    position: absolute;
+    top: 7px;
+    left: 0;
+}
+
+.itemTask > select {
+    max-height: 44px;
+    width: 100%;
+    border: 1px solid #adadad;
+    padding: 6px 10px;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    background-color: transparent;
+}
+
+.itemTask > select {
+    outline: 0;
+}
+
+.itemTask > input:hover {
+    border-color: #878787;
+}
+
+.itemTask > input:focus {
+    border-color: #007bdb;
+    box-shadow: none;
+    outline: 0;
+
 }

@@ -8,8 +8,8 @@ import {
   checkboxTask,
   checkIsEdit,
   DeleteTask,
+  editInputMultiTask,
   inputEditMultiTask,
-  inputEditTask,
   Magento_Page,
   setIsAction,
   Tasks,
@@ -86,19 +86,19 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
 
   const [disableBtn, setDisableBtn] = useState(true);
 
-  const nameEdit = data.nameEdit;
+  const nameAllColumn = data.nameAllColumn;
 
-  const positionEdit = data.positionEdit;
+  const positionAllColumn = data.positionAllColumn;
 
-  const salaryEdit = data.salaryEdit;
+  const salaryAllColumn = data.salaryAllColumn;
 
-  const start_dateEdit = data.start_dateEdit;
+  const start_dateAllColumn = data.start_dateAllColumn;
 
-  const officeEdit = data.officeEdit;
+  const officeAllColumn = data.officeAllColumn;
 
-  const extnEdit = data.extnEdit;
+  const extnAllColumn = data.extnAllColumn;
 
-  const statusEdit = data.statusEdit;
+  const statusAllColumn = data.statusAllColumn;
 
   const nameEditMul = data.nameEditMul;
 
@@ -129,7 +129,7 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   }, [
     nameEditMul,
     positionEditMul,
-    salaryEditMul,
+    salaryAllColumn,
     start_dateEditMul,
     officeEditMul,
     extnEditMul,
@@ -139,20 +139,23 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   const handleApply = () => {
     if (lenghtIsEdit > 1) {
       dispatch(
-        inputEditTask({
-          nameEdit: nameEditMul !== "" ? nameEditMul : nameEdit,
-          positionEdit: positionEditMul !== "" ? positionEditMul : positionEdit,
-          salaryEdit: salaryEditMul !== "" ? salaryEditMul : salaryEdit,
-          start_dateEdit:
+        editInputMultiTask({
+          nameAllColumn: nameEditMul !== "" ? nameEditMul : nameAllColumn,
+          positionAllColumn:
+            positionEditMul !== "" ? positionEditMul : positionAllColumn,
+          salaryAllColumn:
+            salaryEditMul !== "" ? salaryEditMul : salaryAllColumn,
+          start_dateAllColumn:
             moment(start_dateEditMul).format("YYYY/MM/DD") !== "Invalid date"
               ? moment(start_dateEditMul).format("YYYY/MM/DD")
-              : start_dateEdit,
-          officeEdit: officeEditMul !== "" ? officeEditMul : officeEdit,
-          extnEdit: extnEditMul !== "" ? extnEditMul : extnEdit,
-          statusEdit: statusEditMul !== "" ? statusEditMul : statusEdit,
+              : start_dateAllColumn,
+          officeAllColumn:
+            officeEditMul !== "" ? officeEditMul : officeAllColumn,
+          extnAllColumn: extnEditMul !== "" ? extnEditMul : extnAllColumn,
+          statusAllColumn:
+            statusEditMul !== "" ? statusEditMul : statusAllColumn,
         })
       );
-
       dispatch(
         inputEditMultiTask({
           nameEditMul: "",
@@ -166,9 +169,7 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
       );
     }
   };
-  const lenghtIsAction = _.size(
-    _.filter(tasks, (task) => task.isAction === true)
-  );
+
   const handleShow = (id: number) => {
     if (id) {
       // if (lenghtIsAction > 0) {

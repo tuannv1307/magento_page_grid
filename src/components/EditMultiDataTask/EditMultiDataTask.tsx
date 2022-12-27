@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Magento_Page,
+  editInputMultiTask,
   inputEditMultiTask,
 } from "../../store/magentoPageGridReducer";
 import DatePicker from "react-datepicker";
@@ -33,19 +34,19 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
 
   const dispatch = useDispatch();
 
-  const nameEdit = data.nameEdit;
+  const nameAllColumn = data.nameAllColumn;
 
-  const positionEdit = data.positionEdit;
+  const positionAllColumn = data.positionAllColumn;
 
-  const salaryEdit = data.salaryEdit;
+  const salaryAllColumn = data.salaryAllColumn;
 
-  const start_dateEdit = data.start_dateEdit;
+  const start_dateAllColumn = data.start_dateAllColumn;
 
-  const officeEdit = data.officeEdit;
+  const officeAllColumn = data.officeAllColumn;
 
-  const extnEdit = data.extnEdit;
+  const extnAllColumn = data.extnAllColumn;
 
-  const statusEdit = data.statusEdit;
+  const statusAllColumn = data.statusAllColumn;
 
   const nameEditMul = data.nameEditMul;
 
@@ -84,13 +85,13 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
 
   useEffect(() => {
     if (
-      nameEdit === nameEditMul ||
-      positionEdit === positionEditMul ||
-      salaryEdit === salaryEditMul ||
-      officeEdit === officeEditMul ||
-      extnEdit === extnEditMul ||
-      start_dateEdit === start_dateEditMul ||
-      statusEdit === statusEditMul
+      nameAllColumn === nameEditMul ||
+      positionAllColumn === positionEditMul ||
+      salaryAllColumn === salaryEditMul ||
+      officeAllColumn === officeEditMul ||
+      extnAllColumn === extnEditMul ||
+      start_dateAllColumn === start_dateEditMul ||
+      statusAllColumn === statusEditMul
     ) {
       setInputName("");
       setInputPosition("");
@@ -101,41 +102,13 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
       setInputStatus("");
     }
   }, [
-    nameEdit,
-    positionEdit,
-    salaryEdit,
-    officeEdit,
-    extnEdit,
-    start_dateEdit,
-    statusEdit,
-  ]);
-
-  useEffect(() => {
-    if (
-      inputName === "" ||
-      inputPosition === "" ||
-      inputOffice === "" ||
-      inputExtn === "" ||
-      inputSalary === "" ||
-      inputStartDate === "" ||
-      inputStatus === ""
-    ) {
-      setInputName("");
-      setInputPosition("");
-      setInputExtn("");
-      setInputSalary("");
-      setInputOffice("");
-      setInputStartDate("");
-      setInputStatus("");
-    }
-  }, [
-    nameEdit,
-    positionEdit,
-    salaryEdit,
-    officeEdit,
-    extnEdit,
-    start_dateEdit,
-    statusEdit,
+    nameAllColumn,
+    positionAllColumn,
+    salaryAllColumn,
+    officeAllColumn,
+    extnAllColumn,
+    start_dateAllColumn,
+    statusAllColumn,
   ]);
 
   return (
