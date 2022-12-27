@@ -87,8 +87,6 @@ const EditDataTask = ({ task }: EditDataTaskProps) => {
   const arrayEditDataTask = data.arrayEditDataTask;
   const arrTasks = data.arrTasks;
 
-  console.log(arrayEditDataTask);
-
   // console.log(arrayEditDataTask, arrTasks);
 
   // useEffect(() => {

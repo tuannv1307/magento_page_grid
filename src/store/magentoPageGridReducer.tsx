@@ -1,5 +1,6 @@
 import { createSlice, current, type PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
+import type { Actions } from "./actions";
 
 export type Tasks = {
   id?: number;
@@ -60,171 +61,6 @@ export type Magento_Page = {
   isEditTask: boolean;
 
   currentEditTaks: Tasks[];
-};
-
-export type Actions = {
-  getDataColumns: (state: Magento_Page, action: PayloadAction<{}>) => void;
-
-  getPrevDataColumns: (state: Magento_Page, action: PayloadAction<{}>) => void;
-
-  sortColumnsOrder: (
-    state: Magento_Page,
-    action: PayloadAction<string[]>
-  ) => void;
-
-  changeViewLengthData: (
-    state: Magento_Page,
-    action: PayloadAction<number>
-  ) => void;
-
-  setCurrentPage: (state: Magento_Page, action: PayloadAction<number>) => void;
-
-  setBtnPrevAndNext: (
-    state: Magento_Page,
-    action: PayloadAction<{ disabledPrev: boolean; disabledNext: boolean }>
-  ) => void;
-
-  setDisplayColumn: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: string }>
-  ) => void;
-
-  setDisableSelectColumn: (
-    state: Magento_Page,
-    action: PayloadAction<boolean>
-  ) => void;
-
-  searchDataByInput: (
-    state: Magento_Page,
-    action: PayloadAction<string>
-  ) => void;
-
-  resetColumns: (state: Magento_Page) => void;
-
-  setIsAction: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: number }>
-  ) => void;
-
-  DeleteTask: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: number }>
-  ) => void;
-
-  checkboxTask: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: number; isSelected: boolean }>
-  ) => void;
-
-  checkboxOnlyTask: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: number }>
-  ) => void;
-
-  checkboxOnlyAction: (
-    state: Magento_Page,
-    action: PayloadAction<{ id: number }>
-  ) => void;
-
-  checkboxTaskAll: (
-    state: Magento_Page,
-    action: PayloadAction<{ checkedAll: boolean }>
-  ) => void;
-
-  checkCloseIsEditTaskAll: (state: Magento_Page) => void;
-
-  checkboxTaskAllBypage: (
-    state: Magento_Page,
-    action: PayloadAction<{ isCheckedAllByPage: boolean }>
-  ) => void;
-
-  sortDesc: (
-    state: Magento_Page,
-    action: PayloadAction<{ nameSort: string }>
-  ) => void;
-
-  sortAsc: (
-    state: Magento_Page,
-    action: PayloadAction<{ nameSort: string }>
-  ) => void;
-
-  changeIsSort: (
-    state: Magento_Page,
-    action: PayloadAction<{ isSort: boolean }>
-  ) => void;
-
-  changeName: (
-    state: Magento_Page,
-    action: PayloadAction<{ nameSort: string }>
-  ) => void;
-
-  setShowModal: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      isShowModal: boolean;
-      isItemTaskSelectd: boolean;
-      titleModal: string;
-      contentModal: string;
-    }>
-  ) => void;
-
-  clearSelected: (state: Magento_Page) => void;
-
-  changeStatusTask: (
-    state: Magento_Page,
-    action: PayloadAction<{ nameStatus: string }>
-  ) => void;
-  checkIsEdit: (
-    state: Magento_Page,
-    action: PayloadAction<{ id?: number; isEdit?: boolean }>
-  ) => void;
-
-  editTask: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      arrayEditDataTask: [];
-    }>
-  ) => void;
-  editMultiTask: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      arrTasksEdit: [];
-    }>
-  ) => void;
-
-  openEditTask: (state: Magento_Page) => void;
-
-  checkOnPage: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      tasks: Tasks[];
-    }>
-  ) => void;
-  filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
-
-  inputEditMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
-
-  editInputMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
-
-  setArrayEditDataTask: (
-    state: Magento_Page,
-    action: PayloadAction<any>
-  ) => void;
-
-  closeEdit: (
-    state: Magento_Page,
-    action: PayloadAction<{ isEditTask: boolean }>
-  ) => void;
-
-  changeTask: (
-    state: Magento_Page,
-    action: PayloadAction<{ id?: number; keyName?: string; value?: string }>
-  ) => void;
-
-  saveChange: (
-    state: Magento_Page,
-    action: PayloadAction<{ id?: number; keyName?: string; value?: string }>
-  ) => void;
 };
 
 const initialData: Magento_Page = {
@@ -336,7 +172,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.valueChange = _.cloneDeep(state.valueChange);
       state.currentPage = 1;
       state.typeArr = "DATA_SET_LENGTH";
-      state = _.cloneDeep(state);
 
       localStorage.setItem(
         "MAGENTO_PAGE_VALUE",
@@ -349,8 +184,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
       state.currentPage = currentPage;
       state.typeArr = "DATA_SET_PAGINATE";
-
-      state = _.cloneDeep(state);
     },
 
     setBtnPrevAndNext: (state, action) => {
@@ -359,7 +192,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       } = action;
       state.disabledPrev = disabledPrev;
       state.disabledNext = disabledNext;
-      state = _.cloneDeep(state);
     },
 
     setDisplayColumn: (state, action) => {
@@ -372,27 +204,23 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.columns = _.cloneDeep(state.data.columns);
 
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
-      state = _.cloneDeep(state);
     },
 
     setDisableSelectColumn: (state, action) => {
       let disableSelect = action.payload;
       state.disableSelect = disableSelect;
-      state = _.cloneDeep(state);
     },
 
     searchDataByInput: (state, action) => {
       let searchData = action.payload;
       state.searchData = searchData;
       state.currentPage = 1;
-      state = _.cloneDeep(state);
     },
 
     resetColumns: (state) => {
       state.data.columns = state.prevDataColumns;
       state.data.columns = _.cloneDeep(state.data.columns);
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
-      state = _.cloneDeep(state);
     },
 
     setIsAction: (state, action) => {
@@ -402,7 +230,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         task.id === id ? { ...task, isAction: !task.isAction } : task
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     DeleteTask: (state, action) => {
@@ -410,7 +237,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
       state.data.tasks = _.filter(state.data.tasks, (task) => task.id !== id);
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkboxTask: (state, action) => {
@@ -419,8 +245,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id ? { ...task, selected: isSelected } : task
       );
-      state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkboxOnlyTask: (state, action) => {
@@ -432,7 +256,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
           : { ...task, selected: false }
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkboxOnlyAction: (state, action) => {
@@ -444,7 +267,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
           : { ...task, isAction: false }
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkboxTaskAll: (state, action) => {
@@ -454,23 +276,19 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         selected: checkedAll,
       }));
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkCloseIsEditTaskAll: (state) => {
       state.data.tasks = _.map(state.data.tasks, (task) => ({
         ...task,
         isEdit: false,
-        //   selected: false,
       }));
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkboxTaskAllBypage: (state, action) => {
       let { isCheckedAllByPage } = action.payload;
       state.isCheckedAllByPage = isCheckedAllByPage;
-      state = _.cloneDeep(state);
     },
 
     sortDesc: (state, action) => {
@@ -481,7 +299,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       sort = _.reverse(sort);
 
       state.data.tasks = _.cloneDeep(sort);
-      state = _.cloneDeep(state);
     },
 
     sortAsc: (state, action) => {
@@ -492,7 +309,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       const sort = _.sortBy(state.data.tasks, [nameSort]);
 
       state.data.tasks = _.cloneDeep(sort);
-      state = _.cloneDeep(state);
     },
 
     changeIsSort: (state, action) => {
@@ -500,7 +316,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         payload: { isSort },
       } = action;
       state.isSort = isSort;
-      state = _.cloneDeep(state);
     },
 
     changeName: (state, action) => {
@@ -509,7 +324,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       } = action;
       state.isSort = true;
       state.sortName = nameSort;
-      state = _.cloneDeep(state);
     },
 
     setShowModal: (state, action) => {
@@ -520,7 +334,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.titleModal = titleModal;
       state.contentModal = contentModal;
       state.isShowModal = isShowModal;
-      state = _.cloneDeep(state);
     },
 
     clearSelected: (state) => {
@@ -529,7 +342,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         (task) => task.selected === false
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     changeStatusTask: (state, action) => {
@@ -539,11 +351,11 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         task.selected === true ? { ...task, status: nameStatus } : task
       );
       state.data.tasks = _.cloneDeep(state.data.tasks);
-      state = _.cloneDeep(state);
     },
 
     checkIsEdit: (state, action) => {
       let { id, isEdit } = action.payload;
+
       if (!_.isUndefined(id)) {
         const currentEdit = _.find(
           _.cloneDeep(state.data.tasks),
@@ -551,28 +363,28 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         );
 
         state.data.tasks = _.map(state.data.tasks, (task) =>
-          task.id === id ? { ...task, isEdit: isEdit } : task
+          task.id === id ? { ...task, isEdit: isEdit, selected: true } : task
         );
+
         if (isEdit && currentEdit) {
-          state.currentEditTaks = [currentEdit];
+          let newEditTasks = _.cloneDeep(state.currentEditTaks);
+          newEditTasks.push(currentEdit);
+
+          state.currentEditTaks = newEditTasks;
         } else state.currentEditTaks = [];
       }
-
-      // state.data.tasks = _.cloneDeep(state.data.tasks);
-      // state = _.cloneDeep(state);
     },
 
     editTask: (state, action) => {
-      let { arrayEditDataTask } = action.payload;
-
-      state.data.tasks = _.cloneDeep(arrayEditDataTask);
-      state = _.cloneDeep(state);
+      // let { arrayEditDataTask } = action.payload;
+      // state.data.tasks = _.cloneDeep(arrayEditDataTask);
+      //
     },
 
     editMultiTask: (state, action) => {
-      const { arrTasksEdit } = action.payload;
-      state.data.tasks = arrTasksEdit;
-      state = _.cloneDeep(state);
+      // const { arrTasksEdit } = action.payload;
+      // state.data.tasks = arrTasksEdit;
+      //
     },
 
     openEditTask: (state) => {
@@ -638,11 +450,10 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
     },
 
     setArrayEditDataTask: (state, action) => {
-      const { arrInputEdit, arrTasks } = action.payload;
-      // state.arrayEditDataTask = arrInputEdit;
-
-      state.arrayEditDataTask = _.cloneDeep(arrInputEdit);
-      state.arrTasks = _.cloneDeep(arrTasks);
+      // const { arrInputEdit, arrTasks } = action.payload;
+      // // state.arrayEditDataTask = arrInputEdit;
+      // state.arrayEditDataTask = _.cloneDeep(arrInputEdit);
+      // state.arrTasks = _.cloneDeep(arrTasks);
     },
 
     closeEdit: (state, action) => {
@@ -657,53 +468,50 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
         id: action.payload.id,
       });
 
-      // console.log(
-      //   "abc",
-      //   _.find(state.currentEditTaks, { id: action.payload.id })
-      // );
       if (_.find(state.currentEditTaks, { id: action.payload.id })) {
         currentEdit = _.find(state.currentEditTaks, { id: action.payload.id });
       }
-      // let arr = _.cloneDeep(state.data.tasks);
-      // const currentEdit: any = _.find(_.cloneDeep(state.data.tasks), {
-      //   id: action.payload.id,
-      // });
 
       let newEditTasks = _.cloneDeep(state.currentEditTaks);
-      // let ass: Tasks = { ...currentEdit };
-      // if (
-      //   !_.isUndefined(currentEdit) &&
-      //   !_.isUndefined(newEditTasks) &&
-      //   !_.isUndefined(keyname) &&
-      //   !_.isUndefined(action.payload.value)
-      // ) {
-      currentEdit[`${keyname}`] = action.payload.value;
-      // ass = { ...newEditTasks, newEditTasks[keyname]: action.payload.value };
-      // }
 
-      // currentEdit.name = action.payload.value || "";
+      currentEdit[`${keyname}`] = action.payload.value;
+
       newEditTasks = _.filter(
         newEditTasks,
         (task) => task.id !== action.payload.id
       );
-      currentEdit && newEditTasks.push(currentEdit);
+      newEditTasks.push(currentEdit);
 
       state.currentEditTaks = newEditTasks;
     },
 
-    saveChange: (state, action) => {
+    saveChange: (state) => {
       if (_.size(state.currentEditTaks) > 1) {
-        //
+        let newTasks: Tasks[] = [];
+        _.forEach(_.cloneDeep(state.data.tasks), (task) => {
+          let newTask = { ...task };
+          _.forEach(_.cloneDeep(state.currentEditTaks), (currentEdit) => {
+            if (task.id === currentEdit.id) {
+              newTask = {
+                ...currentEdit,
+              };
+            }
+          });
+          newTasks.push(newTask);
+        });
+
+        state.data.tasks = newTasks;
+        console.log(newTasks);
       } else {
+        const newObj = _.cloneDeep(state.currentEditTaks[0]);
         const newTask = _.map(_.cloneDeep(state.data.tasks), (task) =>
-          task.id === action.payload.id
+          task.id === newObj.id
             ? { ..._.cloneDeep(state.currentEditTaks[0]), isEdit: false }
             : task
         );
         state.data.tasks = newTask;
       }
       state.currentEditTaks = [];
-      console.log("aaaa1");
     },
   },
   extraReducers: {},

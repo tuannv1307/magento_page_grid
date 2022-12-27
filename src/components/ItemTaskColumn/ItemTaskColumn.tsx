@@ -1,11 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import EditDataTask from "../EditDataTask";
 import {
   Magento_Page,
   Tasks,
   checkIsEdit,
   checkboxOnlyTask,
-  checkboxTask,
   changeTask,
   saveChange,
 } from "../../store/magentoPageGridReducer";
@@ -27,10 +26,12 @@ type ItemTaskColumnProps = {
 
 const EditControlInput = (props: {
   id?: number;
-  keyName?: string;
+  keyName: string;
   value?: string;
+  disable: boolean;
+  columnsAll: string;
 }) => {
-  const { id, keyName } = props;
+  const { id, keyName, disable, columnsAll } = props;
   const dispatch = useDispatch();
   const currentEditTaks: Magento_Page = useSelector(
     (state: any) => state.magentopage.currentEditTaks
@@ -38,29 +39,48 @@ const EditControlInput = (props: {
 
   const currentTask: any = _.find(
     currentEditTaks,
-    (task) => _.toNumber(task?.id) === id
+    (task: Tasks) => _.toNumber(task?.id) === id
   );
 
   const handleChange = (e?: any) => {
-    id && e && dispatch(changeTask({ id, keyName, value: e.target.value }));
-    // setCurrentValue(e.target.value);
+    id &&
+      e &&
+      dispatch(
+        changeTask({
+          id,
+          keyName,
+          value: e.target.value,
+        })
+      );
   };
+  let itemTask;
+  if (!_.isUndefined(currentTask)) {
+    // currentTask[`${keyName}`] =
+    //   columnsAll !== "" ? columnsAll : currentTask[`${keyName}`];
+    itemTask = currentTask[`${keyName}`];
+    //  abc = columnsAll !== "" ? columnsAll : currentTask[`${keyName}`];
+  }
+
+  console.log(itemTask);
 
   return (
     <input
       type="text"
-      value={!_.isUndefined(currentTask) && currentTask.keyName}
+      value={itemTask}
       onChange={handleChange}
+      disabled={disable}
     />
   );
 };
 
 const EditControlSelectPo = (props: {
   id?: number;
-  keyName?: string;
+  keyName: string;
   value?: string;
+  disable: boolean;
+  columnsAll: string;
 }) => {
-  const { id, keyName, value } = props;
+  const { id, keyName, disable, columnsAll } = props;
   const dispatch = useDispatch();
   const currentEditTaks: Magento_Page = useSelector(
     (state: any) => state.magentopage.currentEditTaks
@@ -68,17 +88,26 @@ const EditControlSelectPo = (props: {
 
   const currentTask: any = _.find(
     currentEditTaks,
-    (task) => _.toNumber(task?.id) === id
+    (task: Tasks) => _.toNumber(task?.id) === id
   );
 
   const handleChange = (e?: any) => {
-    id && e && dispatch(changeTask({ id, keyName, value: e.target.value }));
+    id &&
+      e &&
+      dispatch(
+        changeTask({
+          id,
+          keyName,
+          value: e.target.value,
+        })
+      );
     // setCurrentValue(e.target.value);
   };
   return (
     <select
-      value={!_.isUndefined(currentTask) && currentTask.keyName}
+      value={!_.isUndefined(currentTask) && currentTask[`${keyName}`]}
       onChange={handleChange}
+      disabled={disable}
     >
       <option value="Tokyo">Tokyo</option>
       <option value="Sydney">Sydney</option>
@@ -93,10 +122,12 @@ const EditControlSelectPo = (props: {
 
 const EditControlSelectSta = (props: {
   id?: number;
-  keyName?: string;
+  keyName: string;
   value?: string;
+  disable: boolean;
+  columnsAll: string;
 }) => {
-  const { id, keyName, value } = props;
+  const { id, keyName, disable, columnsAll } = props;
   const dispatch = useDispatch();
   const currentEditTaks: Magento_Page = useSelector(
     (state: any) => state.magentopage.currentEditTaks
@@ -104,17 +135,26 @@ const EditControlSelectSta = (props: {
 
   const currentTask: any = _.find(
     currentEditTaks,
-    (task) => _.toNumber(task?.id) === id
+    (task: Tasks) => _.toNumber(task?.id) === id
   );
 
   const handleChange = (e?: any) => {
-    id && e && dispatch(changeTask({ id, keyName, value: e.target.value }));
-    // setCurrentValue(e.target.value);
+    id &&
+      e &&
+      dispatch(
+        changeTask({
+          id,
+          keyName,
+          value: e.target.value,
+        })
+      );
   };
+
   return (
     <select
-      value={!_.isUndefined(currentTask) && currentTask.keyName}
+      value={!_.isUndefined(currentTask) && currentTask[`${keyName}`]}
       onChange={handleChange}
+      disabled={disable}
     >
       <option value="enable">Enable</option>
       <option value="disable">Disable</option>
@@ -124,20 +164,44 @@ const EditControlSelectSta = (props: {
 
 const EditControlDate = (props: {
   id?: number;
-  keyName?: string;
+  keyName: string;
   value?: string;
+  disable: boolean;
+  columnsAll: string;
 }) => {
-  const { id, keyName, value } = props;
+  const { id, keyName, disable, columnsAll } = props;
   const dispatch = useDispatch();
-  const handleChange = (e?: any) => {
-    id && dispatch(changeTask({ id, keyName, value }));
+  const currentEditTaks: Magento_Page = useSelector(
+    (state: any) => state.magentopage.currentEditTaks
+  );
+
+  const currentTask: any = _.find(
+    currentEditTaks,
+    (task: Tasks) => task?.id === id
+  );
+
+  const handleChange = (valueDate?: any) => {
+    id &&
+      dispatch(
+        changeTask({
+          id,
+          keyName,
+          value: moment(valueDate).format("YYYY/MM/DD"),
+        })
+      );
   };
+
   return (
     <DatePicker
-      selected={moment(value).toDate()}
+      selected={
+        !_.isUndefined(currentTask)
+          ? moment(currentTask[`${keyName}`]).toDate()
+          : new Date()
+      }
       showPopperArrow={false}
       dateFormat="yyyy/MM/dd"
       onChange={handleChange}
+      disabled={disable}
     />
   );
 };
@@ -146,7 +210,9 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
+  // const currentEditTaks: Magento_Page = useSelector(
+  //   (state: any) => state.magentopage.currentEditTaks
+  // );
   let tasks: any = data.data.tasks;
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 
@@ -160,14 +226,106 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
 
-  const handleClickEdit = (id?: number, isEdit?: boolean) => {
+  const nameAllColumn = data.nameAllColumn;
+
+  const positionAllColumn = data.positionAllColumn;
+
+  const salaryAllColumn = data.salaryAllColumn;
+
+  const start_dateAllColumn = data.start_dateAllColumn;
+
+  const officeAllColumn = data.officeAllColumn;
+
+  const extnAllColumn = data.extnAllColumn;
+
+  const statusAllColumn = data.statusAllColumn;
+
+  const nameEditMul = data.nameEditMul;
+
+  const positionEditMul = data.positionEditMul;
+
+  const salaryEditMul = data.salaryEditMul;
+
+  const start_dateEditMul = data.start_dateEditMul;
+
+  const officeEditMul = data.officeEditMul;
+
+  const extnEditMul = data.extnEditMul;
+
+  const statusEditMul = data.statusEditMul;
+
+  const currentEditTaks = data.currentEditTaks;
+  // console.log(currentEditTaks);
+
+  const [disableName, setDisableName] = useState(false);
+  const [disablePosition, setDisablePosition] = useState(false);
+  const [disableOffice, setDisableOffice] = useState(false);
+  const [disableSalary, setDisableSalary] = useState(false);
+  const [disableStart_date, setDisableStart_date] = useState(false);
+  const [disableExtn, setDisableExtn] = useState(false);
+  const [disableStatus, setDisableStatus] = useState(false);
+
+  useEffect(() => {
+    if (_.size(currentEditTaks) > 1) {
+      if (nameEditMul !== "") {
+        setDisableName(true);
+      } else setDisableName(false);
+      if (positionEditMul !== "") {
+        setDisablePosition(true);
+      } else setDisablePosition(false);
+      if (salaryEditMul !== "") {
+        setDisableOffice(true);
+      } else setDisableOffice(false);
+      if (start_dateEditMul !== "") {
+        setDisableSalary(true);
+      } else setDisableSalary(false);
+      if (officeEditMul !== "") {
+        setDisableStart_date(true);
+      } else setDisableStart_date(false);
+      if (extnEditMul !== "") {
+        setDisableExtn(true);
+      } else setDisableExtn(false);
+      if (statusEditMul !== "") {
+        setDisableStatus(true);
+      } else setDisableStatus(false);
+    }
+  }, [
+    nameEditMul,
+    positionEditMul,
+    officeEditMul,
+    salaryEditMul,
+    start_dateEditMul,
+    extnEditMul,
+    statusEditMul,
+  ]);
+
+  // useEffect(() => {
+  //   if (nameAllColumn !== "") setInputName(nameAllColumn);
+  //   if (positionAllColumn !== "") setInputPosition(positionAllColumn);
+  //   if (officeAllColumn !== "") setInputOffice(officeAllColumn);
+  //   if (salaryAllColumn !== "") setInputSalary(salaryAllColumn);
+  //   if (start_dateAllColumn !== "")
+  //     setInputStartDate(moment(start_dateAllColumn).toDate());
+  //   if (extnAllColumn !== "") setInputExtn(extnAllColumn);
+  //   if (statusAllColumn !== "") setInputStatus(statusAllColumn);
+  // }, [
+  //   nameAllColumn,
+  //   positionAllColumn,
+  //   officeAllColumn,
+  //   salaryAllColumn,
+  //   start_dateAllColumn,
+  //   extnAllColumn,
+  //   statusAllColumn,
+  // ]);
+
+  const handleClickEdit = (id?: number) => {
     if (id) {
-      if (lenghtIsEdit === 1) {
-        dispatch(checkIsEdit({ id, isEdit: true }));
-        dispatch(checkboxTask({ id, isSelected: !isEdit }));
-        dispatch(checkboxOnlyTask({ id }));
+      if (lenghtIsEdit > 0) {
+        //dispatch(checkIsEdit({ id, isEdit: false }));
       } else {
-        dispatch(checkIsEdit({ id, isEdit: false }));
+        dispatch(checkIsEdit({ id, isEdit: true }));
+        //   dispatch(checkboxTask({ id, isSelected: !isEdit }));
+        dispatch(checkboxOnlyTask({ id }));
       }
     }
   };
@@ -176,13 +334,14 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
     dispatch(checkIsEdit({ id, isEdit: false }));
   };
 
-  const handleSaveTask = (id?: number) => {
+  const handleSaveTask = () => {
     // console.log("dta");
-    dispatch(saveChange({ id }));
+    dispatch(saveChange());
     // dispatch(editTask({ arrayEditDataTask }));
     // setIsEditTask(false);
     // dispatch(checkIsEdit({ id, isEdit: false }));
   };
+  // console.log(data);
 
   return (
     <div className={st(classes.root)}>
@@ -204,10 +363,7 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
               >
                 Cancel
               </button>
-              <button
-                onClick={() => handleSaveTask(task.id)}
-                className={st(classes.save)}
-              >
+              <button onClick={handleSaveTask} className={st(classes.save)}>
                 Save
               </button>
             </div>
@@ -218,7 +374,7 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
       )}
       <div
         className={st(classes.taskItem)}
-        onDoubleClick={() => handleClickEdit(task.id, task.isEdit)}
+        onDoubleClick={() => handleClickEdit(task.id)}
       >
         <>{typeColumn === "id" && <span>{task.id}</span>}</>
         <>
@@ -230,6 +386,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.name}
+                  disable={disableName}
+                  columnsAll={nameAllColumn}
                 />
               )}
             </span>
@@ -244,6 +402,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.position}
+                  disable={disablePosition}
+                  columnsAll={positionAllColumn}
                 />
               )}
             </span>
@@ -258,6 +418,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.office}
+                  disable={disableOffice}
+                  columnsAll={officeAllColumn}
                 />
               )}
             </span>
@@ -272,6 +434,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.salary}
+                  disable={disableSalary}
+                  columnsAll={salaryAllColumn}
                 />
               )}
             </span>
@@ -287,6 +451,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.start_date}
+                  disable={disableStart_date}
+                  columnsAll={start_dateAllColumn}
                 />
               )}
             </span>
@@ -301,6 +467,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.extn}
+                  disable={disableExtn}
+                  columnsAll={extnAllColumn}
                 />
               )}
             </span>
@@ -315,6 +483,8 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
                   id={task.id}
                   keyName={typeColumn}
                   value={task.status}
+                  disable={disableStatus}
+                  columnsAll={statusAllColumn}
                 />
               )}
             </span>

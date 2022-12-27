@@ -53,7 +53,7 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
     tasks = searchFilters(tasks, searchData);
   }
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id?: number) => {
     if (id) {
       dispatch(DeleteTask({ id }));
     }
@@ -75,7 +75,7 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
 
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 
-  const handleEditTask = (id: number) => {
+  const handleEditTask = (id?: number) => {
     dispatch(checkIsEdit({ id, isEdit: true }));
     setTimeout(() => {
       dispatch(setIsAction({ id }));
@@ -136,8 +136,10 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
     statusEditMul,
   ]);
 
+  const currentEditTaks = data.currentEditTaks;
+
   const handleApply = () => {
-    if (lenghtIsEdit > 1) {
+    if (_.size(currentEditTaks) > 1) {
       dispatch(
         editInputMultiTask({
           nameAllColumn: nameEditMul !== "" ? nameEditMul : nameAllColumn,
@@ -167,10 +169,23 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
           statusEditMul: "",
         })
       );
+      setTimeout(() => {
+        dispatch(
+          editInputMultiTask({
+            nameAllColumn: "",
+            positionAllColumn: "",
+            salaryAllColumn: "",
+            start_dateAllColumn: "",
+            officeAllColumn: "",
+            extnAllColumn: "",
+            statusAllColumn: "",
+          })
+        );
+      }, 100);
     }
   };
 
-  const handleShow = (id: number) => {
+  const handleShow = (id?: number) => {
     if (id) {
       // if (lenghtIsAction > 0) {
       //   dispatch(setIsAction({ id }));

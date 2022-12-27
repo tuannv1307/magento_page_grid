@@ -7,13 +7,9 @@ import {
   checkIsEdit,
   checkCloseIsEditTaskAll,
   checkOnPage,
-  editTask,
-  inputEditMultiTask,
   Magento_Page,
-  editMultiTask,
-  editInputMultiTask,
   Tasks,
-  closeEdit,
+  saveChange,
 } from "../../store/magentoPageGridReducer";
 import {
   columnDataLenght,
@@ -170,37 +166,13 @@ const ColumnCheck = () => {
     dispatch(checkIsEdit({ id, isEdit: false }));
   };
 
-  let arrTasksEdit = data.arrTasks;
-
   const handleCancel = () => {
     dispatch(checkCloseIsEditTaskAll());
   };
 
   const handleSaveEdits = () => {
-    // dispatch(editMultiTask({ arrTasksEdit: arrTasksEdit }));
-    // dispatch(checkCloseIsEditTaskAll());
-    // dispatch(
-    //   editInputMultiTask({
-    //     nameAllColumn: "",
-    //     positionAllColumn: "",
-    //     salaryAllColumn: "",
-    //     start_dateAllColumn: "",
-    //     officeAllColumn: "",
-    //     extnAllColumn: "",
-    //     statusAllColumn: "",
-    //   })
-    // );
-    // dispatch(
-    //   inputEditMultiTask({
-    //     nameEditMul: "",
-    //     positionEditMul: "",
-    //     salaryEditMul: "",
-    //     start_dateEditMul: "",
-    //     officeEditMul: "",
-    //     extnEditMul: "",
-    //     statusEditMul: "",
-    //   })
-    // );
+    dispatch(saveChange());
+    dispatch(checkCloseIsEditTaskAll());
   };
 
   const checkboxPage = _.every(tasks, (task) => task.selected === true);
