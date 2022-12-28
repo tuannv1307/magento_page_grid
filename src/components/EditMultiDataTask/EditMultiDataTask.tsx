@@ -18,47 +18,27 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const [inputName, setInputName] = useState("");
-
   const [inputPosition, setInputPosition] = useState("");
-
   const [inputOffice, setInputOffice] = useState("");
-
   const [inputSalary, setInputSalary] = useState("");
-
   const [inputStartDate, setInputStartDate] = useState<any>("");
   const [inputExtn, setInputExtn] = useState("");
   const [inputStatus, setInputStatus] = useState("");
-
   const dispatch = useDispatch();
-
   const nameAllColumn = data.nameAllColumn;
-
   const positionAllColumn = data.positionAllColumn;
-
   const salaryAllColumn = data.salaryAllColumn;
-
   const start_dateAllColumn = data.start_dateAllColumn;
-
   const officeAllColumn = data.officeAllColumn;
-
   const extnAllColumn = data.extnAllColumn;
-
   const statusAllColumn = data.statusAllColumn;
-
   const nameEditMul = data.nameEditMul;
-
   const positionEditMul = data.positionEditMul;
-
   const salaryEditMul = data.salaryEditMul;
-
   const start_dateEditMul = data.start_dateEditMul;
-
   const officeEditMul = data.officeEditMul;
-
   const extnEditMul = data.extnEditMul;
-
   const statusEditMul = data.statusEditMul;
 
   const handleBlurInput = () => {

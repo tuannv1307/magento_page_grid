@@ -27,22 +27,15 @@ const Products = () => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   const columns: any = data.data.columns;
-
   const columnOrder: any = data.data.columnOrder;
-
   let tasks: any = data.data.tasks;
-
   const searchData = data.searchData;
-
   const typeArr = data.typeArr;
-
   const sizeData = data.valueChange;
-
   const currentPage = data.currentPage;
-
   const objFilters: any = data.objFilters;
-
   const dispatch = useDispatch();
+
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId, type } = result;
 
@@ -71,6 +64,7 @@ const Products = () => {
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
+
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }

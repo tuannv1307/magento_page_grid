@@ -1,4 +1,3 @@
-import React from "react";
 import { st, classes } from "./Header.st.css";
 
 const Header = () => {

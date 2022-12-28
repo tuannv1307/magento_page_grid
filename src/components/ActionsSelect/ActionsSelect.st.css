@@ -9,7 +9,6 @@
     position: relative;
 }
 
-
 .actionSelect {
     width: 100%;
     border: 1px solid;
@@ -25,7 +24,6 @@
     font-size: 14px;
     padding: 6px 32px 6px 14px;
     padding-right: 199px;
-
 }
 
 .seclectMenuToggle {
@@ -45,7 +43,6 @@
     border: 1px solid #adadad;
 
 }
-
 
 .actionMenu {
     margin: 0;

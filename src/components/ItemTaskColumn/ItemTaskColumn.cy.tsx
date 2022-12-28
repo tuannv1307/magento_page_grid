@@ -15,6 +15,7 @@ let task: any = {
   isAction: false,
   isEdit: false,
 };
+
 let task1: any = {
   id: "2",
   name: "Garrett Winters",
@@ -30,13 +31,8 @@ let task1: any = {
 };
 
 describe("ItemTaskColumn.cy.tsx", () => {
-  // beforeEach(() => {
-  //   cy.wait(1000);
-  // });
-
   it("show mount", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ItemTaskColumn task={task} typeColumn="name" />
@@ -47,7 +43,6 @@ describe("ItemTaskColumn.cy.tsx", () => {
 
   it("show mount data-info", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ItemTaskColumn task={task} typeColumn="name" />

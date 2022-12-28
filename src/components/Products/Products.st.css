@@ -3,13 +3,11 @@
     padding-top: 60px;
 }
 
-
 .headerPagePro {
     margin-top: 50px;
     margin-bottom: 1.2rem;
     padding: 1.5rem 3rem;
 }
-
 
 .headerPagePro > h1 {
     margin: 0;
@@ -28,7 +26,6 @@
 
 .btnActionPage {
     margin-bottom: 3rem;
-
     background: #f8f8f8;
     border-bottom: 1px solid #e3e3e3;
     border-top: 1px solid #e3e3e3;
@@ -53,7 +50,6 @@
     border-right: 1px solid #333;
 }
 
-
 .actionPage {
     display: flex;
     flex-direction: column;
@@ -65,12 +61,6 @@
 .actionPageBottom {
     display: flex;
     justify-content: space-between;
-
-}
-
-.actionPageBottom {
-
-    /* margin-top: 50px; */
 }
 
 .btnFilter {
@@ -94,19 +84,10 @@
     display: flex;
 }
 
-
-
-
-
-
 .dataGridPagerWrap {
     display: flex;
     align-items: center;
 }
-
-
-
-
 
 .textPage {
     border: 1px solid transparent;

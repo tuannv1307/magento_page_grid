@@ -3,13 +3,8 @@ import store from "../../store/store";
 import ViewLength from "./ViewLength";
 
 describe("ViewLength.cy.tsx", () => {
-  // beforeEach(() => {
-  //   cy.wait(1000);
-  // });
-
   it("show mount", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ViewLength />
@@ -19,13 +14,11 @@ describe("ViewLength.cy.tsx", () => {
 
   it("show mount change value", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ViewLength />
       </Provider>
     );
-
     cy.get('[data-hook="input-change-length"]')
       .clear()
       .type("40")
@@ -34,7 +27,6 @@ describe("ViewLength.cy.tsx", () => {
       .type("dawddd")
       .trigger("keydown", { key: "Enter" });
     cy.get('[data-hook="btn-toggle-menu"]').click();
-
     cy.get('[data-hook="btn-value"]').click();
     cy.wait(2000);
     cy.get('[data-hook="btn-toggle-menu"]').click();

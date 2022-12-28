@@ -12,14 +12,11 @@ const ViewLength = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const valueChange = data?.valueChange;
-
   const [isShow, setIsShow] = useState(false);
   const [isShowCustoms, setIsShowCustoms] = useState(false);
   const [inputValue, setInputValue] = useState(_.toString(valueChange));
   const [inputValueEdit, setInputValueEdit] = useState("");
-
   const dispatch = useDispatch();
 
   const handleShow = () => {

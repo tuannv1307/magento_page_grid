@@ -1,15 +1,12 @@
 .root {
-
   width: 50%;
 }
 
 .itemColumn {
   background-color: #fff;
   color: #303030;
-
   border-left: 0.1rem dashed #d6d6d6;
   border-right: 0.1rem dashed #d6d6d6;
-
   padding: 1rem 1rem;
   max-height: 44px;
   text-align: center;
@@ -89,7 +86,6 @@
   cursor: default;
 }
 
-
 .itemColumnEdit > button {
   border-color: #adadad;
   font-weight: 400;
@@ -99,7 +95,6 @@
 .itemColumnEdit > button:hover {
   background-color: #dbdbdb;
 }
-
 
 .icon {
   padding-left: 4px;

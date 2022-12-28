@@ -22,7 +22,6 @@
     z-index: 12;
     display: flex;
     gap: 10px;
-
 }
 
 .root:isShowColums > div > .btnColumns {
@@ -46,12 +45,10 @@
     gap: 10px;
 }
 
-
 .dropDownShowColumns {
     background-color: #fff;
     border: 1px solid #adadad;
     box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
-
     line-height: 1.36;
     margin-top: -1px;
     min-width: 120%;
@@ -63,15 +60,11 @@
     right: 0;
 }
 
-
 .dropDownHeader {
     padding-bottom: 15px;
-
 }
 
-
 .dropDownContent {
-
     max-height: 219px;
     overflow-y: auto;
     padding-top: 15px;
@@ -98,7 +91,6 @@
 }
 
 .cloumnShowHide > svg {
-
     cursor: pointer !important;
 }
 
@@ -112,7 +104,6 @@
     opacity: .4;
     cursor: default;
 }
-
 
 .dropDownAction {
     display: flex;

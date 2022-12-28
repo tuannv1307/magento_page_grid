@@ -3,13 +3,8 @@ import store from "../../store/store";
 import HideShowColumns from "./HideShowColumns";
 
 describe("HideShowColumns.cy.tsx", () => {
-  // beforeEach(() => {
-  //   cy.wait(1000);
-  // });
-
   it("show mount", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <HideShowColumns />
@@ -19,7 +14,6 @@ describe("HideShowColumns.cy.tsx", () => {
 
   it("show mount with onClick", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <HideShowColumns />

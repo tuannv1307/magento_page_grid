@@ -24,36 +24,21 @@ const ColumnCheck = () => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const dispatch = useDispatch();
-
   const [isShow, setIsShow] = useState(false);
   const [disableBtn, setDisableBtn] = useState(false);
-
   let tasks: any = data.data.tasks;
-
   const sizeData = data.valueChange;
-
   const typeArr = data.typeArr;
-
   const currentPage = data.currentPage;
-
   const searchData = data.searchData;
-
   const objFilters: any = data.objFilters;
-
   const nameEditMul = data.nameEditMul;
-
   const positionEditMul = data.positionEditMul;
-
   const salaryEditMul = data.salaryEditMul;
-
   const start_dateEditMul = data.start_dateEditMul;
-
   const officeEditMul = data.officeEditMul;
-
   const extnEditMul = data.extnEditMul;
-
   const statusEditMul = data.statusEditMul;
 
   useEffect(() => {
@@ -92,9 +77,7 @@ const ColumnCheck = () => {
       : getPaginatedData(tasks, currentPage, sizeData);
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
-
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
-
   const checkHaveIsEdit = _.some(tasks, ["isEdit", true]);
 
   const handleShow = () => {
@@ -172,7 +155,6 @@ const ColumnCheck = () => {
   };
 
   const checkboxPage = _.every(tasks, (task) => task.selected === true);
-
   const checkboxPageDeselect = _.some(tasks, (task) => task.selected === true);
 
   const handleSaveTask = () => {

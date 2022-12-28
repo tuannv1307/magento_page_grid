@@ -17,18 +17,12 @@ const PaginatePage = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const dispatch = useDispatch();
   let currentPage = data.currentPage;
-
   const [currentPageP, setCurrentPageP] = useState(_.toString(currentPage));
-
   let tasks: any = data.data.tasks;
-
   const searchData = data.searchData;
-
   const objFilters = data.objFilters;
-
   const valueChangePage = data.valueChange;
 
   useEffect(() => {
@@ -36,7 +30,6 @@ const PaginatePage = () => {
   }, [currentPage]);
 
   let disabledPrev = data.disabledPrev;
-
   let disabledNext = data.disabledNext;
 
   if (_.some(objFilters, (obj: any) => obj.value !== "")) {

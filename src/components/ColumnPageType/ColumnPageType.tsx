@@ -144,28 +144,20 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const dispatch = useDispatch();
-
   let tasks: any = data.data.tasks;
-
   const sizeData = data.valueChange;
-
   const typeArr = data.typeArr;
-
   const currentPage = data.currentPage;
-
   const searchData = data.searchData;
-
   const isSorted = data.isSort;
-
   const sortName = data.sortName;
-
   const objFilters: any = data.objFilters;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
+
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }

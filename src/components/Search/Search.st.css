@@ -8,7 +8,6 @@
 }
 
 .inputSearch {
-
     background-color: #fff;
     border: 1px solid #adadad;
     border-radius: 1px;
@@ -23,12 +22,9 @@
     vertical-align: baseline;
     width: auto;
     padding-right: 20rem;
-
-
 }
 
 .inputSearch::placeholder {
-
     font-style: italic;
     opacity: 0.8;
 }

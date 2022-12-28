@@ -12,7 +12,6 @@
     background-color: #fffbe6;
 }
 
-
 .root > span {
     padding-left: 5px;
 }
@@ -33,7 +32,6 @@
     box-shadow: none;
     outline: 0;
 }
-
 
 .selectEditTask {
     padding: 6px 44px 6px 10px;

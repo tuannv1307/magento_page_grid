@@ -33,13 +33,9 @@ const ShowActions = ({
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const dispatch = useDispatch();
-
   let tasks: any = data.data.tasks;
-
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
-
   const [isShow, setIsShow] = useState(false);
 
   const handleShow = () => {

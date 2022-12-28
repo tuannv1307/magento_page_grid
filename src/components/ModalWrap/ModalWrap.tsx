@@ -14,7 +14,6 @@ const ModalWrap = () => {
   const isItemTaskSelectd = data.isItemTaskSelectd;
   const titleModal = data.titleModal;
   const contentModal = data.contentModal;
-
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -49,6 +48,7 @@ const ModalWrap = () => {
       );
     }
   };
+
   return (
     <div className={st(classes.root, { isShowModal })} data-hook="modal">
       <header className={st(classes.modalHeader)}>
@@ -75,7 +75,6 @@ const ModalWrap = () => {
             Cancel
           </button>
         )}
-
         <button
           className={st(classes.ok)}
           onClick={handleOKModal}

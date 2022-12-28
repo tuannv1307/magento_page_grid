@@ -6,15 +6,12 @@
     background-color: #373330 !important;
     z-index: 6000;
     left: 0;
-
     top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
-
-
 
 .logoImg {
     display: block;
@@ -41,7 +38,6 @@
     font-size: inherit;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     padding: 15px 10px;
     transition: 0.5s all;
@@ -54,13 +50,3 @@
 .menu > li > a > span {
     font-size: initial;
 }
-
-.dashboard {}
-
-.icon {}
-
-/* .menu > li > a::before {
-    content: '\e604';
-    font-size: 1.8rem;
-    padding-top: 0.4rem;
-} */

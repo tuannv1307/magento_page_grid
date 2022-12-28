@@ -8,10 +8,6 @@ let column = {
 };
 
 describe("ColumnActions.cy.tsx", () => {
-  // beforeEach(() => {
-  //   cy.wait(1000);
-  // });
-
   it("show mount", () => {
     cy.viewport("macbook-15");
 

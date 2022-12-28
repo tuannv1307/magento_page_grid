@@ -13,11 +13,8 @@ const Search = () => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   let searchData = data.searchData;
-
   const [inputSearch, setInputSearch] = useState(searchData);
-
   const dispatch = useDispatch();
-
   let objFilters: any = data.objFilters;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +51,7 @@ const Search = () => {
     dispatch(searchDataByInput(""));
     setInputSearch("");
   };
+
   const handleDeleteKeyWordSearch = () => {
     dispatch(searchDataByInput(""));
     setInputSearch("");

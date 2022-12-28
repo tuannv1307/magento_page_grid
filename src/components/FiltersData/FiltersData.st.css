@@ -1,4 +1,4 @@
-.root {
+.root > div {
     display: flex;
     align-items: center;
     position: relative;
@@ -14,15 +14,16 @@
 }
 
 .btnFilter {
-
     font-weight: 400;
     background: #e3e3e3;
     border-color: #adadad;
     border-color: #adadad;
     padding: 10px 20px;
-
 }
 
+.btnFilter:focus {
+    outline: none;
+}
 
 .FilterData {
     -st-states: isShow;
@@ -39,9 +40,8 @@
 }
 
 .FilterData:isShow {
-    height: 200px;
+    height: 234px;
 }
-
 
 .selectEditTask {
     padding: 6px 44px 6px 10px;
@@ -59,30 +59,37 @@
     height: 44px;
 }
 
-
 .itemFilter {
     width: 192px;
     margin-left: 14px;
+    padding-left: 20px;
+    margin-top: 6px;
 }
 
 .itemFilter:first-child {
     display: flex;
-    margin-left: 0;
-    width: 205px;
+    margin-left: 12px;
+    width: 244px;
+    padding-left: 0px;
+}
 
+.itemFilter:first-child > div {
+    margin-top: 5px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .itemFilter > h4 {
     margin: 0;
     margin-bottom: 5px;
     margin-right: 10px;
-
 }
 
 .itemFilter:first-child > h4 {
     margin: 0;
     margin-top: 4px;
-
 }
 
 .itemFilter:last-child {
@@ -108,10 +115,8 @@
 }
 
 .inputFilter:hover {
-
     border-color: #6a6a6a;
 }
-
 
 .cancel {
     color: #007bdb;

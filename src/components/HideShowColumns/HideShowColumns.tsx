@@ -14,14 +14,10 @@ const HideShowColumns = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   const [isShowColums, setIsShowColumns] = useState(false);
   const dispatch = useDispatch();
-
   const columnOrder = data.data.columnOrder;
-
   const columns: any = data.data.columns;
-
   let disableSelect = data.disableSelect;
 
   const columnDisplay = _.filter(

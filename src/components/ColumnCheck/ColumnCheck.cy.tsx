@@ -3,13 +3,8 @@ import store from "../../store/store";
 import ColumnCheck from "./ColumnCheck";
 
 describe("ColumnCheck.cy.tsx", () => {
-  // beforeEach(() => {
-  //   cy.wait(1000);
-  // });
-
   it("show mount", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ColumnCheck />
@@ -19,7 +14,6 @@ describe("ColumnCheck.cy.tsx", () => {
 
   it("show mount onClick", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <ColumnCheck />

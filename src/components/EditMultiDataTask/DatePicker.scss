@@ -89,15 +89,14 @@
   display: inline-block;
   padding: 0;
   border: 0;
-  // width: 100%;
   outline: none;
 }
-.react-datepicker-wrapper input{
+.react-datepicker-wrapper input {
   outline: none;
   padding: 5px;
   font-size: initial;
 }
-.react-datepicker-ignore-onclickoutside  {
+.react-datepicker-ignore-onclickoutside {
   outline: none;
   padding: 5px;
   font-size: initial;
@@ -335,14 +334,14 @@
   .react-datepicker-time__input-container
   .react-datepicker-time__input
   input[type="time"]::-webkit-outer-spin-button {
-  // -webkit-appearance: none;
+  -webkit-appearance: none;
   margin: 0;
 }
 .react-datepicker__input-time-container
   .react-datepicker-time__input-container
   .react-datepicker-time__input
   input[type="time"] {
-  // -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 .react-datepicker__input-time-container
   .react-datepicker-time__input-container

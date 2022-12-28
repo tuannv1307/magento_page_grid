@@ -170,9 +170,7 @@ const EditControlDate = (props: {
   disable: boolean;
 }) => {
   const { id, keyName, disable } = props;
-
   const dispatch = useDispatch();
-
   const currentEditTaks: Magento_Page = useSelector(
     (state: any) => state.magentopage.currentEditTaks
   );
@@ -213,17 +211,11 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
-
   let tasks: any = data.data.tasks;
-
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
-
   const dispatch = useDispatch();
-
   const sizeData = data.valueChange;
-
   const typeArr = data.typeArr;
-
   const currentPage = data.currentPage;
 
   tasks =
@@ -232,19 +224,12 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
       : getPaginatedData(tasks, currentPage, sizeData);
 
   const nameEditMul = data.nameEditMul;
-
   const positionEditMul = data.positionEditMul;
-
   const salaryEditMul = data.salaryEditMul;
-
   const start_dateEditMul = data.start_dateEditMul;
-
   const officeEditMul = data.officeEditMul;
-
   const extnEditMul = data.extnEditMul;
-
   const statusEditMul = data.statusEditMul;
-
   const [disableName, setDisableName] = useState(false);
   const [disablePosition, setDisablePosition] = useState(false);
   const [disableOffice, setDisableOffice] = useState(false);
@@ -252,7 +237,6 @@ const ItemTaskColumn = ({ task, typeColumn }: ItemTaskColumnProps) => {
   const [disableStart_date, setDisableStart_date] = useState(false);
   const [disableExtn, setDisableExtn] = useState(false);
   const [disableStatus, setDisableStatus] = useState(false);
-
   let currentEditTaks = data.currentEditTaks;
 
   useEffect(() => {

@@ -37,7 +37,6 @@ export type Magento_Page = {
   titleModal: string;
   contentModal: string;
   isCheckedAllByPage: boolean;
-
   nameAllColumn: string;
   positionAllColumn: string;
   salaryAllColumn: string;
@@ -45,7 +44,6 @@ export type Magento_Page = {
   officeAllColumn: string;
   extnAllColumn: string;
   statusAllColumn: string;
-
   nameEditMul: string;
   positionEditMul: string;
   salaryEditMul: string;
@@ -54,9 +52,7 @@ export type Magento_Page = {
   extnEditMul: string;
   statusEditMul: string;
   objFilters: {};
-
   isEditTask: boolean;
-
   currentEditTaks: Tasks[];
 };
 
@@ -81,7 +77,6 @@ const initialData: Magento_Page = {
   titleModal: "",
   contentModal: "",
   isCheckedAllByPage: false,
-
   nameAllColumn: "",
   positionAllColumn: "",
   salaryAllColumn: "",
@@ -89,7 +84,6 @@ const initialData: Magento_Page = {
   officeAllColumn: "",
   extnAllColumn: "",
   statusAllColumn: "",
-
   nameEditMul: "",
   positionEditMul: "",
   salaryEditMul: "",
@@ -120,13 +114,11 @@ const initialData: Magento_Page = {
       keyWord: "start_date",
       value: "",
     },
-
     status: {
       keyWord: "status",
       value: "",
     },
   },
-
   currentEditTaks: [],
 };
 
@@ -167,7 +159,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       state.valueChange = _.cloneDeep(state.valueChange);
       state.currentPage = 1;
       state.typeArr = "DATA_SET_LENGTH";
-
       localStorage.setItem(
         "MAGENTO_PAGE_VALUE",
         JSON.stringify(state.valueChange)
@@ -176,7 +167,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     setCurrentPage: (state, action) => {
       let currentPage = action.payload;
-
       state.currentPage = currentPage;
       state.typeArr = "DATA_SET_PAGINATE";
     },
@@ -195,9 +185,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       _.map(state.data.columns, (column: any) =>
         column.id === id ? (column.disPlay = !column.disPlay) : column.disPlay
       );
-
       state.data.columns = _.cloneDeep(state.data.columns);
-
       localStorage.setItem("MAGENTO_PAGE", JSON.stringify(state.data));
     },
 
@@ -220,7 +208,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     setIsAction: (state, action) => {
       let { id } = action.payload;
-
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id ? { ...task, isAction: !task.isAction } : task
       );
@@ -229,14 +216,12 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     DeleteTask: (state, action) => {
       let { id } = action.payload;
-
       state.data.tasks = _.filter(state.data.tasks, (task) => task.id !== id);
       state.data.tasks = _.cloneDeep(state.data.tasks);
     },
 
     checkboxTask: (state, action) => {
       let { id, isSelected } = action.payload;
-
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id ? { ...task, selected: isSelected } : task
       );
@@ -244,7 +229,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     checkboxOnlyTask: (state, action) => {
       let { id } = action.payload;
-
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id
           ? { ...task, selected: true }
@@ -255,7 +239,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     checkboxOnlyAction: (state, action) => {
       let { id } = action.payload;
-
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.id === id
           ? { ...task, isAction: true }
@@ -287,7 +270,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       } = action;
       let sort = _.sortBy(state.data.tasks, [nameSort]);
       sort = _.reverse(sort);
-
       state.data.tasks = _.cloneDeep(sort);
     },
 
@@ -295,9 +277,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       let {
         payload: { nameSort },
       } = action;
-
       const sort = _.sortBy(state.data.tasks, [nameSort]);
-
       state.data.tasks = _.cloneDeep(sort);
     },
 
@@ -336,7 +316,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     changeStatusTask: (state, action) => {
       let { nameStatus } = action.payload;
-
       state.data.tasks = _.map(state.data.tasks, (task) =>
         task.selected === true ? { ...task, status: nameStatus } : task
       );
@@ -345,9 +324,7 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     checkIsEdit: (state, action) => {
       let { id, isEdit } = action.payload;
-
       let newTask = _.cloneDeep(state.data.tasks);
-
       state.data.tasks = _.map(newTask, (task) =>
         task.id === id ? { ...task, isEdit: isEdit, selected: isEdit } : task
       );
@@ -385,7 +362,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     filtersData: (state, action) => {
       let objFilters = action.payload;
-
       state.objFilters = objFilters;
     },
 
@@ -448,7 +424,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
 
     changeTask: (state, action) => {
       const keyname = action.payload.keyName;
-
       let currentEdit: any = _.find(_.cloneDeep(state.data.tasks), {
         id: action.payload.id,
       });
@@ -458,7 +433,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       }
 
       let newEditTasks = _.cloneDeep(state.currentEditTaks);
-
       currentEdit[`${keyname}`] = action.payload.value;
 
       newEditTasks = _.filter(
@@ -467,7 +441,6 @@ const MagentoPageSlice = createSlice<Magento_Page, Actions>({
       );
 
       newEditTasks.push(currentEdit);
-
       state.currentEditTaks = newEditTasks;
     },
 

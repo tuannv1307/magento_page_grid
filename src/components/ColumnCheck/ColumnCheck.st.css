@@ -1,6 +1,5 @@
 .root {
   position: relative;
-
 }
 
 .actionCloseAndSave {
@@ -32,10 +31,8 @@
   position: relative;
   background-color: #fff;
   color: #303030;
-
   border-left: 0.1rem dashed #d6d6d6;
   border-right: 0.1rem dashed #d6d6d6;
-
   padding: 8px;
   max-height: 44px;
   text-align: center;
@@ -47,7 +44,6 @@
   border-left: 0.1rem dashed #d6d6d6;
   border-right: 0.1rem dashed #d6d6d6;
   background-color: #fffbe6;
-
 }
 
 .itemColumn > span {
@@ -73,7 +69,6 @@
   background-color: #514b45;
   color: #fff;
   padding: 10.5px 12px;
-
   border-right: none;
   display: flex;
   position: relative;
@@ -179,10 +174,6 @@
   background-color: #ff4500;
   padding: 6px 20px;
 }
-
-
-.columnsCheck {}
-
 
 .btnCheck {
   background-color: transparent;

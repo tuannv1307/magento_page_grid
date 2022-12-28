@@ -1,6 +1,4 @@
 import { classes, st } from "./Nav.st.css";
-import React from "react";
-// import { a } from "react-router-dom";
 
 const Nav = () => {
   return (

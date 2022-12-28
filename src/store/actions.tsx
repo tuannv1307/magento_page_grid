@@ -108,6 +108,7 @@ export type Actions = {
     state: Magento_Page,
     action: PayloadAction<{ nameStatus: string }>
   ) => void;
+
   checkIsEdit: (
     state: Magento_Page,
     action: PayloadAction<{ id?: number; isEdit?: boolean }>

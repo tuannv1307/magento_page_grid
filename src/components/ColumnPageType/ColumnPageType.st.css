@@ -1,7 +1,6 @@
 .root {
     -st-states: typeColumn(enum(id, position, status, extn, salary)), sortName, ;
     width: 100%;
-
 }
 
 .root:typeColumn(id) {
@@ -24,7 +23,6 @@
     width: 70%;
 }
 
-
 .titleColumn {
     -st-states: isSorted;
     margin: 0;
@@ -33,16 +31,13 @@
     padding: 10px;
     border: 0.1rem solid #8a837f;
     border-right: none;
-
     width: 100%;
     position: relative;
 }
 
 .titleColumn:last-child {
-
     border-right: 0.1rem solid #8a837f;
 }
-
 
 .titleColumn > svg {
     position: absolute;
