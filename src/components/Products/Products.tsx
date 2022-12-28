@@ -1,5 +1,3 @@
-import ColumnPageType from "../ColumnPageType/";
-import PaginatePage from "../PaginatePage";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +11,8 @@ import Search from "../Search";
 import ColumnActions from "../ColumnActions";
 import ColumnCheck from "../ColumnCheck";
 import ActionsSelect from "../ActionsSelect";
-
+import ColumnPageType from "../ColumnPageType/";
+import PaginatePage from "../PaginatePage";
 import {
   columnDataLenght,
   fiterDataByKeyword,
@@ -22,7 +21,6 @@ import {
 } from "../ColumnPageType/ColumnPageType";
 import FiltersData from "../FiltersData";
 import { st, classes } from "./Products.st.css";
-import ItemTaskColumn from "../ItemTaskColumn";
 
 const Products = () => {
   const data: Magento_Page = useSelector(
@@ -31,11 +29,17 @@ const Products = () => {
   const columns: any = data.data.columns;
 
   const columnOrder: any = data.data.columnOrder;
+
   let tasks: any = data.data.tasks;
+
   const searchData = data.searchData;
+
   const typeArr = data.typeArr;
+
   const sizeData = data.valueChange;
+
   const currentPage = data.currentPage;
+
   const objFilters: any = data.objFilters;
 
   const dispatch = useDispatch();
@@ -58,11 +62,8 @@ const Products = () => {
 
     if (type === "column") {
       const newColumnOrder: string[] = Array.from(columnOrder);
-
       newColumnOrder.splice(source.index, 1);
-
       newColumnOrder.splice(destination.index, 0, draggableId);
-
       dispatch(sortColumnsOrder(newColumnOrder));
     }
   };
@@ -78,6 +79,7 @@ const Products = () => {
     typeArr === "DATA_SET_LENGTH"
       ? columnDataLenght(tasks, sizeData)
       : getPaginatedData(tasks, currentPage, sizeData);
+
   return (
     <div className={st(classes.root)}>
       <header className={st(classes.headerPagePro)}>

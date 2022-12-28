@@ -1,6 +1,7 @@
 import { useState } from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
+import OutsideClickHandler from "react-outside-click-handler";
 import {
   changeStatusTask,
   Magento_Page,
@@ -11,7 +12,7 @@ import {
   fiterDataByKeyword,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
-import OutsideClickHandler from "react-outside-click-handler";
+
 import { st, classes } from "./ActionsSelect.st.css";
 
 const ActionsSelect = () => {
@@ -19,19 +20,27 @@ const ActionsSelect = () => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   const dispatch = useDispatch();
+
   const [isShow, setIsShow] = useState(false);
+
   let tasks: any = data.data.tasks;
 
   const isShowModal = data.isShowModal;
+
   let titleModal = data.titleModal;
+
   let contentModal = data.contentModal;
+
   const searchData = data.searchData;
+
   const objFilters: any = data.objFilters;
+
   let isItemTaskSelectd = data.isItemTaskSelectd;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
+
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
@@ -46,6 +55,7 @@ const ActionsSelect = () => {
 
   const ShowModal = (type: string) => {
     handleShow();
+
     if (checkedTask && type === "DELETE") {
       isItemTaskSelectd = true;
       titleModal = "Delete items";
@@ -59,10 +69,12 @@ const ActionsSelect = () => {
         })
       );
     }
+
     if (checkedTask === false) {
       isItemTaskSelectd = false;
       titleModal = "Attention";
       contentModal = "You haven't selected any items!";
+
       if (type === "DELETE") {
         dispatch(
           setShowModal({
@@ -73,6 +85,7 @@ const ActionsSelect = () => {
           })
         );
       }
+
       if (type === "DISABLE") {
         dispatch(
           setShowModal({
@@ -83,6 +96,7 @@ const ActionsSelect = () => {
           })
         );
       }
+
       if (type === "ENABLE") {
         dispatch(
           setShowModal({
@@ -93,6 +107,7 @@ const ActionsSelect = () => {
           })
         );
       }
+
       if (type === "EDIT") {
         dispatch(
           setShowModal({
@@ -104,6 +119,7 @@ const ActionsSelect = () => {
         );
       }
     }
+
     if (checkedTask) {
       if (type === "DISABLE") {
         dispatch(
@@ -125,6 +141,7 @@ const ActionsSelect = () => {
       }
     }
   };
+
   const handleOutsideClick = () => {
     setIsShow(false);
   };
@@ -133,15 +150,13 @@ const ActionsSelect = () => {
     <>
       <div className={st(classes.root)}>
         <OutsideClickHandler onOutsideClick={handleOutsideClick}>
-          <div className={st(classes.actionBtnSelect)}>
-            <button className={st(classes.actionSelect)} onClick={handleShow}>
-              Actions
-            </button>
-            <button
-              className={st(classes.seclectMenuToggle)}
-              onClick={handleShow}
-              // onBlur={handleBlur}
-            >
+          <div
+            className={st(classes.actionBtnSelect)}
+            onClick={handleShow}
+            data-hook="action-select"
+          >
+            <button className={st(classes.actionSelect)}>Actions</button>
+            <button className={st(classes.seclectMenuToggle)}>
               {isShow ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +182,7 @@ const ActionsSelect = () => {
               )}
             </button>
             {isShow && (
-              <ul className={st(classes.actionMenu)}>
+              <ul className={st(classes.actionMenu)} data-hook="menu-action">
                 <li onClick={() => ShowModal("DELETE")}>Delete</li>
 
                 <li onClick={() => ShowModal("DISABLE")}>Disable</li>

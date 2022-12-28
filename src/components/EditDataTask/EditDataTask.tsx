@@ -1,11 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Magento_Page,
-  Tasks,
-  inputEditMultiTask,
-  setArrayEditDataTask,
-} from "../../store/magentoPageGridReducer";
+import type { Magento_Page, Tasks } from "../../store/magentoPageGridReducer";
 import _ from "lodash";
 import DatePicker from "react-datepicker";
 import moment from "moment";

@@ -63,7 +63,3 @@
 .root:sortName .titleColumn:isSorted > span > svg {
     display: none;
 }
-
-.content {
-    /* position: relative; */
-}

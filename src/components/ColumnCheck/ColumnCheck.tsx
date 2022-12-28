@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
+import OutsideClickHandler from "react-outside-click-handler";
 import {
   checkboxTask,
   checkboxTaskAll,
@@ -17,31 +18,29 @@ import {
   getPaginatedData,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
-import OutsideClickHandler from "react-outside-click-handler";
 import { st, classes } from "./ColumnCheck.st.css";
 
 const ColumnCheck = () => {
   let data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
   const dispatch = useDispatch();
+
   const [isShow, setIsShow] = useState(false);
   const [disableBtn, setDisableBtn] = useState(false);
+
   let tasks: any = data.data.tasks;
+
   const sizeData = data.valueChange;
+
   const typeArr = data.typeArr;
+
   const currentPage = data.currentPage;
+
   const searchData = data.searchData;
+
   const objFilters: any = data.objFilters;
-
-  const name = data.nameAllColumn;
-  const position = data.positionAllColumn;
-  const office = data.officeAllColumn;
-  const salary = data.salaryAllColumn;
-
-  const start_date = data.start_dateAllColumn;
-  const extn = data.extnAllColumn;
-  const status = data.statusAllColumn;
 
   const nameEditMul = data.nameEditMul;
 
@@ -82,6 +81,7 @@ const ColumnCheck = () => {
   if (_.some(objFilters, (obj) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
+
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
@@ -93,9 +93,9 @@ const ColumnCheck = () => {
 
   const lengthTask = _.size(_.filter(tasks, (task) => task.selected === true));
 
-  const haveIsEdit = _.some(tasks, ["isEdit", true]);
-
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
+
+  const checkHaveIsEdit = _.some(tasks, ["isEdit", true]);
 
   const handleShow = () => {
     setIsShow(!isShow);
@@ -104,7 +104,7 @@ const ColumnCheck = () => {
   const handleCheckbox = (id?: number, selected?: boolean) => {
     if (id) {
       dispatch(checkboxTask({ id, isSelected: !selected }));
-      if (haveIsEdit) {
+      if (checkHaveIsEdit) {
         dispatch(checkIsEdit({ id, isEdit: !selected }));
       }
     }
@@ -162,10 +162,6 @@ const ColumnCheck = () => {
     setIsShow(false);
   };
 
-  const handleCloseTask = (id: number) => {
-    dispatch(checkIsEdit({ id, isEdit: false }));
-  };
-
   const handleCancel = () => {
     dispatch(checkCloseIsEditTaskAll());
   };
@@ -177,8 +173,17 @@ const ColumnCheck = () => {
 
   const checkboxPage = _.every(tasks, (task) => task.selected === true);
 
+  const checkboxPageDeselect = _.some(tasks, (task) => task.selected === true);
+
+  const handleSaveTask = () => {
+    dispatch(saveChange());
+  };
+
+  const handleCloseTask = (id?: number) => {
+    dispatch(checkIsEdit({ id, isEdit: false }));
+  };
   return (
-    <div className={st(classes.root)}>
+    <div className={st(classes.root)} data-hook="action-columcheck">
       {lenghtIsEdit > 1 && (
         <div className={st(classes.actionCloseAndSave)}>
           <button className={st(classes.cancel)} onClick={() => handleCancel()}>
@@ -188,12 +193,12 @@ const ColumnCheck = () => {
             className={st(classes.saveEdit, { disableBtn })}
             onClick={() => handleSaveEdits()}
             disabled={disableBtn}
+            data-hook="btn-save-edit"
           >
             Save Edits
           </button>
         </div>
       )}
-
       <OutsideClickHandler onOutsideClick={handleoutsideClick}>
         <div className={st(classes.titleColumn)}>
           {checkedAll && (
@@ -235,7 +240,7 @@ const ColumnCheck = () => {
             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
           </svg>
 
-          <button onClick={handleShow}>
+          <button onClick={handleShow} data-hook="action-closesave">
             {isShow ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -261,16 +266,20 @@ const ColumnCheck = () => {
             )}
           </button>
           {isShow && (
-            <ul className={st(classes.actionMenu)}>
+            <ul
+              className={st(classes.actionMenu)}
+              data-hook="action-menu-check"
+            >
               {!checkedAll && <li onClick={selectAll}>SelectAll</li>}
-
               {lengthTask > 0 && <li onClick={deSelectAll}>Deselect All</li>}
-
-              {!checkboxPage ? (
-                <li onClick={() => handleCheckAllOnPage(true)}>
-                  Select All on This Page
-                </li>
-              ) : (
+              {!checkboxPage && (
+                <>
+                  <li onClick={() => handleCheckAllOnPage(true)}>
+                    Select All on This Page
+                  </li>
+                </>
+              )}
+              {checkboxPageDeselect && (
                 <li onClick={() => handleCheckAllOnPage(false)}>
                   Deselect All on This Page
                 </li>
@@ -280,54 +289,67 @@ const ColumnCheck = () => {
         </div>
       </OutsideClickHandler>
       {lenghtIsEdit > 1 && <div className={st(classes.itemColumnEdit)}> </div>}
-      {tasks.length > 0 &&
-        _.map(tasks, (task: Tasks) => (
-          <div className={st(classes.itemColumn)} key={task.id}>
-            <div onClick={() => handleCheckbox(task.id, task.selected)}>
-              {task.selected ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="17"
-                  height="17"
-                  fill="currentColor"
-                  className="bi bi-check-square"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                </svg>
+      <div className={st(classes.columnsCheck)}>
+        {tasks.length > 0 &&
+          _.map(tasks, (task: Tasks) => (
+            <div className={st(classes.itemColumn)} key={task.id}>
+              <button
+                className={st(classes.btnCheck)}
+                onClick={() => handleCheckbox(task.id, task.selected)}
+                data-hook="item-check"
+              >
+                {task.selected ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    fill="currentColor"
+                    className="bi bi-check-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    fill="currentColor"
+                    className="bi bi-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                  </svg>
+                )}
+              </button>
+
+              {task.isEdit ? (
+                <div className={st(classes.editTask)}>
+                  {lenghtIsEdit === 1 && (
+                    <div className={st(classes.actionClose)}>
+                      <button
+                        onClick={() => handleCloseTask(task.id)}
+                        className={st(classes.cancel)}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleSaveTask}
+                        className={st(classes.save)}
+                        data-hook="btn-save"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  )}
+                </div>
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="17"
-                  height="17"
-                  fill="currentColor"
-                  className="bi bi-square"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                </svg>
+                ""
               )}
             </div>
-
-            {/* {task.isEdit && lenghtIsEdit === 1 && (
-              <div className={st(classes.actionClose)}>
-                <button
-                  onClick={() => handleCloseTask(task.id)}
-                  className={st(classes.cancel)}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSaveTask(task.id, task)}
-                  className={st(classes.save)}
-                >
-                  Save
-                </button>
-              </div>
-            )} */}
-          </div>
-        ))}
+          ))}
+      </div>
     </div>
   );
 };

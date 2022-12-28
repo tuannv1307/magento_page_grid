@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Magento_Page,
-  editInputMultiTask,
-  inputEditMultiTask,
-} from "../../store/magentoPageGridReducer";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import _ from "lodash";
+import {
+  Magento_Page,
+  inputEditMultiTask,
+} from "../../store/magentoPageGridReducer";
 import "./DatePicker.scss";
 import { st, classes } from "./EditMultiDataTask.st.css";
 
@@ -124,6 +123,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
               onBlur={handleBlurInput}
+              data-hook="input-name"
             />
           </>
         )}
@@ -137,6 +137,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               value={inputPosition}
               onChange={(e) => setInputPosition(e.target.value)}
               onBlur={handleBlurInput}
+              data-hook="input-position"
             />
           </>
         )}
@@ -213,6 +214,7 @@ const EditMultiDataTask = ({ typeColumn }: EditMultiDataTaskProps) => {
               className={st(classes.selectEditTask)}
               onChange={(e) => setInputStatus(e.target.value)}
               onBlur={handleBlurInput}
+              data-hook="input-status"
             >
               <option value=""></option>
               <option value="enable">Enable</option>

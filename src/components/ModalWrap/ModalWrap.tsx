@@ -50,7 +50,7 @@ const ModalWrap = () => {
     }
   };
   return (
-    <div className={st(classes.root, { isShowModal })}>
+    <div className={st(classes.root, { isShowModal })} data-hook="modal">
       <header className={st(classes.modalHeader)}>
         <h1 className={st(classes.title)}>{titleModal}</h1>
         <button className={st(classes.hideModal)} onClick={handleCloseModal}>
@@ -76,7 +76,11 @@ const ModalWrap = () => {
           </button>
         )}
 
-        <button className={st(classes.ok)} onClick={handleOKModal}>
+        <button
+          className={st(classes.ok)}
+          onClick={handleOKModal}
+          data-hook="btn-ok-modal"
+        >
           OK
         </button>
       </footer>

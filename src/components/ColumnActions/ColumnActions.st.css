@@ -1,8 +1,5 @@
 .root {
-  /* display: flex; */
-  /* cursor: pointer;
-    border: 0.1rem solid #8a837f; */
-  /* border-right: 1px solid #fff; */
+
   width: 50%;
 }
 
@@ -101,4 +98,11 @@
 
 .itemColumnEdit > button:hover {
   background-color: #dbdbdb;
+}
+
+
+.icon {
+  padding-left: 4px;
+  color: #007bdb;
+  cursor: pointer;
 }

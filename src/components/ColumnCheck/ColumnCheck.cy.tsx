@@ -7,7 +7,7 @@ describe("ColumnCheck.cy.tsx", () => {
   //   cy.wait(1000);
   // });
 
-  it("show mount data-info", () => {
+  it("show mount", () => {
     cy.viewport("macbook-15");
 
     cy.mount(
@@ -15,5 +15,17 @@ describe("ColumnCheck.cy.tsx", () => {
         <ColumnCheck />
       </Provider>
     );
+  });
+
+  it("show mount onClick", () => {
+    cy.viewport("macbook-15");
+
+    cy.mount(
+      <Provider store={store}>
+        <ColumnCheck />
+      </Provider>
+    );
+
+    cy.get('[data-hook="action-closesave"]').invoke("show").trigger("click");
   });
 });

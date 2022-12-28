@@ -12,7 +12,6 @@ import {
 import ItemTaskColumn from "../ItemTaskColumn";
 import EditMultiDataTask from "../EditMultiDataTask";
 import { st, classes } from "./ColumnPageType.st.css";
-import { useState } from "react";
 
 export type ColumnPageTypeProps = {
   column: {
@@ -53,30 +52,24 @@ export const searchFilters = (arr: Tasks[], searchData: string) => {
   return _.filter(arr, (task) => {
     return (
       (task.name &&
-        task.name.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
-          -1) ||
+        _.toLower(_.toString(task.name)).indexOf(_.toLower(searchData)) > -1) ||
       (task.position &&
-        task.position
-          .toString()
-          .toLowerCase()
-          .indexOf(searchData.toLowerCase()) > -1) ||
+        _.toLower(_.toString(task?.position)).indexOf(_.toLower(searchData)) >
+          -1) ||
       (task.office &&
-        task.office.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
+        _.toLower(_.toString(task?.office)).indexOf(_.toLower(searchData)) >
           -1) ||
       (task.salary &&
-        task.salary.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
+        _.toLower(_.toString(task.salary)).indexOf(_.toLower(searchData)) >
           -1) ||
       (task.extn &&
-        task.extn.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
+        _.toLower(_.toString(task?.extn)).indexOf(_.toLower(searchData)) >
           -1) ||
       (task.start_date &&
-        task.start_date
-          .toString()
-          .toLowerCase()
-          .indexOf(searchData.toLowerCase()) > -1) ||
+        _.toLower(_.toString(task.start_date)).indexOf(_.toLower(searchData)) >
+          -1) ||
       (task.status &&
-        task.status.toString().toLowerCase().indexOf(searchData.toLowerCase()) >
-          -1)
+        _.toLower(_.toString(task?.status)).indexOf(_.toLower(searchData)) > -1)
     );
   });
 };
@@ -153,13 +146,21 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
   );
 
   const dispatch = useDispatch();
+
   let tasks: any = data.data.tasks;
+
   const sizeData = data.valueChange;
+
   const typeArr = data.typeArr;
+
   const currentPage = data.currentPage;
+
   const searchData = data.searchData;
+
   const isSorted = data.isSort;
+
   const sortName = data.sortName;
+
   const objFilters: any = data.objFilters;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
@@ -196,7 +197,7 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
 
   return (
     <Draggable draggableId={column.id} index={_.toNumber(index)}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           className={st(classes.root, {
             typeColumn,
@@ -209,6 +210,7 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
             className={st(classes.titleColumn, { isSorted })}
             {...provided.dragHandleProps}
             onClick={() => handleClickIsSort(typeColumn)}
+            data-hook="title"
           >
             {column.title}
             <span>
@@ -246,23 +248,13 @@ const ColumnPageType = ({ column, index, typeColumn }: ColumnPageTypeProps) => {
           {lenghtIsEdit > 1 && <EditMultiDataTask typeColumn={typeColumn} />}
           <div className={st(classes.content)}>
             {tasks.length > 0 &&
-              _.map(
-                tasks,
-                (task: Tasks) => (
-                  // task.selected ? (
-                  // <>
-
-                  <ItemTaskColumn
-                    task={task}
-                    typeColumn={typeColumn}
-                    key={task.id}
-                  />
-
-                  // </>
-                  // ) : (
-                )
-                //)
-              )}
+              _.map(tasks, (task: Tasks) => (
+                <ItemTaskColumn
+                  task={task}
+                  typeColumn={typeColumn}
+                  key={task.id}
+                />
+              ))}
           </div>
         </div>
       )}

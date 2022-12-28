@@ -34,17 +34,14 @@
     box-shadow: none;
     color: #41362f;
     display: inline-block;
-    /* font-size: 13px; */
     font-weight: 400;
     letter-spacing: -.025em;
     padding: 10px 33px 15px 15px;
     position: relative;
     vertical-align: baseline;
     z-index: 12;
-    /* border-color: #007bdb; */
     border-color: #adadad;
     border-bottom: none;
-    /* box-shadow: 1px 1px 5px rgb(0 0 0 / 50%); */
     display: flex;
     gap: 10px;
 }

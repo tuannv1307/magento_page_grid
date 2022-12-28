@@ -123,9 +123,8 @@
     -st-states: isFalseTrue;
     display: flex;
     width: 100%;
-      margin-top: 100px;
-    /* grid-template-columns: repeat(10, 1fr); */
-    /* grid-template-columns: auto; */
+
+    margin-top: 60px
 }
 
 .pageColumns:isFalseTrue {

@@ -5,9 +5,7 @@
     padding: 7px 10px;
     height: 44px;
     align-items: center;
-    /* position: absolute; */
     width: 100%;
-    /* left: 201px; */
     z-index: 10;
     border-bottom: 0.1rem solid #c2c2c2;
     box-shadow: 2px 3px 4px 0px rgb(0 0 0 / 7%);
@@ -22,7 +20,6 @@
 
 .itemEdit {
     -st-states: typeColumn(enum(id, actions, status, name, position, extn, salary, start_date, office));
-    /* margin-right: 20px; */
     width: 100%;
 }
 
@@ -53,7 +50,6 @@
 
 .itemEdit:typeColumn(salary) {
     width: 45%;
-    /* margin: 0; */
     margin-right: 17px;
 }
 
@@ -82,31 +78,31 @@
 
 .inputEditTask:typeColumn(name) {
     width: 100%;
-    /* margin-right: 14px; */
+
 }
 
 .inputEditTask:typeColumn(position) {
     width: 100%;
-    /* margin-right: 12px; */
+
 }
 
 
 
 .inputEditTask:typeColumn(extn) {
     width: 100%;
-    /* margin-right: 11px; */
+
 }
 
 .inputEditTask:typeColumn(salary) {
     width: 100%;
-    /* margin-right: 15px; */
+
 }
 
 
 
 .inputEditTask:typeColumn(start_date) {
     width: 100%;
-    /* margin-right: 58px; */
+
 }
 
 
@@ -154,7 +150,7 @@
 
 .selectEditTask:typeColumn(office) {
     width: 100%;
-    /* margin-right: 15px; */
+
 }
 
 .selectEditTask:typeColumn(status) {

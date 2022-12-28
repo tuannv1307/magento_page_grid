@@ -1,29 +1,34 @@
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
+import OutsideClickHandler from "react-outside-click-handler";
 import {
   Magento_Page,
   setBtnPrevAndNext,
   setCurrentPage,
 } from "../../store/magentoPageGridReducer";
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import {
   fiterDataByKeyword,
   searchFilters,
 } from "../ColumnPageType/ColumnPageType";
-import OutsideClickHandler from "react-outside-click-handler";
 import { st, classes } from "./PaginatePage.st.css";
 
 const PaginatePage = () => {
   const data: Magento_Page = useSelector(
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
+
   const dispatch = useDispatch();
   let currentPage = data.currentPage;
 
   const [currentPageP, setCurrentPageP] = useState(_.toString(currentPage));
+
   let tasks: any = data.data.tasks;
+
   const searchData = data.searchData;
+
   const objFilters = data.objFilters;
+
   const valueChangePage = data.valueChange;
 
   useEffect(() => {
@@ -31,19 +36,25 @@ const PaginatePage = () => {
   }, [currentPage]);
 
   let disabledPrev = data.disabledPrev;
+
   let disabledNext = data.disabledNext;
 
   if (_.some(objFilters, (obj: any) => obj.value !== "")) {
     tasks = fiterDataByKeyword(tasks, objFilters);
   }
+
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
+
   const handleChangeCurrentPage = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPageP(e.target.value);
   };
+
   const lengthData = _.size(tasks);
+
   let numberPage = Math.ceil(lengthData / valueChangePage);
+
   const handleKeyDowSetCurrentPage = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (
@@ -127,6 +138,7 @@ const PaginatePage = () => {
         <span>
           <OutsideClickHandler onOutsideClick={handleOutsideClick}>
             <input
+              data-hook="value-page"
               type="text"
               className={st(classes.inputPaginate)}
               value={currentPageP}

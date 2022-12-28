@@ -7,7 +7,7 @@ describe("App.cy.tsx", () => {
   //   cy.wait(1000);
   // });
 
-  it("show mount data-info", () => {
+  it("show mount", () => {
     cy.viewport("macbook-15");
 
     cy.mount(
@@ -15,5 +15,22 @@ describe("App.cy.tsx", () => {
         <PaginatePage />
       </Provider>
     );
+  });
+
+  it("show mount onClick", () => {
+    cy.viewport("macbook-15");
+
+    cy.mount(
+      <Provider store={store}>
+        <PaginatePage />
+      </Provider>
+    );
+
+    cy.get('[data-hook="previous"]').click();
+    cy.get('[data-hook="next"]').click();
+    cy.get('[data-hook="value-page"]')
+      .clear()
+      .type("2")
+      .trigger("keydown", { key: "Enter" });
   });
 });

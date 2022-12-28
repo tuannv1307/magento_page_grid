@@ -7,7 +7,7 @@ describe("ActionsSelect.cy.tsx", () => {
   //   cy.wait(1000);
   // });
 
-  it("show mount data-info", () => {
+  it("show mount ", () => {
     cy.viewport("macbook-15");
 
     cy.mount(
@@ -15,5 +15,23 @@ describe("ActionsSelect.cy.tsx", () => {
         <ActionsSelect />
       </Provider>
     );
+  });
+
+  it("show mount with onClick", () => {
+    cy.viewport("macbook-15");
+
+    cy.mount(
+      <Provider store={store}>
+        <ActionsSelect />
+      </Provider>
+    );
+
+    cy.get('[data-hook="action-select"]').trigger("click");
+    cy.wait(2000);
+    cy.get('[data-hook="action-select"]').trigger("click");
+    cy.wait(1000);
+    cy.get('[data-hook="action-select"]').trigger("click");
+
+    cy.get('[data-hook="menu-action"]').trigger("click");
   });
 });

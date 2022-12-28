@@ -72,11 +72,6 @@ export type Actions = {
 
   checkCloseIsEditTaskAll: (state: Magento_Page) => void;
 
-  checkboxTaskAllBypage: (
-    state: Magento_Page,
-    action: PayloadAction<{ isCheckedAllByPage: boolean }>
-  ) => void;
-
   sortDesc: (
     state: Magento_Page,
     action: PayloadAction<{ nameSort: string }>
@@ -118,19 +113,6 @@ export type Actions = {
     action: PayloadAction<{ id?: number; isEdit?: boolean }>
   ) => void;
 
-  editTask: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      arrayEditDataTask: [];
-    }>
-  ) => void;
-  editMultiTask: (
-    state: Magento_Page,
-    action: PayloadAction<{
-      arrTasksEdit: [];
-    }>
-  ) => void;
-
   openEditTask: (state: Magento_Page) => void;
 
   checkOnPage: (
@@ -141,18 +123,30 @@ export type Actions = {
   ) => void;
   filtersData: (state: Magento_Page, action: PayloadAction<any>) => void;
 
-  inputEditMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
-
-  editInputMultiTask: (state: Magento_Page, action: PayloadAction<any>) => void;
-
-  setArrayEditDataTask: (
+  inputEditMultiTask: (
     state: Magento_Page,
-    action: PayloadAction<any>
+    action: PayloadAction<{
+      nameEditMul: string;
+      positionEditMul: string;
+      salaryEditMul: string;
+      start_dateEditMul: string;
+      officeEditMul: string;
+      extnEditMul: string;
+      statusEditMul: string;
+    }>
   ) => void;
 
-  closeEdit: (
+  editInputMultiTask: (
     state: Magento_Page,
-    action: PayloadAction<{ isEditTask?: boolean }>
+    action: PayloadAction<{
+      nameAllColumn: string;
+      positionAllColumn: string;
+      salaryAllColumn: string;
+      start_dateAllColumn: string;
+      officeAllColumn: string;
+      extnAllColumn: string;
+      statusAllColumn: string;
+    }>
   ) => void;
 
   changeTask: (

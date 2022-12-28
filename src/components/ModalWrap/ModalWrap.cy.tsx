@@ -7,7 +7,7 @@ describe("ViewLength.cy.tsx", () => {
   //   cy.wait(1000);
   // });
 
-  it("show mount data-info", () => {
+  it("show mount", () => {
     cy.viewport("macbook-15");
 
     cy.mount(
@@ -15,5 +15,17 @@ describe("ViewLength.cy.tsx", () => {
         <ModalWrap />
       </Provider>
     );
+  });
+
+  it("show mount modal", () => {
+    cy.viewport("macbook-15");
+
+    cy.mount(
+      <Provider store={store}>
+        <ModalWrap />
+      </Provider>
+    );
+
+    cy.get('[data-hook="modal"]').invoke("show");
   });
 });

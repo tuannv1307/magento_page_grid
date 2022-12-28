@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
+import OutsideClickHandler from "react-outside-click-handler";
 import {
   Magento_Page,
   resetColumns,
   setDisableSelectColumn,
   setDisplayColumn,
 } from "../../store/magentoPageGridReducer";
-import OutsideClickHandler from "react-outside-click-handler";
 import { st, classes } from "./HideShowColumns.st.css";
 
 const HideShowColumns = () => {
@@ -19,8 +19,11 @@ const HideShowColumns = () => {
   const dispatch = useDispatch();
 
   const columnOrder = data.data.columnOrder;
+
   const columns: any = data.data.columns;
+
   let disableSelect = data.disableSelect;
+
   const columnDisplay = _.filter(
     columns,
     (column: { disPlay: boolean }) => column?.disPlay === true
@@ -59,7 +62,11 @@ const HideShowColumns = () => {
   return (
     <div className={st(classes.root, { isShowColums })}>
       <OutsideClickHandler onOutsideClick={handleClickOutside}>
-        <button className={st(classes.btnColumns)} onClick={handleShow}>
+        <button
+          className={st(classes.btnColumns)}
+          onClick={handleShow}
+          data-hook="btn-columns"
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +107,7 @@ const HideShowColumns = () => {
           </span>
         </button>
         {isShowColums && (
-          <div className={st(classes.dropDownShowColumns)}>
+          <div className={st(classes.dropDownShowColumns)} data-hook="columns">
             <div className={st(classes.dropDownHeader)}>
               {lengthDisplayColumn} out of {numbeColumns} visible
             </div>
@@ -115,6 +122,7 @@ const HideShowColumns = () => {
                     className={st(classes.cloumnShowHide, { disableSelect })}
                     key={index}
                     onClick={() => handleClickChangeDisplay(column.id)}
+                    data-hook="hideshow-columns"
                   >
                     {column.disPlay ? (
                       <svg
@@ -152,10 +160,20 @@ const HideShowColumns = () => {
             </div>
             <div className={st(classes.dropDownAction)}>
               <div className={st(classes.reset)}>
-                <button onClick={() => dispatch(resetColumns())}>Reset</button>
+                <button
+                  onClick={() => dispatch(resetColumns())}
+                  data-hook="btn-reset"
+                >
+                  Reset
+                </button>
               </div>
               <div className={st(classes.cancel)}>
-                <button onClick={() => setIsShowColumns(false)}>Cancel</button>
+                <button
+                  onClick={() => setIsShowColumns(false)}
+                  data-hook="btn-cancel"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

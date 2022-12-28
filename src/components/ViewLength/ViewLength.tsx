@@ -1,11 +1,11 @@
+import { ChangeEvent, KeyboardEvent, useState } from "react";
+import OutsideClickHandler from "react-outside-click-handler";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeViewLengthData,
   Magento_Page,
 } from "../../store/magentoPageGridReducer";
-import { ChangeEvent, KeyboardEvent, useState } from "react";
-import OutsideClickHandler from "react-outside-click-handler";
 import { st, classes } from "./ViewLength.st.css";
 
 const ViewLength = () => {
@@ -14,6 +14,7 @@ const ViewLength = () => {
   );
 
   const valueChange = data?.valueChange;
+
   const [isShow, setIsShow] = useState(false);
   const [isShowCustoms, setIsShowCustoms] = useState(false);
   const [inputValue, setInputValue] = useState(_.toString(valueChange));
@@ -84,7 +85,6 @@ const ViewLength = () => {
   const handleClickEdit = () => {
     if (!inputValueEdit || _.isNaN(_.toNumber(inputValueEdit)) === true) {
       setInputValue("20");
-
       dispatch(changeViewLengthData(20));
       setIsShow(false);
     } else if (inputValueEdit !== inputValue) {
@@ -115,6 +115,7 @@ const ViewLength = () => {
           <div className={st(classes.selectValue)}>
             <OutsideClickHandler onOutsideClick={handleOutSideClickInput}>
               <input
+                data-hook="input-change-length"
                 value={inputValue}
                 type="text"
                 className={st(classes.valueSelect)}
@@ -127,6 +128,7 @@ const ViewLength = () => {
           <button
             className={st(classes.seclectMenuToggle)}
             onClick={handleShow}
+            data-hook="btn-toggle-menu"
           >
             {isShow ? (
               <svg
@@ -168,7 +170,7 @@ const ViewLength = () => {
                 </button>
               </li>
               <li>
-                <button value={50} onClick={handleClick}>
+                <button value={50} onClick={handleClick} data-hook="btn-value">
                   50
                 </button>
               </li>
@@ -195,11 +197,13 @@ const ViewLength = () => {
                         onKeyDown={handleKeyDowEdit}
                         value={inputValueEdit}
                         autoFocus
+                        data-hook="input-customs"
                       />
                     </OutsideClickHandler>
                     <button
                       className={st(classes.btnCustomsEdit)}
                       onClick={() => handleClickEdit()}
+                      data-hook="btn-customs-edit"
                     >
                       <svg
                         viewBox="0 0 24 24"
@@ -215,6 +219,7 @@ const ViewLength = () => {
                   <button
                     className={st(classes.btnCustoms)}
                     onClick={handleCustoms}
+                    data-hook="btn-customs"
                   >
                     Customs
                   </button>
