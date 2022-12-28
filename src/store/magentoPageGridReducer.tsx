@@ -1,4 +1,4 @@
-import { createSlice, current, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import _ from "lodash";
 import type { Actions } from "./actions";
 
@@ -37,9 +37,6 @@ export type Magento_Page = {
   titleModal: string;
   contentModal: string;
   isCheckedAllByPage: boolean;
-
-  arrayEditDataTask: [];
-  arrTasks: [];
 
   nameAllColumn: string;
   positionAllColumn: string;
@@ -85,8 +82,6 @@ const initialData: Magento_Page = {
   contentModal: "",
   isCheckedAllByPage: false,
 
-  arrayEditDataTask: [],
-  arrTasks: [],
   nameAllColumn: "",
   positionAllColumn: "",
   salaryAllColumn: "",

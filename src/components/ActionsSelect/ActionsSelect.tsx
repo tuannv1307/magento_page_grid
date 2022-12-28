@@ -20,21 +20,13 @@ const ActionsSelect = () => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
   const dispatch = useDispatch();
-
   const [isShow, setIsShow] = useState(false);
-
   let tasks: any = data.data.tasks;
-
   const isShowModal = data.isShowModal;
-
   let titleModal = data.titleModal;
-
   let contentModal = data.contentModal;
-
   const searchData = data.searchData;
-
   const objFilters: any = data.objFilters;
-
   let isItemTaskSelectd = data.isItemTaskSelectd;
 
   if (_.some(objFilters, (obj) => obj.value !== "")) {
@@ -147,59 +139,57 @@ const ActionsSelect = () => {
   };
 
   return (
-    <>
-      <div className={st(classes.root)}>
-        <OutsideClickHandler onOutsideClick={handleOutsideClick}>
-          <div
-            className={st(classes.actionBtnSelect)}
-            onClick={handleShow}
-            data-hook="action-select"
-          >
-            <button className={st(classes.actionSelect)}>Actions</button>
-            <button className={st(classes.seclectMenuToggle)}>
-              {isShow ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  fill="currentColor"
-                  className="bi bi-caret-up-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  fill="currentColor"
-                  className="bi bi-caret-down-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                </svg>
-              )}
-            </button>
-            {isShow && (
-              <ul className={st(classes.actionMenu)} data-hook="menu-action">
-                <li onClick={() => ShowModal("DELETE")}>Delete</li>
-
-                <li onClick={() => ShowModal("DISABLE")}>Disable</li>
-
-                <li onClick={() => ShowModal("ENABLE")}>Enable</li>
-                <li onClick={() => ShowModal("EDIT")}>Edit</li>
-              </ul>
+    <div className={st(classes.root)}>
+      <OutsideClickHandler onOutsideClick={handleOutsideClick}>
+        <div
+          className={st(classes.actionBtnSelect)}
+          onClick={handleShow}
+          data-hook="action-select"
+        >
+          <button className={st(classes.actionSelect)}>Actions</button>
+          <button className={st(classes.seclectMenuToggle)}>
+            {isShow ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="currentColor"
+                className="bi bi-caret-up-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="currentColor"
+                className="bi bi-caret-down-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+              </svg>
             )}
-          </div>
-        </OutsideClickHandler>
+          </button>
+          {isShow && (
+            <ul className={st(classes.actionMenu)} data-hook="menu-action">
+              <li onClick={() => ShowModal("DELETE")}>Delete</li>
 
-        <div>
-          {_.size(tasks)} records found{" "}
-          {lengthTask > 0 && `( ${lengthTask} selected)`}{" "}
+              <li onClick={() => ShowModal("DISABLE")}>Disable</li>
+
+              <li onClick={() => ShowModal("ENABLE")}>Enable</li>
+              <li onClick={() => ShowModal("EDIT")}>Edit</li>
+            </ul>
+          )}
         </div>
+      </OutsideClickHandler>
+
+      <div>
+        {_.size(tasks)} records found{" "}
+        {lengthTask > 0 && `( ${lengthTask} selected)`}{" "}
       </div>
-    </>
+    </div>
   );
 };
 

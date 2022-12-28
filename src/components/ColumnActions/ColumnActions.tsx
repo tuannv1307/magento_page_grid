@@ -132,7 +132,6 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
     (state: { magentopage: Magento_Page }) => state.magentopage
   );
 
-  const refOutsideClick = useRef<any>(null);
   const dispatch = useDispatch();
   let tasks: any = data.data.tasks;
   const sizeData = data.valueChange;
@@ -146,20 +145,6 @@ const ColumnActions = ({ column, typeColumn, index }: ColumnActionsProps) => {
   if (searchData !== "") {
     tasks = searchFilters(tasks, searchData);
   }
-
-  useEffect(() => {
-    function handleClickOutside(event: { target: any }) {
-      if (
-        refOutsideClick.current &&
-        !refOutsideClick.current.contains(event.target)
-      ) {
-      }
-    }
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [refOutsideClick]);
 
   const lenghtIsEdit = _.size(_.filter(tasks, (task) => task.isEdit === true));
 

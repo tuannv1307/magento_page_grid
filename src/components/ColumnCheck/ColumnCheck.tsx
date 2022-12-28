@@ -123,7 +123,7 @@ const ColumnCheck = () => {
   const handleCheckAllOnPage = (type: boolean) => {
     const selectTask: Tasks[] = [];
     _.forEach(data.data.tasks, (task) => {
-      let newTask: any = { ...task };
+      let newTask: Tasks = { ...task };
       _.forEach(tasks, (dataTask) => {
         if (dataTask.id === task.id) {
           newTask = {
