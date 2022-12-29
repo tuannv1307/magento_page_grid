@@ -3,6 +3,7 @@
     position: relative;
     margin: 0 10px;
     font-size: 13px;
+
 }
 
 .btnColumns {
@@ -57,7 +58,7 @@
     transition: all .15s ease;
     z-index: 10;
     color: #333;
-    right: 0;
+    right: 0px;
 }
 
 .dropDownHeader {

@@ -1,8 +1,11 @@
+.root {
+    width: 80%;
+}
+
 .root > div {
     display: flex;
     align-items: center;
     position: relative;
-    margin-bottom: 44px;
     flex-wrap: wrap;
     justify-content: flex-end;
 }
@@ -37,6 +40,7 @@
     overflow: hidden;
     background-color: #babbbd;
     transition: height ease 0.2s;
+    overflow: auto;
 }
 
 .FilterData:isShow {

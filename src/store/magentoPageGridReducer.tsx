@@ -92,27 +92,33 @@ const initialData: Magento_Page = {
     idFrom: {
       keyWord: "idFrom",
       value: "",
+      isSearch: false,
     },
     idTo: {
       keyWord: "idTo",
       value: "",
+      isSearch: false,
     },
     name: {
       keyWord: "name",
       value: "",
+      isSearch: false,
     },
     office: {
       keyWord: "office",
       value: "",
+      isSearch: false,
     },
 
     start_date: {
       keyWord: "start_date",
       value: "",
+      isSearch: false,
     },
     status: {
       keyWord: "status",
       value: "",
+      isSearch: false,
     },
   },
   currentEditTaks: [],

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "./DatePicker.scss";
@@ -41,22 +41,73 @@ const FiltersData = () => {
     setIsShow(!isShow);
   };
 
-  objFilters = {
-    idFrom: {
-      keyWord: "idFrom",
-      value: !idFrom ? "" : idFrom,
-    },
-    idTo: { keyWord: "idTo", value: !idTo ? "" : idTo },
-    name: { keyWord: "name", value: !name ? "" : name },
-    office: { keyWord: "office", value: !office ? "" : office },
-    status: { keyWord: "status", value: !status ? "" : status },
-    start_date: {
-      keyWord: "start_date",
-      value:
-        startDate !== "Invalid date"
-          ? ""
-          : moment(startDate).format("yyyy/MM/DD"),
-    },
+  console.log(objFilters);
+
+  useEffect(() => {
+    _.forEach(objFilters, (obj: any) => {
+      if (obj.isSearch === false) {
+        if (obj.keyWord === "idFrom") {
+          setIdFrom("");
+        }
+        if (obj.keyWord === "idTo") {
+          setIdTo("");
+        }
+        if (obj.keyWord === "name") {
+          setName("");
+        }
+        if (obj.keyWord === "office") {
+          setOffice("");
+        }
+        if (obj.keyWord === "status") {
+          setStatus("");
+        }
+        if (obj.keyWord === "start_date") {
+          setStartDate("");
+        }
+      }
+    });
+  }, [objFilters]);
+
+  const hanleFilterData = () => {
+    objFilters = {
+      idFrom: {
+        keyWord: "idFrom",
+        value: !idFrom ? "" : idFrom,
+        isSearch: !idFrom ? false : true,
+      },
+      idTo: {
+        keyWord: "idTo",
+        value: !idTo ? "" : idTo,
+        isSearch: !idTo ? false : true,
+      },
+      name: {
+        keyWord: "name",
+        value: !name ? "" : name,
+        isSearch: !name ? false : true,
+      },
+      office: {
+        keyWord: "office",
+        value: !office ? "" : office,
+        isSearch: !office ? false : true,
+      },
+      status: {
+        keyWord: "status",
+        value: !status ? "" : status,
+        isSearch: !status ? false : true,
+      },
+      start_date: {
+        keyWord: "start_date",
+        value:
+          moment(startDate).format("YYYY/MM/DD") === "Invalid date" ||
+          moment(startDate).format("YYYY/MM/DD")! === ""
+            ? ""
+            : moment(startDate).format("YYYY/MM/DD"),
+
+        isSearch: !startDate ? false : true,
+      },
+    };
+    dispatch(filtersData(objFilters));
+    setIsShow(false);
   };
 
   const handleCancel = () => {
@@ -67,17 +118,6 @@ const FiltersData = () => {
     setOffice("");
     setStatus("");
     setIsShow(false);
-  };
-
-  const hanleFilterData = () => {
-    dispatch(filtersData(objFilters));
-    setIsShow(false);
-    setStartDate("");
-    setIdFrom("");
-    setIdTo("");
-    setName("");
-    setOffice("");
-    setStatus("");
   };
 
   const handleOutsideClick = () => {
