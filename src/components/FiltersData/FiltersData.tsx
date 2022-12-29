@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "./DatePicker.scss";
@@ -30,7 +30,7 @@ const FiltersData = () => {
 
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false);
-  const [startDate, setStartDate] = useState<any>("");
+  const [startDate, setStartDate] = useState<any>();
   const [idFrom, setIdFrom] = useState("");
   const [idTo, setIdTo] = useState("");
   const [name, setName] = useState("");
@@ -52,9 +52,10 @@ const FiltersData = () => {
     status: { keyWord: "status", value: !status ? "" : status },
     start_date: {
       keyWord: "start_date",
-      value: _.isUndefined(startDate)
-        ? ""
-        : moment(startDate).format("yyyy/MM/DD"),
+      value:
+        startDate !== "Invalid date"
+          ? ""
+          : moment(startDate).format("yyyy/MM/DD"),
     },
   };
 
@@ -140,7 +141,6 @@ const FiltersData = () => {
           </div>
           <div className={st(classes.itemFilter)}>
             <h4>office</h4>
-
             <select
               name="office"
               value={office}

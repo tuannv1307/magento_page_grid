@@ -36,7 +36,6 @@ describe("Products.cy.tsx", () => {
         <Products />
       </Provider>
     );
-
     cy.get('[data-hook="btn-filter"]').click();
     cy.get('[data-hook="input-name"]').focus().type("dadawd");
     cy.get('[data-hook="select-office"]')
@@ -51,31 +50,26 @@ describe("Products.cy.tsx", () => {
 
   it("show mount with onClick action columns", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <Products />
       </Provider>
     );
-
     cy.get('[data-hook="action-select"]').trigger("click");
     cy.wait(2000);
     cy.get('[data-hook="action-select"]').trigger("click");
     cy.wait(1000);
     cy.get('[data-hook="action-select"]').trigger("click");
-
     cy.get('[data-hook="menu-action"]').trigger("click");
   });
 
   it("show mount change value page", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <Products />
       </Provider>
     );
-
     cy.get('[data-hook="input-change-length"]')
       .clear()
       .type("40")
@@ -84,7 +78,6 @@ describe("Products.cy.tsx", () => {
       .type("dawddd")
       .trigger("keydown", { key: "Enter" });
     cy.get('[data-hook="btn-toggle-menu"]').click();
-
     cy.get('[data-hook="btn-value"]').click();
     cy.wait(2000);
     cy.get('[data-hook="btn-toggle-menu"]').click();
@@ -95,13 +88,11 @@ describe("Products.cy.tsx", () => {
 
   it("show mount onClick paginate", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <Products />
       </Provider>
     );
-
     cy.get('[data-hook="previous"]').click();
     cy.get('[data-hook="next"]').click();
     cy.get('[data-hook="value-page"]')
@@ -112,13 +103,11 @@ describe("Products.cy.tsx", () => {
 
   it("show mount onClick column check", () => {
     cy.viewport("macbook-15");
-
     cy.mount(
       <Provider store={store}>
         <Products />
       </Provider>
     );
-
     cy.get('[data-hook="action-closesave"]').invoke("show").trigger("click");
   });
 });

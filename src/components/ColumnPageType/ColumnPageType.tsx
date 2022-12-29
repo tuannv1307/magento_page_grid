@@ -17,17 +17,7 @@ export type ColumnPageTypeProps = {
   column: {
     id: string;
     title: string;
-    tasks: {
-      id: string;
-      name: string;
-      position: string;
-      salary: string;
-      start_date: string;
-      office: string;
-      extn: string;
-      status: string;
-      selected: boolean;
-    }[];
+
     disPlay: boolean;
   };
   index: string;

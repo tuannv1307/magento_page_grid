@@ -746,50 +746,41 @@ export const initialData = {
     "column-1": {
       id: "column-1",
       title: "id",
-      tasks: [],
       disPlay: true,
     },
     "column-2": {
       id: "column-2",
       title: "name",
-      tasks: [],
       disPlay: true,
     },
     "column-3": {
       id: "column-3",
       title: "position",
-      tasks: [],
       disPlay: true,
     },
     "column-4": {
       id: "column-4",
       title: "office",
-      tasks: [],
       disPlay: true,
     },
     "column-5": {
       id: "column-5",
       title: "salary",
-      tasks: [],
       disPlay: true,
     },
     "column-6": {
       id: "column-6",
       title: "start_date",
-      tasks: [],
       disPlay: true,
     },
     "column-7": {
       id: "column-7",
       title: "extn",
-
-      tasks: [],
       disPlay: true,
     },
     "column-8": {
       id: "column-8",
       title: "status",
-      tasks: [],
       disPlay: true,
     },
     "column-9": {
@@ -810,72 +801,3 @@ export const initialData = {
     "column-9",
   ],
 };
-
-export const titleColumns = [
-  {
-    id: "tt0",
-    title: "id",
-    name: "id",
-    statusDisplay: true,
-  },
-  {
-    id: "tt1",
-    title: "name",
-    name: "name",
-    statusDisplay: true,
-  },
-  {
-    id: "tt2",
-    title: "position",
-    name: "position",
-    statusDisplay: true,
-  },
-  {
-    id: "tt3",
-    title: "office",
-    name: "office",
-    statusDisplay: true,
-  },
-  {
-    id: "tt4",
-    title: "Age",
-    name: "age",
-    statusDisplay: true,
-  },
-  {
-    id: "tt5",
-    title: "salary",
-    name: "Salary",
-    statusDisplay: true,
-  },
-  {
-    id: "tt6",
-    title: "start date",
-    name: "start date",
-    statusDisplay: true,
-  },
-  {
-    id: "tt7",
-    title: "extn",
-    name: "extn",
-    statusDisplay: true,
-  },
-  {
-    id: "tt8",
-    title: "status",
-    name: "status",
-    statusDisplay: true,
-  },
-  {
-    id: "tt9",
-    title: "option",
-    name: "option",
-    statusDisplay: true,
-  },
-  {
-    id: "tt10",
-    title: "Action",
-    name: "action",
-    statusDisplay: true,
-  },
-];

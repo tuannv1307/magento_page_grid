@@ -24,6 +24,7 @@ const HideShowColumns = () => {
     columns,
     (column: { disPlay: boolean }) => column?.disPlay === true
   );
+
   const lengthDisplayColumn = _.size(columnDisplay);
 
   useEffect(() => {

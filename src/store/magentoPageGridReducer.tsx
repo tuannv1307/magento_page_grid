@@ -36,7 +36,6 @@ export type Magento_Page = {
   isItemTaskSelectd: boolean;
   titleModal: string;
   contentModal: string;
-  isCheckedAllByPage: boolean;
   nameAllColumn: string;
   positionAllColumn: string;
   salaryAllColumn: string;
@@ -52,7 +51,6 @@ export type Magento_Page = {
   extnEditMul: string;
   statusEditMul: string;
   objFilters: {};
-  isEditTask: boolean;
   currentEditTaks: Tasks[];
 };
 
@@ -76,7 +74,6 @@ const initialData: Magento_Page = {
   isItemTaskSelectd: false,
   titleModal: "",
   contentModal: "",
-  isCheckedAllByPage: false,
   nameAllColumn: "",
   positionAllColumn: "",
   salaryAllColumn: "",
@@ -91,7 +88,6 @@ const initialData: Magento_Page = {
   officeEditMul: "",
   extnEditMul: "",
   statusEditMul: "",
-  isEditTask: false,
   objFilters: {
     idFrom: {
       keyWord: "idFrom",

@@ -20,6 +20,7 @@ const Search = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputSearch(e.target.value);
   };
+
   const handleKeySearch = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
       dispatch(searchDataByInput(inputSearch));
